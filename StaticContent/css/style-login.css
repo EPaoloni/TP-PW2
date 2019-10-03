@@ -1,0 +1,23 @@
+#login-title{
+    margin-top: 10%;
+}
+
+#login-container{
+    margin: auto;
+    margin-top: 50px;
+    width: 20%;
+    min-width: 200px;
+    height: 250px;
+    border: solid;
+    border-color: lightgrey;
+    border-radius: 10px;
+}
+
+.form-control{
+    margin-bottom: 20px;
+}
+
+#submit-button{
+    margin: 10px;
+    margin-top: 10px;
+}
