@@ -4,7 +4,7 @@ USE pw2;
 
 CREATE TABLE usuario(
     id INT AUTO_INCREMENT,
-    username VARCHAR(30),
+    username VARCHAR(30) UNIQUE,
     pass VARCHAR(30),
     nombre VARCHAR(30),
     apellido VARCHAR(30),
