@@ -1,5 +1,26 @@
 <?php
 
+    include_once("helpers/validaciones.php");
+//TODO: Las validaciones no estan funcionando, toma como que siempre estan seteadas
+$error = "";
+if(!isset($_POST['enviar'])){
+
+} else {
+
+    if(isset($_POST['username']) && isset($_POST['password'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if(usuarioValido($username, $password)){
+            header("location: Vistas/welcome.html");
+        } else {
+            $error = "<p class='text-danger'>Usuario o contraseña inválidos<p>";
+        };
+    } else {
+        $error = "<p class='text-danger'>Complete los campos<p>";
+    }
+    
+}
 
 
 ?>
@@ -14,14 +35,16 @@
 </head>
 <body>
     <h1 id="login-title" class="text-center">Ingrese sus datos</h1>
+    
     <div id="login-container" class="container">
-        <form action="" method="post">
+        <form action="login.php" method="post">
             <label for="username">Usuario: </label>
-            <input class="form-control col-xs-12" type="text" name="username" id="username">
+            <input class="form-control col-xs-12" type="text" name="username" id="username" required>
             <label for="password">Contraseña: </label>
-            <input class="form-control col-xs-12" type="password" name="password" id="password">
-            <input id="submit-button" class="btn btn-success float-right" type="submit" value="Enviar">
+            <input class="form-control col-xs-12" type="password" name="password" id="password" required>
+            <input id="submit-button" name="enviar" class="btn btn-success float-right" type="submit">
         </form>
+        <?php echo $error; ?>
     </div>
 </body>
 </html>
