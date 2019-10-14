@@ -5,7 +5,7 @@
         
         $conexion = getConexion();
 
-        $sql = "SELECT id FROM usuario WHERE username = '" . $username . "' and pass = '" . $password . "' ;";
+        $sql = "SELECT usuario.id FROM usuario INNER JOIN Credencial ON  Usuario.credencial=Credencial.id WHERE username = '" . $username . "' and pass = '" . $password . "' ;";
         $result = mysqli_query($conexion, $sql);
 
         $affectedRows = mysqli_affected_rows($conexion);
