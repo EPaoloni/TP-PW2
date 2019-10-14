@@ -13,7 +13,11 @@ if(!isset($_POST['enviar'])){
 
         if(usuarioValido($username, $password)){
             header("location: Vistas/welcome.html");
-        } else {
+        } else { 
+            // Log del error
+            date_default_timezone_set("America/Argentina/Buenos_Aires");
+            file_put_contents("./logs/app.log", date('d/M/Y - H:i:s') . " - Fallo en el login con el usuario: $username\n", FILE_APPEND);
+            
             $error = "<p class='text-danger'>Usuario o contraseña inválidos<p>";
         };
     } else {
