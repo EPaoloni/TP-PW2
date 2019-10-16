@@ -8,23 +8,24 @@ CREATE TABLE tipo_usuario(
     descripcionTipoUsuario NVARCHAR(50),
     PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE credencial(
+    id INT AUTO_INCREMENT,
+    username VARCHAR(30) UNIQUE,
+    pass VARCHAR(30),
+    PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE usuario(
     id INT AUTO_INCREMENT,
     nombre VARCHAR(30),
     apellido VARCHAR(30),
     tipo_usuario INT, -- admin (1) / normal (2)
     codigo_viajero INT,
+    credencial INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario(id)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE credencial(
-    id INT AUTO_INCREMENT,
-    username VARCHAR(30) UNIQUE,
-    pass VARCHAR(30),
-    usuario int,
-    PRIMARY KEY (id),
-    FOREIGN KEY (usuario) REFERENCES Usuario(id)
+    FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario(id),
+    FOREIGN KEY (credencial) REFERENCES Credencial(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE tipoVuelo(
@@ -61,18 +62,18 @@ INSERT INTO `tipo_usuario` (`id`, `descripcionTipoUsuario`)
                      VALUES (1, 'admin'),
                             (2, 'normal');
 
-INSERT INTO `usuario` (`id`,`nombre`, `apellido`, `tipo_usuario`, `codigo_viajero`)
-                     VALUES (NULL, 'Ezequiel', 'Paoloni', 1, 0),
-                            (NULL, 'Ian', 'Tries', 1, 0),
-                            (NULL, 'Alejo', 'Zonta', 1, 0),
-                            (NULL, 'Juan', 'Pérez', 2, 1);
+INSERT INTO `credencial` (`id`, `username`, `pass`)
+                     VALUES (NULL, 'ezep', '1234'),
+                            (NULL, 'iant', '1234'),
+                            (NULL, 'alejoz', '1234'),
+                            (NULL, 'juanp', '1234');
 
-INSERT INTO `credencial` (`id`, `username`, `pass`,`usuario`)
-                     VALUES (NULL, 'ezep', '1234',1),
-                            (NULL, 'iant', '1234',2),
-                            (NULL, 'alejoz', '1234',3),
-							(NULL, 'juanp', '1234',4);
-                        
+INSERT INTO `usuario` (`id`,`nombre`, `apellido`, `tipo_usuario`, `codigo_viajero`,`credencial`)
+                     VALUES (NULL, 'Ezequiel', 'Paoloni', 1, 0,1),
+                            (NULL, 'Ian', 'Tries', 1, 0,2),
+                            (NULL, 'Alejo', 'Zonta', 1, 0,3),
+                            (NULL, 'Juan', 'Pérez', 2, 1,4);
+
 INSERT INTO `tipovuelo` (`id`, `nombreTipoVuelo`)
                      VALUES (NULL, 'Orbital'),
                             (NULL, 'Baja aceleración'),

@@ -1,6 +1,5 @@
 <?php
 
-include_once("helpers/validaciones.php");
 include_once("modelos/registro_modelo.php");
 //TODO: Las validaciones no estan funcionando, toma como que siempre estan seteadas
 $error = "";

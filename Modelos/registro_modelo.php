@@ -3,40 +3,45 @@
     include_once("helpers/conexion.php");
 
     function registrarUsuario($username, $password, $nombre, $apellido){
-        
-        $conexion = getConexion();
-
-        $sql = "INSERT INTO usuario(nombre, apellido)
-                    VALUES( '" . $nombre . "', '" . $apellido . "');";
-        $result = mysqli_query($conexion, $sql);
-
-        mysqli_close($conexion);
-
+        $result=registrarCredencial($username, $password);
         if ($result){
-            $result=registrarCredencialPorUsuario($username, $password, $nombre, $apellido);
+        	$idCredencial=getIdCredencial($username);
+
+            $conexion = getConexion();
+
+        	$sql = "INSERT INTO usuario(nombre, apellido,credencial)
+                    VALUES( '" . $nombre . "', '" . $apellido . "', '" . $idCredencial . "'  );";
+        	$result = mysqli_query($conexion, $sql);
+
+        	mysqli_close($conexion);
+
+        } else {
+        	$result=false;
+        	echo "<h2> Fallo el registro</h2>";
         }
+        
+
+        
         return $result;
     }
 
-    function registrarCredencialPorUsuario($username, $password, $nombre, $apellido){
-        $idUsuario= getIdUsuario($nombre, $apellido);
+    function registrarCredencial($username, $password){
         $conexion = getConexion();
 
-        $sql = "INSERT INTO credencial(username, pass,usuario)
-                        VALUES('" . $username . "', '" . $password . "', '" . $idUsuario . "' );";
+        $sql = "INSERT INTO credencial(username, pass)
+                        VALUES('" . $username . "', '" . $password . "');";
         $result = mysqli_query($conexion, $sql);
-
 
         mysqli_close($conexion);
 
         return $result;
     }
 
-    function getIdUsuario($nombre, $apellido){
+    function getIdCredencial($username){
 
         $conexion = getConexion();
 
-        $sql = "SELECT id FROM usuario WHERE nombre = '" . $nombre . "' AND  apellido =  '" . $apellido . "' ;";
+        $sql = "SELECT id FROM Credencial WHERE username = '" . $username . "' ;";
         $result = mysqli_query($conexion, $sql);
         $idBuscada= mysqli_fetch_assoc($result);
 
