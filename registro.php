@@ -16,8 +16,13 @@ if(!isset($_POST['enviar'])){
             $nombre = $_POST['nombre'];
             $apellido = $_POST['apellido'];
 
-            if(registrarUsuario($username, $password, $nombre, $apellido)){
+            $returnRegistrarUsuario = registrarUsuario($username, $password, $nombre, $apellido);
+            if($returnRegistrarUsuario === true){
                 header("location: login.php");
+            } else {
+                if($returnRegistrarUsuario == "Usuario Existente"){
+                    $error = "<p class='text-danger'>Usuario existente<p>";
+                }
             }
 
         } else {
