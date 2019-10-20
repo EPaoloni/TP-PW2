@@ -1,7 +1,7 @@
 <?php
 
-    include_once("helpers/validaciones.php");
-//TODO: Las validaciones no estan funcionando, toma como que siempre estan seteadas
+    include_once("Modelos/login_modelo.php");
+
 $error = "";
 if(!isset($_POST['enviar'])){
 
@@ -11,7 +11,7 @@ if(!isset($_POST['enviar'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if(usuarioValido($username, $password)){
+        if(validarCredencialesUsuario($username, $password) != null){
             header("location: Vistas/welcome.html");
         } else { 
             // Log del error
