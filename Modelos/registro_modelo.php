@@ -37,7 +37,7 @@
     function getIdCredencial($username){
 
         $query = new Query();
-        $resultado = $query->consulta("credencial.id", "Credencial INNER JOIN usuario ON Usuario.credencial=Credencial.id", "username = '$username'");
+        $resultado = $query->consulta("credencial.id", "Credencial", "username = '$username'");
 
         return $resultado['id'];
     }
