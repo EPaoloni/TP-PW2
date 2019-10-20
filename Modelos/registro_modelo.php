@@ -12,16 +12,11 @@
         if ($result){
         	$idCredencial=getIdCredencial($username);
 
-            $conexion = getConexion();
-
-        	$sql = "INSERT INTO usuario(nombre, apellido,credencial)
-                    VALUES( '" . $nombre . "', '" . $apellido . "', '" . $idCredencial . "'  );";
-        	$result = mysqli_query($conexion, $sql);
-
-        	mysqli_close($conexion);
-
+            $query = new Query();
+            $resultado = $query->insert("usuario", "('$nombre', '$apellido', '$idCredencial')", "(nombre, apellido, credencial)");
+            
+            return $resultado;
         } else {
-        	$result=false;
         	echo "<h2> Fallo el registro</h2>";
         }
         
@@ -31,29 +26,32 @@
     }
 
     function registrarCredencial($username, $password){
-        $conexion = getConexion();
+        
+        
+        $query = new Query();
+        $resultado = $query->insert("credencial", "('$username', '$password')", "(username, pass)");
 
-        $sql = "INSERT INTO credencial(username, pass)
-                        VALUES('" . $username . "', '" . $password . "');";
-        $result = mysqli_query($conexion, $sql);
-
-
-        mysqli_close($conexion);
-
-        return $result;
+        return $resultado;
     }
 
     function getIdCredencial($username){
 
-        $conexion = getConexion();
+        $query = new Query();
+        $resultado = $query->consulta("credencial.id", "Credencial INNER JOIN usuario ON Usuario.credencial=Credencial.id", "username = '$username'");
 
-        $sql = "SELECT id FROM Credencial WHERE username = '" . $username . "' ;";
-        $result = mysqli_query($conexion, $sql);
-        $idBuscada= mysqli_fetch_assoc($result);
+        return $resultado['id'];
+    }
 
-        mysqli_close($conexion);
+    function usuarioExiste($username){
+        
+        $query = new Query();
+        $resultado = $query->consulta("usuario.id", "usuario INNER JOIN credencial ON Usuario.credencial=Credencial.id", "username = '$username'");
 
-        return $idBuscada['id'];
+        if($resultado == null){
+            return false;
+        } else {
+            return true;
+        }
     }
 
 ?>
