@@ -6,14 +6,16 @@
         
         $conexion = getConexion();
 
-        $sql = "SELECT id FROM usuario WHERE username = '" . $username . "' and pass = '" . $password . "' ;";
+        $sql = "SELECT usuario.id FROM usuario INNER JOIN Credencial ON  Usuario.credencial=Credencial.id WHERE username = '" . $username . "' and pass = '" . $password . "' ;";
         $result = mysqli_query($conexion, $sql);
 
-        $idUsuario = mysqli_fetch_assoc($result);
+        $affectedRows = mysqli_affected_rows($conexion);
+
+        $usuarioCorrecto = ($affectedRows > 0) ? true : false;
 
         mysqli_close($conexion);
 
-        return $idUsuario;
+        return $usuarioCorrecto;
     }
 
     function usuarioExiste($username){
