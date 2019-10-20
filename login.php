@@ -1,6 +1,7 @@
 <?php
 
     include_once("Modelos/login_modelo.php");
+    include_once("helpers/Logger.php");
 
 $error = "";
 if(!isset($_POST['enviar'])){
@@ -15,8 +16,8 @@ if(!isset($_POST['enviar'])){
             header("location: Vistas/welcome.html");
         } else { 
             // Log del error
-            date_default_timezone_set("America/Argentina/Buenos_Aires");
-            file_put_contents("./logs/app.log", date('d/M/Y - H:i:s') . " - Fallo en el login con el usuario: $username\n", FILE_APPEND);
+            $log = new Logger();
+            $log->warning("Fallo en el login con el usuario: $username");
             
             $error = "<p class='text-danger'>Usuario o contraseña inválidos<p>";
         };
