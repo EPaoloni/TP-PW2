@@ -39,7 +39,7 @@ if(!isset($_POST['enviar'])){
 <html lang="en">
 <head>
 
-    <?php include("Vistas/header.html"); ?>
+    <?php include("Vistas/head.html"); ?>
 
 </head>
 <body>
