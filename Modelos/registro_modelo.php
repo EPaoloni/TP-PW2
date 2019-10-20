@@ -1,8 +1,13 @@
 <?php
 
     include_once("helpers/conexion.php");
+    include_once("Modelos/login_modelo.php");
 
     function registrarUsuario($username, $password, $nombre, $apellido){
+
+        if(usuarioExiste($username)){
+            return "Usuario Existente";
+        }
         $result=registrarCredencial($username, $password);
         if ($result){
         	$idCredencial=getIdCredencial($username);
@@ -31,6 +36,7 @@
         $sql = "INSERT INTO credencial(username, pass)
                         VALUES('" . $username . "', '" . $password . "');";
         $result = mysqli_query($conexion, $sql);
+
 
         mysqli_close($conexion);
 
