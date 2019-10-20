@@ -13,7 +13,7 @@ if(!isset($_POST['enviar'])){
         $password = $_POST['password'];
 
         if(validarCredencialesUsuario($username, $password) != null){
-            header("location: Vistas/welcome.html");
+            header("location: Vistas/welcome.php");
         } else { 
             // Log del error
             $log = new Logger();
