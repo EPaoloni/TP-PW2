@@ -13,7 +13,7 @@
         	$idCredencial=getIdCredencial($username);
 
             $query = new Query();
-            $resultado = $query->insert("usuario", "('$nombre', '$apellido', '$idCredencial')", "(nombre, apellido, credencial)");
+            $resultado = $query->insert("usuario", "(nombre, apellido, credencial)", "('$nombre', '$apellido', '$idCredencial')");
             
             return $resultado;
         } else {
@@ -29,7 +29,7 @@
         
         
         $query = new Query();
-        $resultado = $query->insert("credencial", "('$username', '$password')", "(username, pass)");
+        $resultado = $query->insert("credencial", "(username, pass)", "('$username', '$password')");
 
         return $resultado;
     }

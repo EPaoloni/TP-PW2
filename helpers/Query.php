@@ -50,10 +50,10 @@ class Query{
      * Devuelve true si la insercion es exitosa.
      * -----------------------------------
      * @param string $tabla
+     * @param string $columnas Las columnas que se quiere afectar, si no se desea especificar se manda un string vacio.
      * @param string $valores Los valores a insertar, entre parentesis, si son varias entradas poner varios parentesis.
-     * @param string $columnas Las columnas que se quiere afectar.
      */
-    public function insert($tabla, $valores, $columnas){
+    public function insert($tabla, $columnas, $valores){
         $conn = $this->establecerConexion();
 
         $sql = "INSERT INTO " . $tabla . $columnas . " VALUES" . $valores;
