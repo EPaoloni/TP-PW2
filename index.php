@@ -1,37 +1,27 @@
 <?php
-    include_once('helpers/conexion.php');
-    $conexion= getConexion();
+    include_once('helpers/Query.php');
+    $query = new Query();
+    $estaciones = $query->consulta("", "estacion", "");
 
-    $sqlorigen= 'select *
-          FROM origenvuelo';
-    $origenesvuelo= mysqli_query($conexion, $sqlorigen);
+    include_once("Modelos/busqueda_modelo.php");
 
-    $sqldestino= 'select *
-                  from destinovuelo';
-    $destinosvuelo= mysqli_query($conexion, $sqldestino);
-
-
-
+    
     if(isset($_GET['enviar'])){
-        $origen = $_GET['origen'];
-        $destino = $_GET['destino'];
-        $fechaDesde = $_GET['fechaDesde'];
-        $fechaHasta = $_GET['fechaHasta'];
+        $origen = isset($_GET['origen']) ? $_GET['origen'] : " * ";
+        $destino = isset($_GET['destino']) ? $_GET['destino'] : " * ";
+        $fechaDesde = isset($_GET['fechaDesde']) ? $_GET['fechaDesde'] : " * ";
+        $fechaHasta = isset($_GET['fechaHasta']) ? $_GET['fechaHasta'] : " * ";
         $cantidadPasajeros = $_GET['cantidadPasajeros'];
 
-        
-        $sqlConsultaVuelos= "select *
-            FROM vuelo inner join origenvuelo on vuelo.origenVuelo = origenvuelo.id
-                    inner join destinoVuelo on destinoVuelo = destinovuelo.id
-            WHERE fechaPartida = '" . $fechaDesde . "' and fechaLlegada = '" . $fechaHasta . "'
-                and destinoVuelo = '" . $destino . "' and origenVuelo = '" . $origen . "' ;";
-        $listaDeVuelos= mysqli_query($conexion, $sqlConsultaVuelos);
-
+        $vuelos = $query->consulta("",
+                                    "vuelo inner join circuito on vuelo.idCircuito = circuito.idCircuito",
+                                    "fechaPartida = '" . $fechaDesde . "' and fechaLlegada = '" . $fechaHasta . "'
+                                    and destinoVuelo = '" . $destino . "' and origenVuelo = '" . $origen . "' ;");
         $consultaRealizada = true;
+
     } else {
         $consultaRealizada = false;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -52,15 +42,17 @@
         <form action="./index.php" method="get">
             <label for="origen">Origen: </label>
                 <select name="origen" id="origen" class="form-control col-xs-12">                   
-                    <?php foreach ($origenesvuelo as $origen) {
-                        echo "<option value='" . $origen['id'] . "'>" . $origen['nombreOrigen'] . "</option>";
+                    <?php 
+                        foreach ($estaciones as $estacion) {
+                        echo "<option value='" . $estacion['idEstacion'] . "'>" . $estacion['nombreEstacion'] . "</option>";
                     }?>
 
                 </select>
             <label for="destino">Destino: </label>
             <select name="destino" id="destino" class="form-control col-xs-12">                   
-                    <?php foreach ($destinosvuelo as $destino) {
-                        echo "<option value='" . $destino['id'] . "'>" . $destino['nombreDestino'] . "</option>";
+                    <?php 
+                        foreach ($estaciones as $estacion) {
+                        echo "<option value='" . $estacion['idEstacion'] . "'>" . $estacion['nombreEstacion'] . "</option>";
                     }?>
 
                 </select>
