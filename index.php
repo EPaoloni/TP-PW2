@@ -39,6 +39,7 @@
 <head>
 
     <?php include("Vistas/head.html") ?>
+    <script src="StaticContent/js/busqueda.js"></script>
 
 </head>
 <body>
