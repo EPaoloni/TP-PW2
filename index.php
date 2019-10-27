@@ -58,11 +58,11 @@
                 </select>
             
             <label for="ida">Fecha desde: </label>
-            <input class="form-control col-xs-12" type="date" name="fechaDesde" id="fechaDesde" required>
+            <input class="form-control col-xs-12" type="date" name="fechaDesde" id="fechaDesde">
             <label for="vuelta">Fecha hasta: </label>
-            <input class="form-control col-xs-12" type="date" name="fechaHasta" id="fechaHasta" required>
+            <input class="form-control col-xs-12" type="date" name="fechaHasta" id="fechaHasta">
             <label for="pasajeros">Cantidad de pasajeros: </label>
-            <input class="form-control col-xs-12" type="number" name="cantidadPasajeros" id="cantidadPasajeros" required>
+            <input class="form-control col-xs-12" type="number" name="cantidadPasajeros" id="cantidadPasajeros">
             <input id="submit-button" name="enviar" class="btn btn-success" type="submit">
             <a href="./index.php" class="btn btn-danger">Limpiar</a>
         </form>
@@ -76,14 +76,16 @@
                     echo "
                     <div class='card text-center'>
                         <div class='card-header'>
-                        Vuelo
-                        </div>
-                        <div class='card-body'>
-                        <h5 class='card-title'>Partida: " . $vuelo['nombreOrigen'] . ", " . $vuelo['fechaPartida'] . ";<br>
-                                    Destino: " . $vuelo['nombreDestino'] .", " . $vuelo['fechaLlegada'] . "
-                        </h5>
-                        <p class='card-text'>Datos de tu vuelo</p>
-                        <a href='./reserva.php' class='btn btn-primary'>Reservar(toDO)</a>
+                            Vuelo
+                            </div>
+                            <div class='card-body'>
+                            <h5 class='card-title'>Codigo de circuito: " . $vuelo['circuitoVuelo'] . "<br>
+                                                    Fecha de partida: " . $vuelo['fechaPartida'] . "<br>
+                                                    Fecha de llegada: " . $vuelo['fechaLlegada'] . "<br>
+                                                    Matricula de la nave: " . $vuelo['matricula'] . "
+                            </h5>
+                            <p class='card-text'>Datos de tu vuelo</p>
+                            <a href='./reserva.php' class='btn btn-primary'>Reservar(toDO)</a>
                         </div>
                         <div class='card-footer text-muted'>
                         </div>
