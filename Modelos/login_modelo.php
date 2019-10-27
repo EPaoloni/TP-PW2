@@ -6,7 +6,7 @@
     function validarCredencialesUsuario($username, $password){
         
         $query = new Query();
-        $resultado = $query->consulta("usuario.id", "usuario INNER JOIN Credencial ON Usuario.credencial=Credencial.id",
+        $resultado = $query->consulta("usuario.idUsuario", "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
                                                     "username = '$username' and pass = '$password'");
         if($resultado>0){
             

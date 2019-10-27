@@ -4,8 +4,15 @@
     $estaciones = $query->consulta("", "estacion", "");
 
     include_once('helpers/Logger.php');
+    include_once('Modelos/busqueda_modelo.php');
     
     $error = "";
+
+    session_start();
+
+    if(isset($_GET['destruirSesion'])){
+        destruirSesion();
+    }
     
     if(isset($_GET['enviar'])){
         $origen = $_GET['origen'];
@@ -65,8 +72,16 @@
 </head>
 <body>
 
+    <?php if(isset($_SESSION['username'])){ ?>
+
+    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
+
+    <?php } else { ?>
+        
     <a class="btn btn-success" href="./login.php">A login</a>
     <a class="btn btn-success" href="./registro.php">A registro</a>
+    
+    <?php } ?>
 
     <h1 class="text-center">Búsqueda de vuelos</h1>
     <div class="container">
@@ -107,6 +122,17 @@
             }else if($consultaRealizada){
                 if($listaDeVuelos != null){
                     foreach ($listaDeVuelos as $vuelo) {
+
+                        if(isset($_SESSION['username'])){
+                            $redirectReserva = "./reserva.php?origen="  . $_GET['origen']
+                            . "&destino=" . $_GET['destino']
+                            . "&fechaDesde=" . $_GET['fechaDesde']
+                            . "&fechaHasta=" . $_GET['fechaHasta']
+                            . "&cantidadPasajeros=" . $_GET['cantidadPasajeros'] . " ";
+                        } else {
+                            $redirectReserva = "./login.php";
+                        }
+
                         echo "
                         <div class='card text-center'>
                             <div class='card-header'>
@@ -119,25 +145,11 @@
                                                     Matricula de la nave: " . $vuelo['matricula'] . "
                             </h5>
                             <p class='card-text'>Datos de tu vuelo</p>
-                            <a href='./reserva.php' class='btn btn-primary'>Reservar(toDO)</a>
+                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar(toDO)</a>
                             </div>
                             <div class='card-footer text-muted'>
                             </div>
                             ";
-                        if(isset($_SESSION['username'])){
-
-                            echo "<a href='./reserva.php?origen="  . $_GET['origen']
-                                                     . "&destino=" . $_GET['destino']
-                                                     . "&fechaDesde=" . $_GET['fechaDesde']
-                                                     . "&fechaHasta=" . $_GET['fechaHasta']
-                                                     . "&cantidadPasajeros=" . $_GET['cantidadPasajeros']
-                        . "' class='btn btn-primary'>Reservar(toDO)</a>
-                        </div>
-                        <div class='card-footer text-muted'>
-                        </div>
-                        </div>
-                        ";
-                        }
                     }
                 }
             }
