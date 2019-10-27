@@ -124,8 +124,29 @@
                             <div class='card-footer text-muted'>
                             </div>
                         </div>
+                        <div class='card-body'>
+                        <h5 class='card-title'>Partida: " . $vuelo['nombreOrigen'] . ", " . $vuelo['fechaPartida'] . ";<br>
+                                    Destino: " . $vuelo['nombreDestino'] .", " . $vuelo['fechaLlegada'] . "
+                        </h5>
+                        <p class='card-text'>Datos de tu vuelo</p>
                         ";
-                    }
+                        session_start();
+                        if(isset($_SESSION['username'])){
+
+                            echo "<a href='./reserva.php?origen="  . $_GET['origen']
+                                                     . "&destino=" . $_GET['destino']
+                                                     . "&fechaDesde=" . $_GET['fechaDesde']
+                                                     . "&fechaHasta=" . $_GET['fechaHasta']
+                                                     . "&cantidadPasajeros=" . $_GET['cantidadPasajeros']
+                        . "' class='btn btn-primary'>Reservar(toDO)</a>
+                        </div>
+                        <div class='card-footer text-muted'>
+                        </div>
+                        </div>
+                        ";
+                        }
+
+                  
                 }
             }
         ?>

@@ -40,10 +40,60 @@ CREATE TABLE estacion(
     PRIMARY KEY(idEstacion)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE modeloNave(
+    id INT AUTO_INCREMENT,
+    nombreModelo NVARCHAR(50) UNIQUE,
+    tipoVueloRealizado INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(tipoVueloRealizado) REFERENCES tipoVuelo(idTipoVuelo)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 CREATE TABLE circuito(
     idCircuito INT,
     estacionesCircuito VARCHAR(50),
     PRIMARY KEY(idCircuito)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE naves(
+    id INT AUTO_INCREMENT,
+    matricula NVARCHAR(5) UNIQUE,
+    modelo INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(modelo) REFERENCES modeloNave(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE cabinas(
+    id INT AUTO_INCREMENT,
+    tipoCabina NVARCHAR(1) UNIQUE,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE modeloNave_cabinas(
+    id INT AUTO_INCREMENT,
+    modeloNave INT,
+    tipoCabina INT,
+    capacidad INT,
+    PRIMARY KEY(id),
+    UNIQUE KEY (modeloNave,tipoCabina),
+    FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
+    FOREIGN KEY(tipoCabina) REFERENCES cabinas(id)    
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE pasajeros(
+    id INT AUTO_INCREMENT,
+    numeroPasajero INT UNIQUE,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE modeloNave_pasajeros(
+    id INT AUTO_INCREMENT,
+    modeloNave INT,
+    numeroPasajero INT,
+    PRIMARY KEY(id),
+    UNIQUE KEY (modeloNave, numeroPasajero),
+    FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
+    FOREIGN KEY(numeroPasajero) REFERENCES pasajeros(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE vuelo(
@@ -104,3 +154,88 @@ INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `matricula`, `circuitoVuelo`
                             ('20191030', '20191101', 'O2', 6),
                             ('20191015', '20191017', 'AA1', 1),
                             ('20191015', '20191019', 'BA4', 3);
+
+INSERT INTO `modeloNave` (`nombreModelo`, `tipoVueloRealizado`)
+                     VALUES ('Calandria', 1),
+                            ('Colibri', 1),
+                            ('Zorzal', 2),
+                            ('Carancho', 2),
+                            ('Aguilucho', 2),
+                            ('Canario', 2),
+                            ('Aguila', 3),
+                            ('Condor', 3),
+                            ('Alcon', 3),
+                            ('Guanaco', 3);
+
+
+INSERT INTO `naves` (`matricula`, `modelo`)
+                     VALUES ('AA1', 7),
+                            ('AA5', 7),
+                            ('AA9', 7),
+                            ('AA13', 7),
+                            ('AA17', 7),
+                            ('BA8', 5),
+                            ('BA9', 5),
+                            ('BA10', 5),
+                            ('BA11', 5),
+                            ('BA12', 5),
+                            ('O1', 1),
+                            ('O2', 1);
+
+INSERT INTO `cabinas` (`tipoCabina`)
+                     VALUES ('G'),
+                            ('F'),
+                            ('S');
+
+INSERT INTO `modeloNave_cabinas` (`modeloNave`, `tipoCabina`, `capacidad`)
+                     VALUES (1, 1, 200),
+                            (1, 2, 75),
+                            (1, 3, 25),
+                            (2, 1, 100),
+                            (2, 2, 18),
+                            (2, 3, 2),
+                            (3, 1, 50),
+                            (3, 3, 50),
+                            (4, 1, 110),
+                            (5, 2, 50),
+                            (5, 3, 10),
+                            (6, 2, 70),
+                            (6, 3, 10),
+                            (7, 1, 200),
+                            (7, 2, 75),
+                            (7, 3, 25),
+                            (8, 1, 300),
+                            (8, 2, 10),
+                            (8, 3, 40),
+                            (9, 1, 150),
+                            (9, 2, 25),
+                            (9, 3, 25),
+                            (10, 3, 100);
+
+INSERT INTO `pasajeros` (`numeroPasajero`)
+                     VALUES (1),
+                            (2),
+                            (3);
+
+
+INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
+                     VALUES (1, 1),
+                            (1, 2),
+                            (1, 3),
+                            (2, 1),
+                            (2, 2),
+                            (2, 3),
+                            (3, 2),
+                            (3, 3),
+                            (4, 2),
+                            (4, 3),
+                            (5, 2),
+                            (5, 3),
+                            (6, 2),
+                            (6, 3),
+                            (7, 2),
+                            (7, 3),
+                            (8, 2),
+                            (8, 3),
+                            (9, 3),
+                            (10, 3);                                              

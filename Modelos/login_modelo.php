@@ -8,7 +8,11 @@
         $query = new Query();
         $resultado = $query->consulta("usuario.id", "usuario INNER JOIN Credencial ON Usuario.credencial=Credencial.id",
                                                     "username = '$username' and pass = '$password'");
-
+        if($resultado>0){
+            
+            session_start();
+            $_SESSION['username'] = $username;
+        }
         return $resultado;
     }
 
