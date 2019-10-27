@@ -15,12 +15,14 @@ class Query{
      * -----------------------------------
      * @param string $columnas Si viene vacio hace un SELECT *.
      * @param string $tablas Lo que va despues del FROM. Si se requiere un INNER JOIN debe venir la sentencia completa.
-     * @param string $condiciones Lo que va despues del WHERE.
+     * @param string $condiciones Lo que va despues del WHERE, si no se desea ninguna condicion dejar vacio.
      */
     public function consulta($columnas, $tablas, $condiciones){
         $conn = $this->establecerConexion();
-
-        if(isset($condiciones)){
+        if($columnas == ""){
+            $columnas = "*";
+        }
+        if($condiciones != ""){
             $sql = "SELECT " . $columnas . " FROM " . $tablas . " WHERE " . $condiciones;
         } else {
             $sql = "SELECT " . $columnas . " FROM " . $tablas;
@@ -34,7 +36,9 @@ class Query{
             exit(1);
         }
         if ($result->num_rows > 0) {
-            $entradas = $result->fetch_assoc();
+            while($row = $result->fetch_assoc()){
+                $entradas[] = $row;
+           }
         } else {
             $entradas = null;
         }
