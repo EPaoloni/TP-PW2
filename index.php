@@ -3,20 +3,51 @@
     $query = new Query();
     $estaciones = $query->consulta("", "estacion", "");
 
-    include_once("Modelos/busqueda_modelo.php");
-
+    include_once('helpers/Logger.php');
+    
+    $error = "";
     
     if(isset($_GET['enviar'])){
-        $origen = isset($_GET['origen']) ? $_GET['origen'] : " * ";
-        $destino = isset($_GET['destino']) ? $_GET['destino'] : " * ";
-        $fechaDesde = isset($_GET['fechaDesde']) ? $_GET['fechaDesde'] : " * ";
-        $fechaHasta = isset($_GET['fechaHasta']) ? $_GET['fechaHasta'] : " * ";
+        $origen = $_GET['origen'];
+        $destino = $_GET['destino'];
+        $fechaDesde = ($_GET['fechaDesde'] != "") ? $_GET['fechaDesde'] : "%";
+        $fechaHasta = ($_GET['fechaHasta'] != "") ? $_GET['fechaHasta'] : "%";
         $cantidadPasajeros = $_GET['cantidadPasajeros'];
 
-        $vuelos = $query->consulta("",
-                                    "vuelo inner join circuito on vuelo.idCircuito = circuito.idCircuito",
-                                    "fechaPartida = '" . $fechaDesde . "' and fechaLlegada = '" . $fechaHasta . "'
-                                    and destinoVuelo = '" . $destino . "' and origenVuelo = '" . $origen . "' ;");
+        $logger = new Logger();
+        $logger->info("Se van a realizar consultas a vuelos con los siguientes parametros: origen = $origen, destino = $destino, fechaDesde = $fechaDesde, fechaHasta = $fechaHasta");
+
+        $circuitosRequeridos = $query->consulta("idCircuito",
+                                                "circuito",
+                                                "`estacionesCircuito` LIKE '%{$origen}%{$destino}%'");
+
+        if($circuitosRequeridos == null){
+            $error = "<p class='text-danger'>No disponemos de vuelos con la ruta que buscaste</p>";
+        }else{
+
+            $listaDeVuelos = null;
+
+            foreach ($circuitosRequeridos as $circuitoRequerido) {
+                $vuelos = $query->consulta("",
+                                            "vuelo inner join circuito on vuelo.circuitoVuelo = circuito.idCircuito",
+                                            "fechaPartida LIKE '" . $fechaDesde . "' and fechaLlegada LIKE '" . $fechaHasta . "'
+                                            and circuitoVuelo = '" . $circuitoRequerido['idCircuito'] . "' ;");
+
+                if($vuelos != null){
+                    if($listaDeVuelos == null){
+                        $listaDeVuelos = $vuelos;
+                    } else {
+                        $listaDeVuelos = array_merge($listaDeVuelos, $vuelos);
+                    }
+                }
+            }
+
+            if($listaDeVuelos == null){
+                $error = "<p class='text-danger'>No disponemos de vuelos con la ruta que buscaste</p>";
+            }
+        }
+        
+
         $consultaRealizada = true;
 
     } else {
@@ -71,11 +102,14 @@
     <div class="container">
         <?php
 
-            if($consultaRealizada){
-                foreach ($listaDeVuelos as $vuelo) {
-                    echo "
-                    <div class='card text-center'>
-                        <div class='card-header'>
+            if($error != ""){
+                echo $error;
+            }else if($consultaRealizada){
+                if($listaDeVuelos != null){
+                    foreach ($listaDeVuelos as $vuelo) {
+                        echo "
+                        <div class='card text-center'>
+                            <div class='card-header'>
                             Vuelo
                             </div>
                             <div class='card-body'>
@@ -86,11 +120,12 @@
                             </h5>
                             <p class='card-text'>Datos de tu vuelo</p>
                             <a href='./reserva.php' class='btn btn-primary'>Reservar(toDO)</a>
+                            </div>
+                            <div class='card-footer text-muted'>
+                            </div>
                         </div>
-                        <div class='card-footer text-muted'>
-                        </div>
-                    </div>
-                    ";
+                        ";
+                    }
                 }
             }
         ?>
