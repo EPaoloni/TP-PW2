@@ -14,6 +14,18 @@
         $resultado=$resultado[0]['nombreCentroMedico'];
         return $resultado;
     }
+    function tieneTurnos($idUsuario){
+        $query = new Query();
+        $resultado = $query->consulta("", "turno ", "idUsuario=$idUsuario ");
+        $resultado = isset($resultado);
+        return $resultado;
+    }
+    function eliminarTurno($idUsuario){
+        $query = new Query();
+        $resultado = $query->eliminar("turno", "idUsuario=$idUsuario ");
+        return $resultado;
+    }
+
 
 
 

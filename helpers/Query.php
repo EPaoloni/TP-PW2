@@ -76,6 +76,25 @@ class Query{
 
         return $insertExitoso;
     }
+    public function eliminar($tabla, $valores){
+        $conn = $this->establecerConexion();
+
+        $sql = "DELETE FROM " . $tabla . " WHERE " . $valores;
+
+        $result = $conn->query($sql);
+
+        if($result){
+            $deleteExitoso = true;
+        } else {
+            $log = new Logger();
+            $log->error("Ocurrio un error en la base de datos al realizar el DELETE: $sql \t El error de la base de datos es: $conn->error");
+            $deleteExitoso = false;
+        }
+        
+        $conn->close();
+
+        return $deleteExitoso;
+    }
 
     private function establecerConexion(){
         $conn = getConexion();
