@@ -110,6 +110,7 @@ CREATE TABLE centroMedico(
     idCentroMedico INT AUTO_INCREMENT NOT NULL,
     nombreCentroMedico varchar(50) NOT NULL,
     turnosMaximosDiarios int NOT NULL,
+    cantidadDeMedicos int NOT NULL,
     PRIMARY KEY(idCentroMedico)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -118,6 +119,7 @@ CREATE TABLE turno(
 	fecha DATE NOT NULL,
     idCentroMedico INT,
     idUsuario INT,
+    horario varchar(5),
     PRIMARY KEY(idTurno),
     FOREIGN KEY(idCentroMedico) REFERENCES centroMedico(idCentroMedico),
     FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
@@ -257,7 +259,7 @@ INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
                             (9, 3),
                             (10, 3);                                              
 
-INSERT INTO `centroMedico` (`nombreCentroMedico`, `turnosMaximosDiarios`)
-                VALUES  ('Centro Medico de Buenos Aires',300),
-                        ('Centro Medico de Shanghái',210),
-                        ('Centro Medico de Ankara',200);
+INSERT INTO `centroMedico` (`nombreCentroMedico`, `turnosMaximosDiarios`,`cantidadDeMedicos`)
+                VALUES  ('Centro Medico de Buenos Aires',300,10),
+                        ('Centro Medico de Shanghái',210,7),
+                        ('Centro Medico de Ankara',200,10);

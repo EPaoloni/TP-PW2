@@ -32,25 +32,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <?php include("Vistas/head.html") ?>
-    <script src="StaticContent/js/busqueda.js"></script>
-
 </head>
 <body>
 
-    <?php if(isset($_SESSION['username'])){ ?>
-
     <a class="btn btn-danger" href="#">Cerrar sesion</a>
     <a class="btn btn-primary" href="./index.php">Ir al Inicio</a>
-
-    <?php } else { ?>
-        
-    <a class="btn btn-success" href="./login.php">A login</a>
-    <a class="btn btn-success" href="./registro.php">A registro</a>
-
-    <?php }
-     ?>
+    
      <h1 class="text-center">Mis Turnos</h1>
 
      <div class="container">
