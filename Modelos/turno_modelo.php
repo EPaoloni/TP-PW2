@@ -8,6 +8,13 @@
         $resultado = $query->insert("turno", "(idCentroMedico, fecha,idUsuario)", "('$idCentroMedico', '$fechaTurno', '$idUsuario')");
         return $resultado;
     }
+    function getNombreCentroMedico($idCentro){
+        $query = new Query();
+        $resultado = $query->consulta("nombreCentroMedico", "centroMedico ", "idCentroMedico=$idCentro ");
+        $resultado=$resultado[0]['nombreCentroMedico'];
+        return $resultado;
+    }
+
 
 
     

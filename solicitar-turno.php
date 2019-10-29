@@ -3,7 +3,8 @@
     include_once('modelos/turno_modelo.php');
     session_start();
     $query = new Query();
-    
+    $error="";
+
     if(!isset($_SESSION['username'])){
         header("location: ./login.php");
         exit();
@@ -21,7 +22,7 @@
             if(isset($idCentroMedico) && isset( $fechaTurno) && isset($idUsuario) ){
                 $returnCrearTurno=crearTurno($idCentroMedico,$fechaTurno,$idUsuario);
                 if ($returnCrearTurno === true){
-                    header("location: ./mis-turnos.php");
+                    header("location: ./turno.php");
                     exit();
                 } else {
                     $error = "<p class='text-danger'>Hubo un error<p>";
