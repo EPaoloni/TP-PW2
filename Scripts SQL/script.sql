@@ -106,6 +106,23 @@ CREATE TABLE vuelo(
     FOREIGN KEY(circuitoVuelo) REFERENCES circuito(idCircuito)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE centroMedico(
+    idCentroMedico INT AUTO_INCREMENT NOT NULL,
+    nombreCentroMedico varchar(50) NOT NULL,
+    turnosMaximosDiarios int NOT NULL,
+    PRIMARY KEY(idCentroMedico)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE turno(
+    idTurno INT AUTO_INCREMENT NOT NULL,
+	fecha DATE NOT NULL,
+    idCentroMedico INT,
+    idUsuario INT,
+    PRIMARY KEY(idTurno),
+    FOREIGN KEY(idCentroMedico) REFERENCES centroMedico(idCentroMedico),
+    FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 INSERT INTO `tipoUsuario` (`idTipoUsuario`, `descripcionTipoUsuario`)
                      VALUES (1, 'admin'),
                             (2, 'normal');
@@ -239,3 +256,8 @@ INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
                             (8, 3),
                             (9, 3),
                             (10, 3);                                              
+
+INSERT INTO `centroMedico` (`nombreCentroMedico`, `turnosMaximosDiarios`)
+                VALUES  ('Centro Medico de Buenos Aires',300),
+                        ('Centro Medico de Shanghái',210),
+                        ('Centro Medico de Ankara',200);
