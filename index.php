@@ -126,8 +126,9 @@
                         if(isset($_SESSION['username'])){
                             $redirectReserva = "./reserva.php?origen="  . $_GET['origen']
                             . "&destino=" . $_GET['destino']
-                            . "&fechaDesde=" . $_GET['fechaDesde']
-                            . "&fechaHasta=" . $_GET['fechaHasta']
+                            . "&fechaDesde=" . $vuelo['fechaPartida']
+                            . "&fechaHasta=" . $vuelo['fechaLlegada']
+                            . "&idVuelo="   .$vuelo['idVuelo']
                             . "&cantidadPasajeros=" . $_GET['cantidadPasajeros'] . " ";
                         } else {
                             $redirectReserva = "./login.php";
@@ -139,7 +140,8 @@
                             Vuelo
                             </div>
                             <div class='card-body'>
-                            <h5 class='card-title'>Codigo de circuito: " . $vuelo['circuitoVuelo'] . "<br>
+                            <h5 class='card-title'> Numero de vuelo: " . $vuelo['idVuelo'] . "<br>
+                                                    Codigo de circuito: " . $vuelo['circuitoVuelo'] . "<br>
                                                     Fecha de partida: " . $vuelo['fechaPartida'] . "<br>
                                                     Fecha de llegada: " . $vuelo['fechaLlegada'] . "<br>
                                                     Matricula de la nave: " . $vuelo['matricula'] . "
