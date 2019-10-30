@@ -8,14 +8,16 @@ if(!isset($_POST['enviar'])){
 } else {
 
     if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['nombre']) && isset($_POST['apellido'])
-                && isset($_POST['password-repetido'])){
+     && isset($_POST['mail']) && isset($_POST['password-repetido'])){
         if($_POST['password'] === $_POST['password-repetido']){
             $username = $_POST['username'];
             $password = $_POST['password'];
             $nombre = $_POST['nombre'];
             $apellido = $_POST['apellido'];
-
-            $returnRegistrarUsuario = registrarUsuario($username, $password, $nombre, $apellido);
+            $mail= $_POST['mail'];
+            
+            $returnRegistrarUsuario = registrarUsuario($username, $password, $nombre, $apellido,$mail);
+            
             if($returnRegistrarUsuario === true){
                 header("location: login.php");
             } else {
@@ -52,6 +54,8 @@ if(!isset($_POST['enviar'])){
             <input class="form-control col-xs-12" type="text" name="apellido" id="apellido" required>
             <label for="username">Nombre de Usuario: </label>
             <input class="form-control col-xs-12" type="text" name="username" id="username" required>
+            <label for="username">Mail:</label>
+            <input class="form-control col-xs-12" type="text" name="mail" id="mail" required>
             <label for="password">Contraseña: </label>
             <input class="form-control col-xs-12" type="password" name="password" id="password" required>
             <label for="password">Repita su contraseña: </label>

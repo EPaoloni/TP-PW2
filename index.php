@@ -108,7 +108,7 @@
             <label for="vuelta">Fecha hasta: </label>
             <input class="form-control col-xs-12" type="date" name="fechaHasta" id="fechaHasta">
             <label for="pasajeros">Cantidad de pasajeros: </label>
-            <input class="form-control col-xs-12" type="number" name="cantidadPasajeros" id="cantidadPasajeros">
+            <input class="form-control col-xs-12" type="number" name="cantidadPasajeros" id="cantidadPasajeros" value="1">
             <input id="submit-button" name="enviar" class="btn btn-success" type="submit">
             <a href="./index.php" class="btn btn-danger">Limpiar</a>
         </form>
@@ -129,7 +129,8 @@
                             . "&fechaDesde=" . $vuelo['fechaPartida']
                             . "&fechaHasta=" . $vuelo['fechaLlegada']
                             . "&idVuelo="   .$vuelo['idVuelo']
-                            . "&cantidadPasajeros=" . $_GET['cantidadPasajeros'] . " ";
+                            . "&cantidadPasajeros=" . $_GET['cantidadPasajeros']
+                            . "&id_nave=" . $vuelo['id_nave'] . " ";
                         } else {
                             $redirectReserva = "./login.php";
                         }
@@ -144,7 +145,7 @@
                                                     Codigo de circuito: " . $vuelo['circuitoVuelo'] . "<br>
                                                     Fecha de partida: " . $vuelo['fechaPartida'] . "<br>
                                                     Fecha de llegada: " . $vuelo['fechaLlegada'] . "<br>
-                                                    Matricula de la nave: " . $vuelo['matricula'] . "
+                                                    Numero de la nave: " . $vuelo['id_nave'] . "
                             </h5>
                             <p class='card-text'>Datos de tu vuelo</p>
                             <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar(toDO)</a>
