@@ -108,6 +108,15 @@ CREATE TABLE vuelo(
     FOREIGN KEY(id_nave) REFERENCES naves(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE reserva(
+    idReserva INT AUTO_INCREMENT,
+    idCredencial INT NOT NULL,
+    idVuelo INT NOT NULL,
+    PRIMARY KEY (idReserva),
+    FOREIGN KEY (idCredencial) REFERENCES credencial(idCredencial),
+    FOREIGN KEY (idVuelo) REFERENCES vuelo(idVuelo)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 INSERT INTO `tipovuelo` (`nombreTipoVuelo`)
                      VALUES ('Orbital'),
                             ('Baja aceleración'),
@@ -240,4 +249,7 @@ INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
                             (8, 2),
                             (8, 3),
                             (9, 3),
-                            (10, 3);                                              
+                            (10, 3);
+
+INSERT INTO `reserva` (`idCredencial`, `idVuelo`)
+                VALUES (1,2);
