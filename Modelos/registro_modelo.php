@@ -65,16 +65,21 @@
     //     }
     // }
 
-    // function registrarUsuarioSinCredencial($nombre, $apellido){
-    //     if(emailExiste($mail)){
-            
-    //     }
-    //     $query = new Query();
-    //     $resultado = $query->insert("usuario", "(nombre, apellido)", "('$nombre', '$apellido')");
-        
-    //     return $resultado;
-        
-    // }
+    function registrarUsuarioSinCredencial($nombre, $apellido,$mail){
+         if(emailExiste($mail)){
+            return "Ya existe mail";
+         } else {
+            $query = new Query();
+            $resultado = $query->insert("usuario", "(nombreUsuario, apellidoUsuario,mail)", "('$nombre', '$apellido','$mail')");
+            return $resultado;
+        }
+     }
+     function emailExiste($mail){
+        $query = new Query();
+        $resultado = $query->consulta("", "usuario", "mail='$mail'");
+        return $resultado;
+    }
+
     
 
 ?>
