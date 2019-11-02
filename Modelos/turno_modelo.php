@@ -4,25 +4,9 @@
     include_once("helpers/Query.php");
     include_once("helpers/Logger.php");
 
-    function crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$turnosMaximosDiarios){
+    function crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario){
         $query = new Query();
-        $diaLleno=estaDiaLleno($fechaTurno,$turnosMaximosDiarios,$idCentroMedico);
-        if($diaLleno){
-
-            $log = new Logger();
-            $log->warning("No se pudo solicitar turno porque dia $fechaTurno esta completo");
-            $resultado[0]=false;
-            $resultado[1]="No se pudo solicitar turno porque dia $fechaTurno esta completo";
-
-        } else {
-            $resultado[0] = $query->insert("turno", "(idCentroMedico, fecha,idUsuario)", "('$idCentroMedico', '$fechaTurno', '$idUsuario')");
-        }
-        return $resultado;
-    }
-    function getNombreCentroMedico($idCentro){
-        $query = new Query();
-        $resultado = $query->consulta("nombreCentroMedico", "centroMedico ", "idCentroMedico=$idCentro ");
-        $resultado=$resultado[0]['nombreCentroMedico'];
+        $resultado[0] = $query->insert("turno", "(idCentroMedico, fecha,idUsuario,idHorario)", "('$idCentroMedico', '$fechaTurno', '$idUsuario','$idHorario')");
         return $resultado;
     }
     function tieneTurnos($idUsuario){
@@ -36,20 +20,28 @@
         $resultado = $query->eliminar("turno", "idUsuario=$idUsuario ");
         return $resultado;
     }
-    function estaDiaLleno($fechaTurno,$turnosMaximosDiarios,$idCentroMedico){
+    function consultarTurnoPorUsuario($idUsuario){
         $query = new Query();
-        $resultadoConsulta = $query->consulta("COUNT(*)","turno", "fecha='$fechaTurno' AND idCentroMedico=$idCentroMedico ");
-        $resultadoConsulta=$resultadoConsulta[0]['COUNT(*)'];
-        if($resultadoConsulta>$turnosMaximosDiarios){
-            $diaLleno=true;
-        } else {
-            $diaLleno=false;
-        }
-        return $diaLleno;
+        $resultado = $query->consulta("nombreCentroMedico,fecha,time_format(hora, '%H:%i') as hora", 
+                                        "Turno 
+                                            INNER JOIN Usuario ON  turno.idUsuario=Usuario.idUsuario 
+                                            INNER JOIN horario ON turno.idHorario=horario.idHorario 
+                                            INNER JOIN centroMedico ON turno.idCentroMedico=centroMedico.idCentroMedico ",
+                                        "Usuario.idUsuario=" . $idUsuario );
+        return $resultado;
+    }
+    function consultarTurnosPorFecha($fecha,$idCentro){
+        $query = new Query();
+        $fecha="$fecha";
+        $resultado = $query->consulta("", 
+                                        "Turno 
+                                            INNER JOIN horario ON turno.idHorario=horario.idHorario 
+                                            INNER JOIN centroMedico ON turno.idCentroMedico=centroMedico.idCentroMedico ",
+                                        "turno.idCentroMedico=$idCentro AND fecha='$fecha'" );
+        return $resultado;
     }
 
 
-
-
     
+
 ?>

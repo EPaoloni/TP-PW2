@@ -107,11 +107,15 @@ CREATE TABLE vuelo(
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE centroMedico(
-    idCentroMedico INT AUTO_INCREMENT NOT NULL,
+    idCentroMedico INT NOT NULL,
     nombreCentroMedico varchar(50) NOT NULL,
-    turnosMaximosDiarios int NOT NULL,
-    cantidadDeMedicos int NOT NULL,
     PRIMARY KEY(idCentroMedico)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE horario(
+    idHorario INT NOT NULL,
+    hora TIME NOT NULL,
+    PRIMARY KEY(idHorario)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE turno(
@@ -119,10 +123,11 @@ CREATE TABLE turno(
 	fecha DATE NOT NULL,
     idCentroMedico INT,
     idUsuario INT,
-    horario varchar(5),
+    idHorario int,
     PRIMARY KEY(idTurno),
     FOREIGN KEY(idCentroMedico) REFERENCES centroMedico(idCentroMedico),
-    FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
+    FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY(idHorario) REFERENCES horario(idHorario)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `tipoUsuario` (`idTipoUsuario`, `descripcionTipoUsuario`)
@@ -259,7 +264,21 @@ INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
                             (9, 3),
                             (10, 3);                                              
 
-INSERT INTO `centroMedico` (`nombreCentroMedico`, `turnosMaximosDiarios`,`cantidadDeMedicos`)
-                VALUES  ('Centro Medico de Buenos Aires',300,10),
-                        ('Centro Medico de Shanghái',210,7),
-                        ('Centro Medico de Ankara',200,10);
+INSERT INTO `centroMedico` (`idCentroMedico`,`nombreCentroMedico`)
+                VALUES  ('1','Centro Medico de Buenos Aires'),
+                        ('2','Centro Medico de Shanghái'),
+                        ('3','Centro Medico de Ankara');
+                        
+INSERT INTO `horario`(`idHorario`,`hora`)
+				VALUES	(1,'08:00'),
+						(2,'09:00'),
+                        (3,'10:00'),
+                        (4,'11:00'),
+                        (5,'12:00'),
+                        (6,'13:00'),
+                        (7,'14:00'),
+                        (8,'15:00');
+INSERT INTO turno(idCentroMedico, fecha,idUsuario,idHorario) 
+                    VALUES  ('1', '2014-05-14', '2','1'),
+                            ('1', '2014-05-14', '1','4'),
+                            ('1', '2014-05-14', '4','7');
