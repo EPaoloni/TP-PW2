@@ -42,8 +42,6 @@ class Query{
         } else {
             $entradas = null;
         }
-        $result->close();
-        $conn->close();
 
         return $entradas;
     }
@@ -71,8 +69,6 @@ class Query{
             $log->error("Ocurrio un error en la base de datos al realizar el insert: $sql \t El error de la base de datos es: $conn->error");
             $insertExitoso = false;
         }
-        
-        $conn->close();
 
         return $insertExitoso;
     }
