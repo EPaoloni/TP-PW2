@@ -30,13 +30,16 @@
 <body>
 
     <div class="container">
-        <form id="form-confirmar-reserva" action="reserva.php" method="post">
+        <form id="form-confirmar-reserva" action="./Endpoints/confirmarReserva.php" method="get">
             <h3>Numero de vuelo: <?php echo $idVuelo; ?></h3>
             <h3>Fecha de partida: <?php echo $fechaDesde ;?></h3>
             <h3>Origen: <?php echo $nombreOrigen ;?></h3>
             <h3>Destino: <?php echo $nombreDestino ;?></h3>
             <h3>Id de la nave: <?php echo $idNave;?></h3>
             <?php
+            for ($i=1; $i < $cantidadPasajeros; $i++) { 
+                echo '<input type="hidden" class="hidden-mail-usuario" id="hidden-mail-usuario" name="mailsUsuarios[' . $i . ']" value="">';
+            }
             echo '<input type="hidden" name="idVuelo" value="' . $idVuelo .'">';
             ?>
             <br><br>
@@ -44,7 +47,7 @@
 
         <h2>Datos de los pasajeros</h2>
         <div class="container row">
-            <?php for ($i=1; $i <= $cantidadPasajeros; $i++) { 
+            <?php for ($i=1; $i < $cantidadPasajeros; $i++) { 
                 echo '
 
                 <div class="col-xs-4">

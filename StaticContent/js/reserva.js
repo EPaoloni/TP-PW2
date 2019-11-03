@@ -3,38 +3,48 @@ $(function(){
     $("#confirmar-reserva").on("click", function(){
 
         //TODO:
-        validarUsuarios();
+        if(validarUsuarios()){
+            enviarFormularioReserva();
+        }
 
-        enviarFormularioReserva();
     });
 
     function validarUsuarios(){
         
         var camposMail = $(".mail")
         var dataJson = "";
+        var banderaUsuariosExistentes = true;
         $.each(camposMail, function (index, mail) { 
             valorMail = $(mail).val();
             dataJson = {"mail": valorMail};
             $.ajax({
                 type: "GET",
                 url: "/TP-PW2/Endpoints/verificarMail.php",
-                data: dataJson
+                data: dataJson,
+                async: false
             })
             .done(function(data){
                 if(data){
                     $("#usuario-no-existente" + (index + 1) ).hide();
                     $("#boton-crear-usuario" + (index + 1) ).hide();
-                    //Ver si mostrar algun mensaje si el usuario existe
                 } else {
                     $("#usuario-no-existente" + (index + 1) ).fadeIn();
                     $("#boton-crear-usuario" + (index + 1) ).fadeIn();
+                    banderaUsuariosExistentes = false;
                 }
             });
         });
+
+        return banderaUsuariosExistentes;
     }
 
     function enviarFormularioReserva(){
+        var camposHiddenMail = $(".hidden-mail-usuario");
+        $.each(camposHiddenMail, function (index, valueOfElement) { 
+            $(this).val($("#mail" + (index+1)).val());
+        });
 
+        $("#form-confirmar-reserva").submit();
     }
 
     $(".boton-crear-usuario").on("click", function(){
