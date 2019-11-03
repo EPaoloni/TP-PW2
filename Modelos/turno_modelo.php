@@ -40,6 +40,7 @@
                                         "turno.idCentroMedico=$idCentro AND fecha='$fecha'" );
         return $resultado;
     }
+    
 
 
     

@@ -1,6 +1,7 @@
 <?php 
     include_once('helpers/Query.php');
     include_once('modelos/turno_modelo.php');
+    include_once('modelos/usuario_modelo.php');
     include_once("helpers/Logger.php");
     session_start();
     $query = new Query();
@@ -21,26 +22,31 @@
             header("location: ./turno.php");
             exit();
         } else {
-            $centroMedicos = $query->consulta("", "centroMedico", "");
-            
-            if(isset($_POST['enviar'])){
-
-                $idCentroMedico = $_POST['centro-medico'];
-                $fechaTurno = ($_POST['fecha-turno'] != "") ? $_POST['fecha-turno'] : null;
-                $idHorario = $_POST['horario'];
+            if(checkCodigoViajero($idUsuario)==0){
+                $centroMedicos = $query->consulta("", "centroMedico", "");
                 
-                if(isset($idCentroMedico) && isset( $fechaTurno) && isset($idUsuario) && isset($idHorario)  ){
-                    $returnCrearTurno=crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario);
-                    if ($returnCrearTurno == true){
-                        header("location: ./turno.php");
-                        die();
-                    } else if(isset($returnCrearTurno[1])) {
-                        $error = "<p class='text-danger'>" . $returnCrearTurno[1] . "<p>";
+                if(isset($_POST['enviar'])){
+
+                    $idCentroMedico = $_POST['centro-medico'];
+                    $fechaTurno = ($_POST['fecha-turno'] != "") ? $_POST['fecha-turno'] : null;
+                    $idHorario = $_POST['horario'];
+                    
+                    if(isset($idCentroMedico) && isset( $fechaTurno) && isset($idUsuario) && isset($idHorario)  ){
+                        $returnCrearTurno=crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario);
+                        if ($returnCrearTurno == true){
+                            header("location: ./turno.php");
+                            die();
+                        } else if(isset($returnCrearTurno[1])) {
+                            $error = "<p class='text-danger'>" . $returnCrearTurno[1] . "<p>";
+                        }
+                    } else {
+                        $error = "<p class='text-danger'>Campos incompletos<p>";
+                        $log->error("Ocurrio un error al crear Turno debido a campos incompletos  \t Los campos son idCentroMedico = $idCentroMedico , fechaTurno = $fechaTurno, idHorario = $idHorario, idUsuario = $idUsuario ");
                     }
-                } else {
-                    $error = "<p class='text-danger'>Campos incompletos<p>";
-                    $log->error("Ocurrio un error al crear Turno debido a campos incompletos  \t Los campos son idCentroMedico = $idCentroMedico , fechaTurno = $fechaTurno, idHorario = $idHorario, idUsuario = $idUsuario ");
                 }
+            }else {
+                header("location: ./index.php");
+                exit();
             }
         }
         

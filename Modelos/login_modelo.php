@@ -9,7 +9,6 @@
         $resultado = $query->consulta("usuario.idUsuario", "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
                                         "username = '$username' and pass = '$password'");
         if($resultado>0){
-            
             session_start();
             $_SESSION['username'] = $username;
         }

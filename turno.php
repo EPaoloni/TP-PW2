@@ -1,6 +1,7 @@
 <?php 
     include_once('helpers/Query.php');
     include_once('modelos/turno_modelo.php');
+    include_once('modelos/usuario_modelo.php');
     session_start();
     $query = new Query();
     
@@ -14,18 +15,21 @@
                                     "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
                                     "Credencial.username='$username'");
         $idUsuario= $idUsuario[0]['idUsuario'];
-        $turnos = consultarTurnoPorUsuario($idUsuario);
+        if(checkCodigoViajero($idUsuario)==0){
+            $turnos = consultarTurnoPorUsuario($idUsuario);
         
-        if(isset($_POST['enviar'])){
-            $cancelar = isset($_POST['cancelar']) ? $_POST['cancelar'] : false ;
-            if($cancelar){
-                eliminarTurno($idUsuario);
-                header("Refresh:0");
-                exit();
+            if(isset($_POST['enviar'])){
+                $cancelar = isset($_POST['cancelar']) ? $_POST['cancelar'] : false ;
+                if($cancelar){
+                    eliminarTurno($idUsuario);
+                    header("Refresh:0");
+                    exit();
+                }
             }
+        }else {
+            header("location: ./index.php");
+            exit();
         }
-
-        
     }
 ?>
 

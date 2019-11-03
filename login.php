@@ -1,6 +1,7 @@
 <?php
 
     include_once("Modelos/login_modelo.php");
+    include_once("Modelos/usuario_modelo.php");
     include_once("helpers/Logger.php");
 
 $error = "";
@@ -13,7 +14,9 @@ if(!isset($_POST['enviar'])){
         $password = $_POST['password'];
 
         if(validarCredencialesUsuario($username, $password) != null){
+            checkTurnos();
             header("location: Vistas/welcome.php");
+            exit();
         } else { 
             // Log del error
             $log = new Logger();
