@@ -1,5 +1,5 @@
 <?php
-    include_once("modelos/registro_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/registro_modelo.php");
 
     session_start();
     $username= $_SESSION['username'];

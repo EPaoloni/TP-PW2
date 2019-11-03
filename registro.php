@@ -1,6 +1,6 @@
 <?php
 
-include_once("modelos/registro_modelo.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/registro_modelo.php");
 //TODO: Las validaciones no estan funcionando, toma como que siempre estan seteadas
 $error = "";
 if(!isset($_POST['enviar'])){

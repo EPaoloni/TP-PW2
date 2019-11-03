@@ -1,10 +1,10 @@
 <?php
-    include_once('helpers/Query.php');
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
     $query = new Query();
     $estaciones = $query->consulta("", "estacion", "");
 
-    include_once('helpers/Logger.php');
-    include_once('Modelos/busqueda_modelo.php');
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
     
     $error = "";
 
