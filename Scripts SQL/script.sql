@@ -144,11 +144,11 @@ INSERT INTO `credencial` (`username`, `pass`)
                             ('alejoz', '1234'),
                             ('juanp', '1234');
 
-INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codigoViajero`,`numeroCredencialUsuario`)
-                     VALUES ('Ezequiel', 'Paoloni', 1, 0, 1),
-                            ('Ian', 'Tries', 1, 0, 2),
-                            ('Alejo', 'Zonta', 1, 0, 3),
-                            ('Juan', 'Pérez', 2, 1, 4);            
+INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codigoViajero`,`numeroCredencialUsuario`, `mail`)
+                     VALUES ('Ezequiel', 'Paoloni', 1, 0, 1, 'ezep@hotmail.com'),
+                            ('Ian', 'Tries', 1, 0, 2, 'iant@hotmail.com'),
+                            ('Alejo', 'Zonta', 1, 0, 3, 'alez@hotmail.com'),
+                            ('Juan', 'Pérez', 2, 1, 4, 'juanp@hotmail.com');            
 
 INSERT INTO `estacion` (`nombreEstacion`)
                      VALUES ('Buenos Aires'),
