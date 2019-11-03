@@ -124,12 +124,12 @@
                     foreach ($listaDeVuelos as $vuelo) {
 
                         if(isset($_SESSION['username'])){
-                            $redirectReserva = "./reserva.php?origen="  . $_GET['origen']
-                            . "&destino=" . $_GET['destino']
+                            $redirectReserva = "./reserva.php?origen="  . $origen
+                            . "&destino=" . $destino
                             . "&fechaDesde=" . $vuelo['fechaPartida']
                             . "&fechaHasta=" . $vuelo['fechaLlegada']
                             . "&idVuelo="   .$vuelo['idVuelo']
-                            . "&cantidadPasajeros=" . $_GET['cantidadPasajeros']
+                            . "&cantidadPasajeros=" . $cantidadPasajeros
                             . "&id_nave=" . $vuelo['id_nave'] . " ";
                         } else {
                             $redirectReserva = "./login.php";
