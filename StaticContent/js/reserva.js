@@ -3,64 +3,58 @@ $(function(){
     $("#confirmar-reserva").on("click", function(){
 
         //TODO:
-        //Validar campos de formularios, si el usuario existe
-        
-        //Si tiene mas personas crear los usuarios
+        validarUsuarios();
 
-        //Consultar codigo medico del usuario
-
-        //Si no tiene codigo medico confirmo la reserva y le digo que saque turno
-        if(codigoMedico == null){
-            guardarReserva();
-            mostrarSolicitarTurno();
-        } else {
-            if(codigoMedico >= codigoMedicoDelViaje){
-                guardarReserva();
-            } else {
-                mostrarCodigoMedicoInsuficiente();
-            }
-        }
-
-        //Si tiene y puede viajar, reservo y listo
-
-        //Si tiene y no puede viajar, le digo y listo
-
-        //Si tiene mas personas validar los codigos medicos de ellos, solo si no pueden viajar
-
+        enviarFormularioReserva();
     });
 
-    function validarFormularios(){
-        //Agarra los mails de los formularios
-        var mails = $(".mail").val()
-        $.ajax({
-            type: "GET",
-            url: "Modelos/reserva_modelo.php",
-            data: mails,
-            success: function (datosQueDevuelve) {
-                $("#form-confirmar-reserva").append("error");
-            }
+    function validarUsuarios(){
+        
+        var camposMail = $(".mail")
+        var dataJson = "";
+        $.each(camposMail, function (index, mail) { 
+            valorMail = $(mail).val();
+            dataJson = {"mail": valorMail};
+            $.ajax({
+                type: "GET",
+                url: "/TP-PW2/Endpoints/verificarMail.php",
+                data: dataJson
+            })
+            .done(function(data){
+                if(data){
+                    $("#usuario-no-existente" + (index + 1) ).hide();
+                    $("#boton-crear-usuario" + (index + 1) ).hide();
+                    //Ver si mostrar algun mensaje si el usuario existe
+                } else {
+                    $("#usuario-no-existente" + (index + 1) ).fadeIn();
+                    $("#boton-crear-usuario" + (index + 1) ).fadeIn();
+                }
+            });
         });
-        //Consulta por ajax si existen
-        //Si existe le pongo un mensaje
     }
 
-    function crearUsuario(){
-        //Creo el usuario con los datos de un formulario
+    function enviarFormularioReserva(){
+
     }
 
+    $(".boton-crear-usuario").on("click", function(){
+        var datosUsuario = "";
+        var indexFormulario = $(this).siblings(".posicion-usuario").val();
 
-    function guardarReserva(){
-        //Guardo la reserva en base de datos
+        crearUsuario(datosUsuario, indexFormulario);
+    });
+
+    function crearUsuario(datosUsuario, indexFormulario){
+            $.ajax({
+                type: "GET",
+                url: "/TP-PW2/Modelos/reserva_modelo.php",
+                data: datosUsuario
+            })
+            .success(function(usuarioCreado){
+                if(usuarioCreado){
+                    $("#usuario-creado" + indexFormulario).append("usuario creado");
+                }
+            });
     }
-
-    function mostrarSolicitarTurno(){
-        //Muestra un mensaje para solicitar turno medico
-    }
-
-    function mostrarCodigoMedicoInsuficiente(){
-        //Muestra el mensaje, el usuario acepta y se lo manda al home
-    }
-
-
 
 });
