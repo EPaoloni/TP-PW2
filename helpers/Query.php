@@ -58,7 +58,7 @@ class Query{
     public function insert($tabla, $columnas, $valores){
         $conn = $this->establecerConexion();
 
-        $sql = "INSERT INTO " . $tabla . $columnas . " VALUES" . $valores;
+        $sql = "INSERT INTO " . $tabla . $columnas . " VALUES " . $valores;
 
         $result = $conn->query($sql);
 
