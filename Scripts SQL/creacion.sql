@@ -112,8 +112,12 @@ CREATE TABLE reserva(
     idReserva INT AUTO_INCREMENT,
     idTitular INT NOT NULL,
     idVuelo INT NOT NULL,
+    idOrigenReserva INT NOT NULL,
+    idDestinoReserva INT NOT NULL,
     PRIMARY KEY (idReserva),
-    FOREIGN KEY (idVuelo) REFERENCES vuelo(idVuelo)
+    FOREIGN KEY (idVuelo) REFERENCES vuelo(idVuelo),
+    FOREIGN KEY (idOrigenReserva) REFERENCES estacion(idEstacion),
+    FOREIGN KEY (idDestinoReserva) REFERENCES estacion(idEstacion)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE acompaniante_reserva(
