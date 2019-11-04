@@ -279,6 +279,6 @@ INSERT INTO `horario`(`idHorario`,`hora`)
                         (7,'14:00'),
                         (8,'15:00');
 INSERT INTO turno(idCentroMedico, fecha,idUsuario,idHorario) 
-                    VALUES  ('1', '2014-05-14', '2','1'),
-                            ('1', '2014-05-14', '1','4'),
-                            ('1', '2014-05-14', '4','7');
+                    VALUES  ('1', '2014-05-14', NULL,'1'),
+                            ('1', '2014-05-14', NULL,'4'),
+                            ('1', '2014-05-14', NULL,'7');

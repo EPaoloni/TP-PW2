@@ -57,6 +57,7 @@
 <html lang="en">
 <head>
     <?php include("Vistas/head.html") ?>
+    <script src="StaticContent/js/turno.js"></script>
 </head>
 <body>
     <a class="btn btn-danger" href="#">Cerrar sesion</a>
@@ -88,29 +89,5 @@
             <?php echo $error; ?> 
         </form>
     </div>
-             
-    <script>
-    $(function() {
-        $("#fecha-turno").change(function() {
-            var fecha = $("#fecha-turno").val();
-            var idCentro = $("#centro-medico").val();
-            var parametro = 'fecha='+ fecha + '& centro='+ idCentro;
-            if(fecha!=null){
-                $.ajax ({
-                type: "GET",
-                url: "hora.php",
-                data: parametro,
-                cache: false,
-                success:
-                    function(html){
-                        $("#horario").html(html);
-                }
-            });
-        }
-
-        }).trigger("change");
-    });
-
-    </script>
 </body>
 </html>

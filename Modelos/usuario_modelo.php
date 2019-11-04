@@ -31,7 +31,6 @@
     }
     function checkCodigoViajero($idUsuario){
         $query = new Query();
-        
         $result=$query->consulta("codigoViajero","usuario ","idUsuario='$idUsuario'");
         return $result[0]['codigoViajero'];
     }
