@@ -5,6 +5,8 @@
     session_start();
 
     $idVuelo = $_GET['idVuelo'];
+    $idOrigen = $_GET['idOrigen'];
+    $idDestino = $_GET['idDestino'];
     $mailUsuarios = [];
     $acompaniantes = [];
     if(isset($_GET['mailsUsuarios'])){
@@ -15,7 +17,7 @@
     }
     $titular = consultarIdUsuarioConMail($_SESSION['emailUsuario']);
     
-    $resultado = guardarReserva($idVuelo, $titular, $acompaniantes);
+    $resultado = guardarReserva($idVuelo, $idOrigen, $idDestino, $titular, $acompaniantes);
     
     echo $resultado;
 

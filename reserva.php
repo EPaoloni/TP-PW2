@@ -41,6 +41,8 @@
                 echo '<input type="hidden" class="hidden-mail-usuario" id="hidden-mail-usuario" name="mailsUsuarios[' . $i . ']" value="">';
             }
             echo '<input type="hidden" name="idVuelo" value="' . $idVuelo .'">';
+            echo '<input type="hidden" name="idOrigen" value="' . $idOrigen .'">';
+            echo '<input type="hidden" name="idDestino" value="' . $idDestino .'">';
             ?>
             <br><br>
         </form>
