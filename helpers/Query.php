@@ -66,7 +66,7 @@ class Query{
             $insertExitoso = true;
         } else {
             $log = new Logger();
-            $log->error("Ocurrio un error en la base de datos al realizar el insert: $sql \t El error de la base de datos es: $conn->error");
+            $log->error("Ocurrio un error en la base de datos al realizar el insert: $sql ;\t El error de la base de datos es: $conn->error");
             $insertExitoso = false;
         }
 
