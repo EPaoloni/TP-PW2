@@ -2,6 +2,7 @@
 
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/login_modelo.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
 
 $error = "";
 if(!isset($_POST['enviar'])){
@@ -13,7 +14,10 @@ if(!isset($_POST['enviar'])){
         $password = $_POST['password'];
 
         if(validarCredencialesUsuario($username, $password) != null){
+            $username=$_SESSION['username'];
+            checkTurnos($username);
             header("location: ./index.php");
+            exit();
         } else { 
             // Log del error
             $log = new Logger();

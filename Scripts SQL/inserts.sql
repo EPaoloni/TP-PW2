@@ -131,3 +131,22 @@ INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
                             (8, 3),
                             (9, 3),
                             (10, 3);
+
+INSERT INTO `centroMedico` (`idCentroMedico`,`nombreCentroMedico`)
+                VALUES  ('1','Centro Medico de Buenos Aires'),
+                        ('2','Centro Medico de Shanghái'),
+                        ('3','Centro Medico de Ankara');
+                        
+INSERT INTO `horario`(`idHorario`,`hora`)
+				VALUES	(1,'08:00'),
+						(2,'09:00'),
+                        (3,'10:00'),
+                        (4,'11:00'),
+                        (5,'12:00'),
+                        (6,'13:00'),
+                        (7,'14:00'),
+                        (8,'15:00');
+INSERT INTO `turno`(idCentroMedico, fecha,idUsuario,idHorario) 
+                    VALUES  ('1', '2014-05-14', NULL,'1'),
+                            ('1', '2014-05-14', NULL,'4'),
+                            ('1', '2014-05-14', NULL,'7');
