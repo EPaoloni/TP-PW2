@@ -1,10 +1,10 @@
 <?php
-    include_once('modelos/turno_modelo.php');
-    include_once("helpers/Query.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/conexion.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
 
-    function checkTurnos (){
+    function checkTurnos ($username){
         $query = new Query();
-        $username=$_SESSION['username'];
         $resultadoConsulta= $query->consulta("codigoViajero,idUsuario",
                                     "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
                                     "Credencial.username='$username'");
@@ -33,6 +33,13 @@
         $query = new Query();
         $result=$query->consulta("codigoViajero","usuario ","idUsuario='$idUsuario'");
         return $result[0]['codigoViajero'];
+    }
+    function getIdByUsername($username){
+        $query = new Query();
+        $idUsuario= $query->consulta("idUsuario",
+                                    "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
+                                    "Credencial.username='$username'");
+        return $idUsuario[0]['idUsuario'];
     }
     
 

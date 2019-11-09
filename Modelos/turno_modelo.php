@@ -1,8 +1,8 @@
 <?php
 
-    include_once("helpers/conexion.php");
-    include_once("helpers/Query.php");
-    include_once("helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/conexion.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
 
     function crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario){
         $query = new Query();

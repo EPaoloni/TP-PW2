@@ -127,3 +127,27 @@ CREATE TABLE acompaniante_reserva(
     FOREIGN KEY (idReserva) REFERENCES reserva(idReserva),
     FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE centroMedico(
+    idCentroMedico INT NOT NULL,
+    nombreCentroMedico varchar(50) NOT NULL,
+    PRIMARY KEY(idCentroMedico)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE horario(
+    idHorario INT NOT NULL,
+    hora TIME NOT NULL,
+    PRIMARY KEY(idHorario)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE turno(
+    idTurno INT AUTO_INCREMENT NOT NULL,
+	fecha DATE NOT NULL,
+    idCentroMedico INT,
+    idUsuario INT,
+    idHorario int,
+    PRIMARY KEY(idTurno),
+    FOREIGN KEY(idCentroMedico) REFERENCES centroMedico(idCentroMedico),
+    FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY(idHorario) REFERENCES horario(idHorario)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,8 +1,10 @@
 <?php 
-    include_once('helpers/Query.php');
-    include_once('modelos/turno_modelo.php');
-    include_once('modelos/usuario_modelo.php');
-    include_once("helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
+    
     session_start();
     $query = new Query();
     $log = new Logger();
@@ -13,10 +15,7 @@
         exit();
     } else {
         $username=$_SESSION['username'];
-        $idUsuario= $query->consulta("idUsuario",
-                                    "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
-                                    "Credencial.username='$username'");
-        $idUsuario= $idUsuario[0]['idUsuario'];
+        $idUsuario= getIdByUsername($username);
 
         if(tieneTurnos($idUsuario)){
             header("location: ./turno.php");
@@ -60,7 +59,7 @@
     <script src="StaticContent/js/turno.js"></script>
 </head>
 <body>
-    <a class="btn btn-danger" href="#">Cerrar sesion</a>
+    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
     <a class="btn btn-primary" href="./index.php">Ir al Inicio</a>
 
      <h1 class="text-center">Solicitar Turno</h1>

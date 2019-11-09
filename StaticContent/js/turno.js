@@ -6,7 +6,7 @@ $(document).ready(function() {
         if(fecha!=null){
             $.ajax ({
             type: "GET",
-            url: "hora.php",
+            url: "/TP-PW2/Endpoints/hora.php",
             data: parametro,
             cache: false,
             success:

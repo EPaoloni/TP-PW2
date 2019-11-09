@@ -1,20 +1,20 @@
 <?php 
-    include_once('helpers/Query.php');
-    include_once('modelos/turno_modelo.php');
-    include_once('modelos/usuario_modelo.php');
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
     session_start();
     $query = new Query();
-    
+    $log = new Logger();
     
     if(!isset($_SESSION['username'])){
         header("location: ./login.php");
         exit();
     } else {
-        $username=$_SESSION['username'];
-        $idUsuario= $query->consulta("idUsuario",
-                                    "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
-                                    "Credencial.username='$username'");
-        $idUsuario= $idUsuario[0]['idUsuario'];
+        $username=$_SESSION['username'];                           
+        $idUsuario= getIdByUsername($username);
+        
         if(checkCodigoViajero($idUsuario)==0){
             $turnos = consultarTurnoPorUsuario($idUsuario);
         
@@ -22,6 +22,7 @@
                 $cancelar = isset($_POST['cancelar']) ? $_POST['cancelar'] : false ;
                 if($cancelar){
                     eliminarTurno($idUsuario);
+                    $log->info("Se elimino el turno para el usuario $idUsuario");
                     header("Refresh:0");
                     exit();
                 }
@@ -40,7 +41,7 @@
 </head>
 <body>
 
-    <a class="btn btn-danger" href="#">Cerrar sesion</a>
+    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
     <a class="btn btn-primary" href="./index.php">Ir al Inicio</a>
     
      <h1 class="text-center">Mis Turnos</h1>

@@ -5,6 +5,8 @@
 
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
     
     $error = "";
 
@@ -76,7 +78,16 @@
 
     <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
 
-    <?php } else { ?>
+    <?php 
+            $idUsuario=getIdByUsername($_SESSION['username']);
+            if(checkCodigoViajero($idUsuario)==0){
+                if(tieneTurnos($idUsuario)){    ?>
+
+    <a class="btn btn-secondary" href="./turno.php">Mi Turno</a>
+
+    <?php } else{ ?>
+    <a class="btn btn-primary" href="./solicitar-turno.php">Solicitar Turno</a>
+    <?php } } } else { ?>
         
     <a class="btn btn-success" href="./login.php">A login</a>
     <a class="btn btn-success" href="./registro.php">A registro</a>

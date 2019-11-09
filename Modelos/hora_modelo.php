@@ -1,9 +1,9 @@
 <?php
 
-    include_once("helpers/conexion.php");
-    include_once("helpers/Query.php");
-    include_once("helpers/Logger.php");
-    include_once("modelos/turno_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/conexion.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
 
     
     function imprimirHorasSegunFechaYCentro($fecha,$idCentro){
