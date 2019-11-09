@@ -1,7 +1,7 @@
 <?php
 
-include_once("helpers/conexion.php");
-include_once("helpers/Logger.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/conexion.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
 
 class Query{
 
@@ -42,8 +42,6 @@ class Query{
         } else {
             $entradas = null;
         }
-        $result->close();
-        $conn->close();
 
         return $entradas;
     }
@@ -60,7 +58,7 @@ class Query{
     public function insert($tabla, $columnas, $valores){
         $conn = $this->establecerConexion();
 
-        $sql = "INSERT INTO " . $tabla . $columnas . " VALUES" . $valores;
+        $sql = "INSERT INTO " . $tabla . $columnas . " VALUES " . $valores;
 
         $result = $conn->query($sql);
 
@@ -68,11 +66,9 @@ class Query{
             $insertExitoso = true;
         } else {
             $log = new Logger();
-            $log->error("Ocurrio un error en la base de datos al realizar el insert: $sql \t El error de la base de datos es: $conn->error");
+            $log->error("Ocurrio un error en la base de datos al realizar el insert: $sql ;\t El error de la base de datos es: $conn->error");
             $insertExitoso = false;
         }
-        
-        $conn->close();
 
         return $insertExitoso;
     }

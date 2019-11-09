@@ -20,7 +20,7 @@ class Logger{
 
     
     private function escribirArchivo($mensaje, $nivel) {
-        file_put_contents("./logs/" . $this->nombreDelArchivo, date('d/M/Y - H:i:s') . " [" . strtoupper($nivel) . "]" . " - " . $mensaje . "\n", FILE_APPEND);
+        file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/logs/" . $this->nombreDelArchivo, date('d/M/Y - H:i:s') . " [" . strtoupper($nivel) . "]" . " - " . $mensaje . "\n", FILE_APPEND);
     }
 }
 
