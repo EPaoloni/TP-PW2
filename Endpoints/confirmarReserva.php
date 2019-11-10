@@ -19,7 +19,12 @@
     
     $resultado = guardarReserva($idVuelo, $idOrigen, $idDestino, $titular, $acompaniantes);
     
-    echo $resultado;
+    if($resultado){
+        header('location: /TP-PW2/listaReservas.php');
+    } else {
+        $_SESSION['reservaFallida'] = true;
+        header('location: /TP-PW2/');
+    }
 
     function consultarIdUsuarioConMail($mail){
         $query = new Query();
