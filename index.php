@@ -60,6 +60,14 @@
     } else {
         $consultaRealizada = false;
     }
+
+    
+    if(isset($_SESSION['reservaFallida'])){
+        if($_SESSION['reservaFallida']){
+            $error = '<p class="text-danger">Ha ocurrido un error con la reserva</p>';
+            $_SESSION['reservaFallida'] = false;
+        }
+    }
 ?>
 
 <!DOCTYPE html>

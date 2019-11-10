@@ -16,8 +16,7 @@
     $nombreOrigen = $result[0]['nombreEstacion'];
     $result = $query->consulta("nombreEstacion", "estacion", "idEstacion = '$idDestino'");
     $nombreDestino = $result[0]['nombreEstacion'];
-
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
