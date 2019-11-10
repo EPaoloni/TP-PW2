@@ -46,22 +46,25 @@
             <br><br>
         </form>
 
-        <h2>Datos de los pasajeros</h2>
+        <h2>Datos de los acompañantes</h2>
         <div class="container row">
             <?php for ($i=1; $i < $cantidadPasajeros; $i++) { 
                 echo '
 
                 <div class="col-xs-4">
-                    <label for="">Nombre del pasajero '. $i . ':</label>
-                    <input class="form-control" type="text" id="nombre' . $i .'" name="nombre' . $i .'" required>
-                    <label for="">Apellido del pasajero '. $i . ':</label>
-                    <input class="form-control" type="text" id="apellido' . $i .'" name="apellido' . $i .'" required>
-                    <label for="">Mail del pasajero '. $i . ':</label>
-                    <input class="form-control mail" type="text" id="mail' . $i .'" name="mail' . $i .'" required>
-                    <p class="text-danger" id="usuario-no-existente' . $i .'" style="display: none;">El usuario no existe, debe crearlo</p>
-                    <p class="text-success" id="usuario-creado' . $i .'" style="display: none;">El usuario ha sido creado</p>
+                    <label for="">Nombre del pasajero ' . $i . ':</label>
+                    <input class="form-control nombre" type="text" id="nombre' . $i .'" name="nombre" required>
+                    <label for="">Apellido del pasajero ' . $i . ':</label>
+                    <input class="form-control apellido" type="text" id="apellido' . $i .'" name="apellido" required>
+                    <label for="">Mail del pasajero ' . $i . ':</label>
+                    <input class="form-control mail" type="text" id="mail' . $i .'" name="mail" required>
+                    <label id="label-username-' . $i . '" for="" style="display: none;" >Username ' . $i . ':</label>
+                    <input class="form-control username" type="text" id="username-' . $i . '" name="username" style="display: none;" required>
+                    <p class="text-danger usuario-no-existente" id="usuario-no-existente' . $i . '" style="display: none;">El usuario no existe, debe crearlo</p>
+                    <p class="text-danger error-crear-usuario" id="error-crear-usuario-' . $i . '" style="display: none;">Ocurrio un error al crear el usuario</p>
+                    <p class="text-success usuario-creado" id="usuario-creado' . $i . '" style="display: none;">El usuario ha sido creado</p>
                     <button class="btn btn-success boton-crear-usuario" id="boton-crear-usuario' . $i . '" style="display: none;">Crear usuario</button>
-                    <input type="hidden" class="posicion-usuario" value="' . $i .'">
+                    <input type="hidden" class="posicion-usuario" value="' . $i . '">
                 </div>    
                     ';
                     
@@ -70,7 +73,6 @@
         </div>
 
         <button id="confirmar-reserva" class="btn btn-primary">Confirmar Reserva</button>
-        
     </div>
 
 </body>
