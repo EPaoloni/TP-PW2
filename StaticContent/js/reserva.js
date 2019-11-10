@@ -75,6 +75,7 @@ $(function(){
                 formActual.children(".usuario-no-existente").hide();
                 formActual.children(".boton-crear-usuario").hide();
                 formActual.children(".error-crear-usuario").hide();
+                formActual.children(".usuario-creado").show();
             } else {
                 formActual.children(".error-crear-usuario").fadeIn();
             }
