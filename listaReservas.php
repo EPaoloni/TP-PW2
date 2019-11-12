@@ -31,7 +31,7 @@
         echo "<div class='container row>'";
         echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
         if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
-            echo "<a class='btn btn-primary' href='realizarPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+            echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
         }
         echo "</div>";
     }
