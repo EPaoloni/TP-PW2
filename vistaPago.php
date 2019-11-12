@@ -1,8 +1,41 @@
 <?php
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
+
+session_start();
 
 $numeroDeReserva= $_GET['idReserva'];
+
+
+verificarCodigosDeViajero($numeroDeReserva);
+
+function verificarCodigosDeViajero($numeroDeReserva){
+    $query = new Query();
+    $idTitular = $query->consulta("idTitular",
+                                    "reserva",
+                                    "idReserva = " . $numeroDeReserva);
+
+    $idAcompaniantes = $query->consulta("idUsuario",
+                                        "acompaniante_reserva",
+                                        "idReserva = " . $numeroDeReserva);
+
+    $idPasajeros[] = $idTitular[0]['idTitular'];
+
+    if($idAcompaniantes != null){
+        foreach ($idAcompaniantes as $idAcompaniante) {
+            $idPasajeros[] = $idAcompaniante['idUsuario'];
+        }
+    }
+    //TODO: Sacar
+    $codigoViajeroRequerido = 2;
+    foreach ($idPasajeros as $idPasajero) {
+        if($codigoViajeroRequerido != checkCodigoViajero($idPasajero)){
+            $_SESSION['errorCodigoDeViajero'] = "Alguno de los pasajeros no cumple con el codigo de viajero requerido para la nave en la reserva numero: $numeroDeReserva";
+            header("location: ./listaReservas.php");
+        }
+    }
+}
 
 $query = new Query();
 $resultado= $query->consulta("montoReserva",

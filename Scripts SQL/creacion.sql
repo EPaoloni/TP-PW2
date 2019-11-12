@@ -45,6 +45,7 @@ CREATE TABLE modeloNave(
     id INT AUTO_INCREMENT,
     nombreModelo NVARCHAR(50) UNIQUE,
     tipoVueloRealizado INT,
+    codigoDeViajeroRequerido INT,
     PRIMARY KEY(id),
     FOREIGN KEY(tipoVueloRealizado) REFERENCES tipoVuelo(idTipoVuelo)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -16,6 +16,13 @@
     $reservas = $query->consulta("*",
                     "reserva",
                     "idTitular = '" . $idTitular[0]['idUsuario'] . "'");
+
+
+    $error = "";
+
+    if(isset($_SESSION['errorCodigoDeViajero'])){
+        $error = $_SESSION['errorCodigoDeViajero'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +32,21 @@
 </head>
 <body>
 
+<div class="container">
+    <p class="text-danger"><?php echo $error; ?></p>
+</div>
+
 
 <?php
     foreach ($reservas as $reserva) {
         echo "<div class='container row>'";
         echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
         if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
-            echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+            if($reserva['reservaPaga']){
+                echo "<span class='text-success'>Reserva Paga</span>";
+            } else {
+                echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+            }
         }
         echo "</div>";
     }
