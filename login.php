@@ -4,9 +4,7 @@
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
 
 $error = "";
-if(!isset($_POST['enviar'])){
-
-} else {
+if(isset($_POST['enviar'])){
 
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
