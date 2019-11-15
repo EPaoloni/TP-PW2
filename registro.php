@@ -3,9 +3,7 @@
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/registro_modelo.php");
 //TODO: Las validaciones no estan funcionando, toma como que siempre estan seteadas
 $error = "";
-if(!isset($_POST['enviar'])){
-
-} else {
+if(isset($_POST['enviar'])){
 
     if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['nombre']) && isset($_POST['apellido'])
      && isset($_POST['mail']) && isset($_POST['password-repetido'])){
@@ -23,6 +21,8 @@ if(!isset($_POST['enviar'])){
             } else {
                 if($returnRegistrarUsuario == "Usuario Existente"){
                     $error = "<p class='text-danger'>Usuario existente<p>";
+                } else {
+                    $error = "<p class='text-danger'>Ocurri&oacute; un error al crear el usuario<p>";
                 }
             }
 
