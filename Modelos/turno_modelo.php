@@ -40,7 +40,14 @@
                                         "turno.idCentroMedico=$idCentro AND fecha='$fecha'" );
         return $resultado;
     }
-    
+    function consultarCentrosMedicos(){
+        $query = new Query();
+        $resultado=$query->consulta("", "centroMedico", "");
+        return $resultado;
+    }
+    function puedeSolicitarTurno($idUsuario){
+        return (!tieneTurnos($idUsuario) && checkCodigoViajero($idUsuario)==0 );
+    }
 
 
     

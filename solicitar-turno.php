@@ -1,55 +1,41 @@
 <?php 
-    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
-    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
     
     session_start();
-    $query = new Query();
-    $log = new Logger();
     $error="";
+    
 
-    if(!isset($_SESSION['username'])){
-        header("location: ./login.php");
-        exit();
-    } else {
-        $username=$_SESSION['username'];
-        $idUsuario= getIdByUsername($username);
-
-        if(tieneTurnos($idUsuario)){
-            header("location: ./turno.php");
-            exit();
-        } else {
-            if(checkCodigoViajero($idUsuario)==0){
-                $centroMedicos = $query->consulta("", "centroMedico", "");
+    if(isset($_SESSION['username'])){
+        $idUsuario= getIdByUsername($_SESSION['username']);
+        if(puedeSolicitarTurno($idUsuario)){
+            $centroMedicos = consultarCentrosMedicos();
                 
-                if(isset($_POST['enviar'])){
+            if(isset($_POST['enviar'])){
 
-                    $idCentroMedico = $_POST['centro-medico'];
-                    $fechaTurno = ($_POST['fecha-turno'] != "") ? $_POST['fecha-turno'] : null;
-                    $idHorario = $_POST['horario'];
-                    
-                    if(isset($idCentroMedico) && isset( $fechaTurno) && isset($idUsuario) && isset($idHorario)  ){
-                        $returnCrearTurno=crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario);
-                        if ($returnCrearTurno == true){
-                            header("location: ./turno.php");
-                            die();
-                        } else if(isset($returnCrearTurno[1])) {
-                            $error = "<p class='text-danger'>" . $returnCrearTurno[1] . "<p>";
-                        }
-                    } else {
-                        $error = "<p class='text-danger'>Campos incompletos<p>";
-                        $log->error("Ocurrio un error al crear Turno debido a campos incompletos  \t Los campos son idCentroMedico = $idCentroMedico , fechaTurno = $fechaTurno, idHorario = $idHorario, idUsuario = $idUsuario ");
+                $idCentroMedico = $_POST['centro-medico'];
+                $fechaTurno = ($_POST['fecha-turno'] != "") ? $_POST['fecha-turno'] : null;
+                $idHorario = $_POST['horario'];
+                
+                if(isset($idCentroMedico) && isset( $fechaTurno) && isset($idUsuario) && isset($idHorario)  ){
+                    $returnCrearTurno=crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario);
+                    if ($returnCrearTurno == true){
+                        header("location: ./turno.php");
+                        exit();
+                    } else if(isset($returnCrearTurno[1])) {
+                        $error = "<p class='text-danger'>" . $returnCrearTurno[1] . "<p>";
                     }
+                } else {
+                    $error = "<p class='text-danger'>Campos incompletos<p>";  
                 }
-            }else {
-                header("location: ./index.php");
-                exit();
             }
         }
-        
+    } else {
+        header("location: ./turno.php");
+        exit();
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -66,15 +52,12 @@
      <div class="container">
         <form action="./solicitar-turno.php" method="POST">
             <label for="fecha-turno">Elija una Fecha </label>
-            <input class="form-control col-xs-12" type="date" name="fecha-turno" id="fecha-turno">
+            <input class="form-control col-xs-12" type="date" name="fecha-turno" id="fecha-turno" >
             <label for="centro-medico">Elija un Centro Medico: </label>
             <select name="centro-medico" id="centro-medico" class="form-control col-xs-12" placeholder="Elija un centro">
                     <?php 
                         foreach ($centroMedicos as $centroMedico) {
                         echo "<option value='" . $centroMedico['idCentroMedico'] . "'>" . $centroMedico['nombreCentroMedico'] . "</option>";
-                        $cantidadDeMedicos=$centroMedico['cantidadDeMedicos'];
-                        $turnosMaximosDiarios=$centroMedico['turnosMaximosDiarios'];
-
                     }?>
 
             </select>
