@@ -27,15 +27,18 @@
 
 
 <?php
-    foreach ($reservas as $reserva) {
-        echo "<div class='container row>'";
-        echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
-        if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
-            echo "<a class='btn btn-primary' href='realizarPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+    if($reservas != null){
+        foreach ($reservas as $reserva) {
+            echo "<div class='container row>'";
+            echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
+            if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
+                echo "<a class='btn btn-primary' href='realizarPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+            }
+            echo "</div>";
         }
-        echo "</div>";
+    } else {
+        echo "<h4>No tenés reservas realizadas</h1>";
     }
-
 ?>    
 
 
