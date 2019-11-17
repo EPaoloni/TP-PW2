@@ -83,6 +83,7 @@
     <?php if(isset($_SESSION['username'])){ ?>
 
     <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
+    <a class="btn btn-primary" href="./listaReservas.php">Mis Reservas</a>
 
     <?php } else { ?>
         
