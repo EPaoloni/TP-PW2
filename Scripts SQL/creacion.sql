@@ -66,9 +66,9 @@ CREATE TABLE naves(
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cabinas(
-    id INT AUTO_INCREMENT,
-    tipoCabina NVARCHAR(1) UNIQUE,
-    PRIMARY KEY(id)
+    idCabina INT AUTO_INCREMENT,
+    nombreCabina NVARCHAR(20) UNIQUE,
+    PRIMARY KEY(idCabina)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE modeloNave_cabinas(
@@ -79,7 +79,7 @@ CREATE TABLE modeloNave_cabinas(
     PRIMARY KEY(id),
     UNIQUE KEY (modeloNave,tipoCabina),
     FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
-    FOREIGN KEY(tipoCabina) REFERENCES cabinas(id)    
+    FOREIGN KEY(tipoCabina) REFERENCES cabinas(idCabina)    
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE pasajeros(
@@ -159,7 +159,7 @@ CREATE TABLE precioCabina(
     idCabina INT,
     precio DECIMAL NOT NULL,
     PRIMARY KEY (idCabina, precio),
-    FOREIGN KEY (idCabina) REFERENCES cabinas(id)
+    FOREIGN KEY (idCabina) REFERENCES cabinas(idCabina)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE pago(

@@ -74,10 +74,10 @@ INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `id_nave`, `circuitoVuelo`)
                             ('20191015', '20191017', 1, 1),
                             ('20191015', '20191019', 13, 3);
 
-INSERT INTO `cabinas` (`tipoCabina`)
-                     VALUES ('G'),
-                            ('F'),
-                            ('S');
+INSERT INTO `cabinas` (`nombreCabina`)
+                     VALUES ('General'),
+                            ('Familiar'),
+                            ('Suite');
 
 INSERT INTO `modeloNave_cabinas` (`modeloNave`, `tipoCabina`, `capacidad`)
                      VALUES (1, 1, 200),

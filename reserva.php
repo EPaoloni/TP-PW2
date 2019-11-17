@@ -16,6 +16,13 @@
     $nombreOrigen = $result[0]['nombreEstacion'];
     $result = $query->consulta("nombreEstacion", "estacion", "idEstacion = '$idDestino'");
     $nombreDestino = $result[0]['nombreEstacion'];
+    $result = $query->consulta("modelo",
+                                "vuelo INNER JOIN naves ON vuelo.id_nave = naves.id",
+                                "idVuelo = '$idVuelo'");
+    $modeloNave = $result[0]['modelo'];
+    $cabinasDisponibles = $query->consulta("idCabina, nombreCabina",
+                                "cabinas INNER JOIN modeloNave_cabinas ON idCabina = tipoCabina",
+                                "modeloNave_cabinas.modeloNave = '$modeloNave'" );
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +42,13 @@
             <h3>Origen: <?php echo $nombreOrigen ;?></h3>
             <h3>Destino: <?php echo $nombreDestino ;?></h3>
             <h3>Id de la nave: <?php echo $idNave;?></h3>
+            <select name="cabina" id="select-cabina">
+                <?php
+                    foreach ($cabinasDisponibles as $cabina) {
+                        echo "<option value='" . $cabina['idCabina'] . "' name='tipoCabina' >" . $cabina['nombreCabina'] . "</option>";
+                    }
+                ?>
+            </select>
             <?php
             for ($i=1; $i < $cantidadPasajeros; $i++) { 
                 echo '<input type="hidden" class="hidden-mail-usuario" id="hidden-mail-usuario" name="mailsUsuarios[' . $i . ']" value="">';
