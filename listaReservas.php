@@ -38,19 +38,21 @@
 
 
 <?php
-    foreach ($reservas as $reserva) {
-        echo "<div class='container row>'";
-        echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
-        if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
-            if($reserva['reservaPaga']){
-                echo "<span class='text-success'>Reserva Paga</span>";
-            } else {
-                echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+    if($reservas != null){
+        foreach ($reservas as $reserva) {
+            echo "<div class='container row>'";
+            echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
+            if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
+                if($reserva['reservaPaga']){
+                    echo "<span class='text-success'>Reserva Paga</span>";
+                } else {
+                    echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+                }
             }
         }
-        echo "</div>";
+    } else {
+        echo "<h4>No tenés reservas realizadas</h1>";
     }
-
 ?>    
 
 
