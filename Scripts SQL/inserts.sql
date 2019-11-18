@@ -26,9 +26,9 @@ INSERT INTO `credencial` (`username`, `pass`)
                             ('juanp', '1234');
 
 INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codigoViajero`,`numeroCredencialUsuario`, `mail`)
-                     VALUES ('Ezequiel', 'Paoloni', 1, 0, 1, 'ezep@hotmail.com'),
-                            ('Ian', 'Tries', 1, 0, 2, 'iant@hotmail.com'),
-                            ('Alejo', 'Zonta', 1, 0, 3, 'alez@hotmail.com'),
+                     VALUES ('Ezequiel', 'Paoloni', 1, 3, 1, 'ezep@hotmail.com'),
+                            ('Ian', 'Tries', 1, 3, 2, 'iant@hotmail.com'),
+                            ('Alejo', 'Zonta', 1, 3, 3, 'alez@hotmail.com'),
                             ('Juan', 'Pérez', 2, 1, 4, 'juanp@hotmail.com');            
 
 INSERT INTO `estacion` (`nombreEstacion`)
@@ -152,7 +152,7 @@ INSERT INTO `turno`(`idCentroMedico`, `fecha`, `idUsuario`, `idHorario`)
                             ('1', '2014-05-14', NULL,'4'),
                             ('1', '2014-05-14', NULL,'7');
 
-INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReserva`, `montoReserva`, `reservaPaga`, `lugaresSeleccionados`, `reservaCaida`) 
+INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReserva`, `montoReserva`, `reservaPaga`, `lugaresSeleccionados`,`idCabina` ,`reservaCaida`) 
                     VALUES  (1, 4, 5, 9, 300, false, '1,2,3', 2, false),
                             (2, 4, 5, 9, 300, false, '4,5', 2, false),
                             -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
