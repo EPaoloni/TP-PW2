@@ -45,7 +45,9 @@
             if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
                 if($reserva['reservaPaga']){
                     echo "<span class='text-success'>Reserva Paga</span>";
-                } else {
+                } else  if($reserva['reservaCaida']){
+                    echo "<span class='text-danger'>Reserva caida por codigo de viajero</span>";
+                } else{
                     echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
                 }
             }
