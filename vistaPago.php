@@ -30,7 +30,7 @@ function verificarCodigosDeViajero($numeroDeReserva){
     //TODO: Sacar
     $codigoViajeroRequerido = 2;
     foreach ($idPasajeros as $idPasajero) {
-        if($codigoViajeroRequerido != checkCodigoViajero($idPasajero)){
+        if($codigoViajeroRequerido > checkCodigoViajero($idPasajero)){
             $_SESSION['errorCodigoDeViajero'] = "Alguno de los pasajeros no cumple con el codigo de viajero requerido para la nave en la reserva numero: $numeroDeReserva";
             header("location: ./listaReservas.php");
         }
