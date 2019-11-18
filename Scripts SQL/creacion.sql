@@ -119,6 +119,7 @@ CREATE TABLE reserva(
     reservaPaga BOOLEAN NOT NULL,
     lugaresSeleccionados NVARCHAR(50) NOT NULL,
     idCabina INT NOT NULL,
+    reservaCaida BOOLEAN NOT NULL,
     PRIMARY KEY (idReserva),
     FOREIGN KEY (idVuelo) REFERENCES vuelo(idVuelo),
     FOREIGN KEY (idOrigenReserva) REFERENCES estacion(idEstacion),

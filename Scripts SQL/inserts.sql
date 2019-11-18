@@ -152,15 +152,15 @@ INSERT INTO `turno`(`idCentroMedico`, `fecha`, `idUsuario`, `idHorario`)
                             ('1', '2014-05-14', NULL,'4'),
                             ('1', '2014-05-14', NULL,'7');
 
-INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReserva`, `montoReserva`, `reservaPaga`, `lugaresSeleccionados`, `idCabina`) 
-                    VALUES  (1, 4, 5, 9, 300, false, '1,2,3', 2),
-                            (2, 4, 5, 9, 300, false, '4,5', 2),
-                            -- (2, 4, 5, 9, 300, false, '4,5', 2),
-                            -- (2, 4, 5, 9, 300, false, '4,5', 2),
-                            -- (2, 4, 5, 9, 300, false, '4,5', 2),
-                            -- (2, 4, 5, 9, 300, false, '4,5', 2),
-                            -- (2, 4, 5, 9, 300, false, '4,5', 2),
-                            (3, 4, 5, 9, 300, false, '6', 2);
+INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReserva`, `montoReserva`, `reservaPaga`, `lugaresSeleccionados`, `reservaCaida`) 
+                    VALUES  (1, 4, 5, 9, 300, false, '1,2,3', 2, false),
+                            (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            (3, 4, 5, 9, 300, false, '6', 2, false);
 
 INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`) 
                     VALUES  (1, 2),
@@ -169,3 +169,8 @@ INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`)
                             (2, 3),
                             (2, 4),
                             (3, 4);
+
+INSERT INTO `precioCabina`(`idCabina`, `precio`)
+                     VALUES (1, 100),
+                            (2, 200),
+                            (3, 300);                          
