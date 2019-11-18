@@ -4,7 +4,7 @@
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
 
 
-    function guardarReserva($idVuelo, $idOrigen, $idDestino, $titular, $acompaniantes){
+    function guardarReserva($idVuelo, $idOrigen, $idDestino, $titular, $acompaniantes, $montoReserva, $idCabina){
         $logger = new Logger();
 
         $query = new Query();
@@ -14,7 +14,8 @@
             $logger->warning("Se quiso hacer una reserva repetida con el usuario: " . $titular[0]['idUsuario'] . " para el vuelo: " . $idVuelo);
             return false;
         }
-        $insertReserva = $query->insert("reserva", "(idVuelo, idTitular, idOrigenReserva, idDestinoReserva)", "('" . $idVuelo . "', '" . $titular[0]['idUsuario'] . "','" . $idOrigen . "','" . $idDestino . "')");
+        $insertReserva = $query->insert("reserva", "(idVuelo, idTitular, idOrigenReserva, idDestinoReserva, montoReserva, reservaPaga, lugaresSeleccionados, idCabina, reservaCaida)",
+                                         "('" . $idVuelo . "', '" . $titular[0]['idUsuario'] . "','" . $idOrigen . "','" . $idDestino . "', '" . $montoReserva . "', false, '', " . $idCabina . ", false)");
         
         if($insertReserva){
             if(count($acompaniantes) > 0){

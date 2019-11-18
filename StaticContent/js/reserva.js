@@ -12,7 +12,7 @@ $(function(){
 
         var precioTotal = precioCabina * ($(".hidden-mail-usuario").length + 1);
 
-        $("#precio-total").text("$" + precioTotal);
+        $("#precio-total").val(precioTotal);
     }
 
     $("#confirmar-reserva").on("click", function(){

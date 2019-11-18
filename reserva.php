@@ -47,7 +47,7 @@
             <h3>Origen: <?php echo $nombreOrigen ;?></h3>
             <h3>Destino: <?php echo $nombreDestino ;?></h3>
             <h3>Id de la nave: <?php echo $idNave;?></h3>
-            <select name="cabina" id="select-cabina">
+            <select name="idCabina" id="select-cabina">
                 <?php
                     $hayLugarEnElVuelo = false;
                     foreach ($cabinasNave as $cabina) {
@@ -64,7 +64,7 @@
                     }
                 ?>
             </select>
-            <h3>Precio total: <strong id="precio-total"></strong></h3>
+            <h3>Precio total: <input id="precio-total" class="" name="montoReserva"></h3>
 
 
             <?php
