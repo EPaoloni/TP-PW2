@@ -72,7 +72,12 @@
 
     <?php } else{ ?>
     <a class="btn btn-primary" href="./solicitar-turno.php">Solicitar Turno</a>
-    <?php } } } else { ?>
+    <?php } } 
+        $isAdmin = $_SESSION['isAdmin'];
+        if($isAdmin){?>
+            <a class="btn btn-primary float-right" href="./reportes.php">Reportes</a>
+    <?php    }
+    } else { ?>
         
     <a class="btn btn-success" href="./login.php">A login</a>
     <a class="btn btn-success" href="./registro.php">A registro</a>
