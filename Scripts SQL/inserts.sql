@@ -169,3 +169,8 @@ INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`)
                             (2, 3),
                             (2, 4),
                             (3, 4);
+
+INSERT INTO `precioCabina`(`idCabina`, `precio`)
+                     VALUES (1, 100),
+                            (2, 200),
+                            (3, 300);                          
