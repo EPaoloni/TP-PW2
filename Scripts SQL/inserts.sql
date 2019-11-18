@@ -2,18 +2,23 @@ INSERT INTO `tipovuelo` (`nombreTipoVuelo`)
                      VALUES ('Orbital'),
                             ('Baja aceleración'),
                             ('Alta aceleración');
+
+INSERT INTO `pasajeros` (`numeroPasajero`)
+                     VALUES (1),
+                            (2),
+                            (3);
                             
-INSERT INTO `modeloNave` (`nombreModelo`, `tipoVueloRealizado`)
-                     VALUES ('Calandria', 1),
-                            ('Colibri', 1),
-                            ('Zorzal', 2),
-                            ('Carancho', 2),
-                            ('Aguilucho', 2),
-                            ('Canario', 2),
-                            ('Aguila', 3),
-                            ('Condor', 3),
-                            ('Alcon', 3),
-                            ('Guanaco', 3);
+INSERT INTO `modeloNave` (`nombreModelo`, `tipoVueloRealizado`, `codigoDeViajeroRequerido`)
+                     VALUES ('Calandria', 1, 1),
+                            ('Colibri', 1, 1),
+                            ('Zorzal', 2, 2),
+                            ('Carancho', 2, 2),
+                            ('Aguilucho', 2, 2),
+                            ('Canario', 2, 2),
+                            ('Aguila', 3, 2),
+                            ('Condor', 3, 2),
+                            ('Alcon', 3, 3),
+                            ('Guanaco', 3, 3);
                             
 INSERT INTO `tipoUsuario` (`idTipoUsuario`, `descripcionTipoUsuario`)
                      VALUES (1, 'admin'),
@@ -26,9 +31,9 @@ INSERT INTO `credencial` (`username`, `pass`)
                             ('juanp', '1234');
 
 INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codigoViajero`,`numeroCredencialUsuario`, `mail`)
-                     VALUES ('Ezequiel', 'Paoloni', 1, 0, 1, 'ezep@hotmail.com'),
-                            ('Ian', 'Tries', 1, 0, 2, 'iant@hotmail.com'),
-                            ('Alejo', 'Zonta', 1, 0, 3, 'alez@hotmail.com'),
+                     VALUES ('Ezequiel', 'Paoloni', 1, 3, 1, 'ezep@hotmail.com'),
+                            ('Ian', 'Tries', 1, 3, 2, 'iant@hotmail.com'),
+                            ('Alejo', 'Zonta', 1, 3, 3, 'alez@hotmail.com'),
                             ('Juan', 'Pérez', 2, 1, 4, 'juanp@hotmail.com');            
 
 INSERT INTO `estacion` (`nombreEstacion`)
@@ -74,10 +79,10 @@ INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `id_nave`, `circuitoVuelo`)
                             ('20191015', '20191017', 1, 1),
                             ('20191015', '20191019', 13, 3);
 
-INSERT INTO `cabinas` (`tipoCabina`)
-                     VALUES ('G'),
-                            ('F'),
-                            ('S');
+INSERT INTO `cabinas` (`nombreCabina`)
+                     VALUES ('General'),
+                            ('Familiar'),
+                            ('Suite');
 
 INSERT INTO `modeloNave_cabinas` (`modeloNave`, `tipoCabina`, `capacidad`)
                      VALUES (1, 1, 200),
@@ -104,49 +109,44 @@ INSERT INTO `modeloNave_cabinas` (`modeloNave`, `tipoCabina`, `capacidad`)
                             (9, 3, 25),
                             (10, 3, 100);
 
-INSERT INTO `pasajeros` (`numeroPasajero`)
-                     VALUES (1),
-                            (2),
-                            (3);
-
-
-INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
-                     VALUES (1, 1),
-                            (1, 2),
-                            (1, 3),
-                            (2, 1),
-                            (2, 2),
-                            (2, 3),
-                            (3, 2),
-                            (3, 3),
-                            (4, 2),
-                            (4, 3),
-                            (5, 2),
-                            (5, 3),
-                            (6, 2),
-                            (6, 3),
-                            (7, 2),
-                            (7, 3),
-                            (8, 2),
-                            (8, 3),
-                            (9, 3),
-                            (10, 3);
-
 INSERT INTO `centroMedico` (`idCentroMedico`,`nombreCentroMedico`)
                 VALUES  ('1','Centro Medico de Buenos Aires'),
                         ('2','Centro Medico de Shanghái'),
                         ('3','Centro Medico de Ankara');
                         
 INSERT INTO `horario`(`idHorario`,`hora`)
-				VALUES	(1,'08:00'),
-						(2,'09:00'),
+		 VALUES (1,'08:00'),
+			(2,'09:00'),
                         (3,'10:00'),
                         (4,'11:00'),
                         (5,'12:00'),
                         (6,'13:00'),
                         (7,'14:00'),
                         (8,'15:00');
-INSERT INTO `turno`(idCentroMedico, fecha,idUsuario,idHorario) 
+
+INSERT INTO `turno`(`idCentroMedico`, `fecha`, `idUsuario`, `idHorario`) 
                     VALUES  ('1', '2014-05-14', NULL,'1'),
                             ('1', '2014-05-14', NULL,'4'),
                             ('1', '2014-05-14', NULL,'7');
+
+INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReserva`, `montoReserva`, `reservaPaga`, `lugaresSeleccionados`,`idCabina` ,`reservaCaida`) 
+                    VALUES  (1, 4, 5, 9, 300, false, '1,2,3', 2, false),
+                            (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            (3, 4, 5, 9, 300, false, '6', 2, false);
+
+INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`) 
+                    VALUES  (1, 2),
+                            (1, 3),
+                            (2, 3),
+                            (2, 4),
+                            (3, 4);
+
+INSERT INTO `precioCabina`(`idCabina`, `precio`)
+                     VALUES (1, 100),
+                            (2, 200),
+                            (3, 300);                          

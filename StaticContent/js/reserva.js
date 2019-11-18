@@ -1,8 +1,22 @@
 $(function(){
 
+    calcularYMostrarPrecio();
+
+    $("#select-cabina").on("change", function(){
+        calcularYMostrarPrecio();
+    });
+
+    function calcularYMostrarPrecio(){
+        var cabinaSeleccionada = $("#select-cabina").val();
+        var precioCabina = $("#precio-cabina-" + cabinaSeleccionada).val();
+
+        var precioTotal = precioCabina * ($(".hidden-mail-usuario").length + 1);
+
+        $("#precio-total").val(precioTotal);
+    }
+
     $("#confirmar-reserva").on("click", function(){
 
-        //TODO:
         if(validarUsuarios()){
             enviarFormularioReserva();
         }

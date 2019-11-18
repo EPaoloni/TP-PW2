@@ -61,6 +61,7 @@
     <?php if(isset($_SESSION['username'])){ ?>
 
     <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
+    <a class="btn btn-primary" href="./listaReservas.php">Mis Reservas</a>
 
     <?php 
             $idUsuario=getIdByUsername($_SESSION['username']);
@@ -143,7 +144,7 @@
                                                     Numero de la nave: " . $vuelo['id_nave'] . "
                             </h5>
                             <p class='card-text'>Datos de tu vuelo</p>
-                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar(toDO)</a>
+                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar</a>
                             </div>
                             <div class='card-footer text-muted'>
                             </div>
