@@ -24,6 +24,8 @@
     $cabinasNave = $query->consulta("idCabina, nombreCabina",
                                 "cabinas INNER JOIN modeloNave_cabinas ON idCabina = tipoCabina",
                                 "modeloNave_cabinas.modeloNave = '$modeloNave'" );
+    $preciosCabinas = $query->consulta("idCabina, precio",
+                                        "precioCabina", "");
 
     $error = "";
 ?>
@@ -62,6 +64,9 @@
                     }
                 ?>
             </select>
+            <h3>Precio total: <strong id="precio-total"></strong></h3>
+
+
             <?php
             for ($i=1; $i < $cantidadPasajeros; $i++) { 
                 echo '<input type="hidden" class="hidden-mail-usuario" id="hidden-mail-usuario" name="mailsUsuarios[' . $i . ']" value="">';
@@ -69,6 +74,9 @@
             echo '<input type="hidden" name="idVuelo" value="' . $idVuelo .'">';
             echo '<input type="hidden" name="idOrigen" value="' . $idOrigen .'">';
             echo '<input type="hidden" name="idDestino" value="' . $idDestino .'">';
+            foreach ($preciosCabinas as $precioCabina) {
+                echo '<input type="hidden" id="precio-cabina-' . $precioCabina['idCabina'] . '" value="' . $precioCabina['precio'] .'">';
+            }
             ?>
             <br><br>
         </form>
