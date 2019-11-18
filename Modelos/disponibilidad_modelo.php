@@ -11,6 +11,12 @@
                                     "idVuelo = '$idVuelo' and idCabina = '$idCabina' and idOrigenReserva >= '$idOrigen' and idDestinoReserva <= '$idDestino'
                                     GROUP BY idReserva");
         
+        $capacidadTotal = consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo, $idOrigen, $idDestino);
+
+        if($cantidadReservasCabinaVuelo == null){
+            return $capacidadTotal;
+        }
+        
         //Sumo la cantidad de reservas para contar a los titulares
         $cantidadLugaresOcupados = array_key_last($cantidadReservasCabinaVuelo) + 1;
 
@@ -19,7 +25,7 @@
             $cantidadLugaresOcupados += $acompaniantes['cantidadAcompaniantes'];
         }
 
-        $capacidadTotal = consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo, $idOrigen, $idDestino);
+        
 
         $cantidadLugaresDisponibles = $capacidadTotal - $cantidadLugaresOcupados;
         
