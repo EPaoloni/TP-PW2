@@ -51,6 +51,7 @@
                     echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
                 }
             }
+            echo "</div>";
         }
     } else {
         echo "<h4>No tenés reservas realizadas</h1>";
