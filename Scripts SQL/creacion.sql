@@ -160,7 +160,8 @@ CREATE TABLE pago(
     idPago INT AUTO_INCREMENT NOT NULL,
     numeroUsuario INT NOT NULL,
     fechaPago DATE NOT NULL,
-    numeroReserva INT NOT NULL,    
+    numeroReserva INT NOT NULL,
+    facturaGenerada BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (idPago),
     FOREIGN KEY(numeroUsuario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(numeroReserva) REFERENCES Reserva(idReserva)
