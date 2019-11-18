@@ -82,25 +82,7 @@
 </head>
 <body>
 
-    <?php if(isset($_SESSION['username'])){ ?>
-
-    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
-
-    <?php 
-            $idUsuario=getIdByUsername($_SESSION['username']);
-            if(checkCodigoViajero($idUsuario)==0){
-                if(tieneTurnos($idUsuario)){    ?>
-
-    <a class="btn btn-secondary" href="./turno.php">Mi Turno</a>
-
-    <?php } else{ ?>
-    <a class="btn btn-primary" href="./solicitar-turno.php">Solicitar Turno</a>
-    <?php } } } else { ?>
-        
-    <a class="btn btn-success" href="./login.php">A login</a>
-    <a class="btn btn-success" href="./registro.php">A registro</a>
-    
-    <?php } ?>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
     <h1 class="text-center">Búsqueda de vuelos</h1>
     <div class="container">

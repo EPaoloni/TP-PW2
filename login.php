@@ -43,6 +43,8 @@ if(!isset($_POST['enviar'])){
     <link rel="stylesheet" href="StaticContent/css/style-login.css">
 </head>
 <body>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+
     <h1 id="login-title" class="text-center">Ingrese sus datos</h1>
     
     <div id="login-container" class="container">

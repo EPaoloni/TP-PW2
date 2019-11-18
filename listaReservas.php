@@ -24,19 +24,19 @@
     <?php include("Vistas/head.html"); ?>
 </head>
 <body>
-
-
-<?php
-    foreach ($reservas as $reserva) {
-        echo "<div class='container row>'";
-        echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
-        if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
-            echo "<a class='btn btn-primary' href='realizarPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+    <div class="container">
+    <?php
+        foreach ($reservas as $reserva) {
+            echo "<div class='container row>'";
+            echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
+            if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
+                echo "<a class='btn btn-primary' href='realizarPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+            }
+            echo "</div>";
         }
-        echo "</div>";
-    }
 
-?>    
+    ?>    
 
 
 </body>

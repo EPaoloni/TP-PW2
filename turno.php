@@ -41,8 +41,7 @@
 </head>
 <body>
 
-    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
-    <a class="btn btn-primary" href="./index.php">Ir al Inicio</a>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
     
      <h1 class="text-center">Mis Turnos</h1>
 

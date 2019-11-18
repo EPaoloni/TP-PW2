@@ -27,7 +27,8 @@
 
 </head>
 <body>
-
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+    
     <div class="container">
         <form id="form-confirmar-reserva" action="./Endpoints/confirmarReserva.php" method="get">
             <h3>Numero de vuelo: <?php echo $idVuelo; ?></h3>

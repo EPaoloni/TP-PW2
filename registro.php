@@ -45,6 +45,8 @@ if(!isset($_POST['enviar'])){
 
 </head>
 <body>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+    
     <h1 id="login-title" class="text-center">Formulario de registro</h1>
     <div id="login-container" class="container">
         <form action="registro.php" method="post">
