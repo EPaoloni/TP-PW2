@@ -35,6 +35,12 @@ CREATE TABLE tipoVuelo(
     PRIMARY KEY(idTipoVuelo)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE pasajeros(
+    id INT AUTO_INCREMENT,
+    numeroPasajero INT UNIQUE,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE estacion(
     idEstacion INT AUTO_INCREMENT,
     nombreEstacion NVARCHAR(50) UNIQUE,
@@ -47,7 +53,8 @@ CREATE TABLE modeloNave(
     tipoVueloRealizado INT,
     codigoDeViajeroRequerido INT,
     PRIMARY KEY(id),
-    FOREIGN KEY(tipoVueloRealizado) REFERENCES tipoVuelo(idTipoVuelo)
+    FOREIGN KEY(tipoVueloRealizado) REFERENCES tipoVuelo(idTipoVuelo),
+    FOREIGN KEY(codigoDeViajeroRequerido) REFERENCES pasajeros(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -80,22 +87,6 @@ CREATE TABLE modeloNave_cabinas(
     UNIQUE KEY (modeloNave,tipoCabina),
     FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
     FOREIGN KEY(tipoCabina) REFERENCES cabinas(idCabina)    
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE pasajeros(
-    id INT AUTO_INCREMENT,
-    numeroPasajero INT UNIQUE,
-    PRIMARY KEY(id)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE modeloNave_pasajeros(
-    id INT AUTO_INCREMENT,
-    modeloNave INT,
-    numeroPasajero INT,
-    PRIMARY KEY(id),
-    UNIQUE KEY (modeloNave, numeroPasajero),
-    FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
-    FOREIGN KEY(numeroPasajero) REFERENCES pasajeros(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE vuelo(

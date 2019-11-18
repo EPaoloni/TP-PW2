@@ -2,18 +2,23 @@ INSERT INTO `tipovuelo` (`nombreTipoVuelo`)
                      VALUES ('Orbital'),
                             ('Baja aceleración'),
                             ('Alta aceleración');
+
+INSERT INTO `pasajeros` (`numeroPasajero`)
+                     VALUES (1),
+                            (2),
+                            (3);
                             
-INSERT INTO `modeloNave` (`nombreModelo`, `tipoVueloRealizado`)
-                     VALUES ('Calandria', 1),
-                            ('Colibri', 1),
-                            ('Zorzal', 2),
-                            ('Carancho', 2),
-                            ('Aguilucho', 2),
-                            ('Canario', 2),
-                            ('Aguila', 3),
-                            ('Condor', 3),
-                            ('Alcon', 3),
-                            ('Guanaco', 3);
+INSERT INTO `modeloNave` (`nombreModelo`, `tipoVueloRealizado`, `codigoDeViajeroRequerido`)
+                     VALUES ('Calandria', 1, 1),
+                            ('Colibri', 1, 1),
+                            ('Zorzal', 2, 2),
+                            ('Carancho', 2, 2),
+                            ('Aguilucho', 2, 2),
+                            ('Canario', 2, 2),
+                            ('Aguila', 3, 2),
+                            ('Condor', 3, 2),
+                            ('Alcon', 3, 3),
+                            ('Guanaco', 3, 3);
                             
 INSERT INTO `tipoUsuario` (`idTipoUsuario`, `descripcionTipoUsuario`)
                      VALUES (1, 'admin'),
@@ -104,42 +109,14 @@ INSERT INTO `modeloNave_cabinas` (`modeloNave`, `tipoCabina`, `capacidad`)
                             (9, 3, 25),
                             (10, 3, 100);
 
-INSERT INTO `pasajeros` (`numeroPasajero`)
-                     VALUES (1),
-                            (2),
-                            (3);
-
-
-INSERT INTO `modeloNave_pasajeros` (`modeloNave`, `numeroPasajero`)
-                     VALUES (1, 1),
-                            (1, 2),
-                            (1, 3),
-                            (2, 1),
-                            (2, 2),
-                            (2, 3),
-                            (3, 2),
-                            (3, 3),
-                            (4, 2),
-                            (4, 3),
-                            (5, 2),
-                            (5, 3),
-                            (6, 2),
-                            (6, 3),
-                            (7, 2),
-                            (7, 3),
-                            (8, 2),
-                            (8, 3),
-                            (9, 3),
-                            (10, 3);
-
 INSERT INTO `centroMedico` (`idCentroMedico`,`nombreCentroMedico`)
                 VALUES  ('1','Centro Medico de Buenos Aires'),
                         ('2','Centro Medico de Shanghái'),
                         ('3','Centro Medico de Ankara');
                         
 INSERT INTO `horario`(`idHorario`,`hora`)
-				VALUES	(1,'08:00'),
-						(2,'09:00'),
+		 VALUES (1,'08:00'),
+			(2,'09:00'),
                         (3,'10:00'),
                         (4,'11:00'),
                         (5,'12:00'),
@@ -165,7 +142,6 @@ INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReser
 INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`) 
                     VALUES  (1, 2),
                             (1, 3),
-                            (1, 4),
                             (2, 3),
                             (2, 4),
                             (3, 4);
