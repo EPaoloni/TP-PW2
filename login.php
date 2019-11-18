@@ -55,7 +55,11 @@ if(!isset($_POST['enviar'])){
             <input class="form-control col-xs-12" type="password" name="password" id="password" required>
             <input id="submit-button" name="enviar" class="btn btn-success float-right" type="submit">
         </form>
+    <div class="container">
+        <a href="./registro.php" class="">¿Todavia no esta registrado? Pulse aqui</a>
+    </div>
         <?php echo $error; ?>
     </div>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

@@ -110,18 +110,18 @@
             <input class="form-control col-xs-12" type="date" name="fechaHasta" id="fechaHasta">
             <label for="pasajeros">Cantidad de pasajeros: </label>
             <input class="form-control col-xs-12" type="number" name="cantidadPasajeros" id="cantidadPasajeros" value="1">
-            <input id="submit-button" name="enviar" class="btn btn-success" type="submit">
-            <a href="./index.php" class="btn btn-danger">Limpiar</a>
+            <input id="submit-button" name="enviar" class="btn btn-success mt-2" type="submit">
+            <a href="./index.php" class="btn btn-danger mt-2">Limpiar</a>
         </form>
         
     </div>
-    <div class="container">
+    <div class="container" id="container-cards-vuelos">
         <?php
-
             if($error != ""){
                 echo $error;
             }else if($consultaRealizada){
                 if($listaDeVuelos != null){
+                    echo '<div class="card-columns mt-4">';
                     foreach ($listaDeVuelos as $vuelo) {
 
                         if(isset($_SESSION['username'])){
@@ -149,17 +149,19 @@
                                                     Numero de la nave: " . $vuelo['id_nave'] . "
                             </h5>
                             <p class='card-text'>Datos de tu vuelo</p>
-                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar(toDO)</a>
+                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar</a>
                             </div>
                             <div class='card-footer text-muted'>
                             </div>
+                        </div>
                             ";
                     }
+                    echo '</div>';
                 }
             }
         ?>
     </div>
 
-
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

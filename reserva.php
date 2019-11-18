@@ -75,6 +75,6 @@
 
         <button id="confirmar-reserva" class="btn btn-primary">Confirmar Reserva</button>
     </div>
-
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

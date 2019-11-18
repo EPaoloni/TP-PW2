@@ -87,5 +87,6 @@
             <?php echo $error; ?> 
         </form>
     </div>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>
