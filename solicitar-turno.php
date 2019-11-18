@@ -82,8 +82,8 @@
             <label for="hora">Elija la Hora </label>
             <select name="horario" id="horario" class="form-control col-xs-12"> 
             </select>
-            <input id="submit-button" name="enviar" class="btn btn-success" type="submit">
-            <a href="./solicitar-turno.php" class="btn btn-danger">Limpiar</a>
+            <input id="submit-button" name="enviar" class="btn btn-success mt-2" type="submit">
+            <a href="./solicitar-turno.php" class="btn btn-danger mt-2">Limpiar</a>
             <?php echo $error; ?> 
         </form>
     </div>
