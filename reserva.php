@@ -1,5 +1,6 @@
 <?php
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/registro_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/disponibilidad_modelo.php");
 
     session_start();
     $username= $_SESSION['username'];
@@ -20,9 +21,11 @@
                                 "vuelo INNER JOIN naves ON vuelo.id_nave = naves.id",
                                 "idVuelo = '$idVuelo'");
     $modeloNave = $result[0]['modelo'];
-    $cabinasDisponibles = $query->consulta("idCabina, nombreCabina",
+    $cabinasNave = $query->consulta("idCabina, nombreCabina",
                                 "cabinas INNER JOIN modeloNave_cabinas ON idCabina = tipoCabina",
                                 "modeloNave_cabinas.modeloNave = '$modeloNave'" );
+
+    $error = "";
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +47,18 @@
             <h3>Id de la nave: <?php echo $idNave;?></h3>
             <select name="cabina" id="select-cabina">
                 <?php
-                    foreach ($cabinasDisponibles as $cabina) {
-                        echo "<option value='" . $cabina['idCabina'] . "' name='tipoCabina' >" . $cabina['nombreCabina'] . "</option>";
+                    $hayLugarEnElVuelo = false;
+                    foreach ($cabinasNave as $cabina) {
+                        $cantidadLugaresDisponibles = consultarCantidadLugaresDisponiblesCabina($cabina['idCabina'], $idVuelo, $idOrigen, $idDestino);
+                        if($cantidadLugaresDisponibles >= $cantidadPasajeros + 1){
+                            echo "<option value='" . $cabina['idCabina'] . "' name='tipoCabina' class='form-control' >" . $cabina['nombreCabina'] . "</option>";
+                            $hayLugarEnElVuelo = true;
+                        } else {
+                            echo "<option value='" . $cabina['idCabina'] . "' name='tipoCabina' class='form-control' disabled>" . $cabina['nombreCabina'] . "</option>";
+                        }
+                    }
+                    if(!$hayLugarEnElVuelo){
+                        $error = "<h5 class='text-danger'>No tenemos disponibilidad para ninguna cabina en el vuelo seleccionado</h5>";
                     }
                 ?>
             </select>
@@ -85,8 +98,9 @@
                 }
             ?>
         </div>
-
+    
         <button id="confirmar-reserva" class="btn btn-primary">Confirmar Reserva</button>
+        <?php echo $error; ?>
     </div>
 
 </body>
