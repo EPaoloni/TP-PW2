@@ -117,6 +117,8 @@ CREATE TABLE reserva(
     idDestinoReserva INT NOT NULL,
     montoReserva DECIMAL NOT NULL,
     reservaPaga BOOLEAN NOT NULL,
+    lugaresSeleccionados NVARCHAR(50) NOT NULL,
+    idCabina INT NOT NULL,
     PRIMARY KEY (idReserva),
     FOREIGN KEY (idVuelo) REFERENCES vuelo(idVuelo),
     FOREIGN KEY (idOrigenReserva) REFERENCES estacion(idEstacion),

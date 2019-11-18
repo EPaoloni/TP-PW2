@@ -146,7 +146,27 @@ INSERT INTO `horario`(`idHorario`,`hora`)
                         (6,'13:00'),
                         (7,'14:00'),
                         (8,'15:00');
-INSERT INTO `turno`(idCentroMedico, fecha,idUsuario,idHorario) 
+
+INSERT INTO `turno`(`idCentroMedico`, `fecha`, `idUsuario`, `idHorario`) 
                     VALUES  ('1', '2014-05-14', NULL,'1'),
                             ('1', '2014-05-14', NULL,'4'),
                             ('1', '2014-05-14', NULL,'7');
+
+INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReserva`, `montoReserva`, `reservaPaga`, `lugaresSeleccionados`, `idCabina`) 
+                    VALUES  (1, 4, 5, 9, 300, false, '1,2,3', 0),
+                            (2, 4, 5, 9, 300, false, '4,5', 0),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 0),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 0),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 0),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 0),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 0),
+                            -- (2, 4, 5, 9, 300, false, '4,5', 0),
+                            (3, 4, 5, 9, 300, false, '6', 0);
+
+INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`) 
+                    VALUES  (1, 2),
+                            (1, 3),
+                            (1, 4),
+                            (2, 3),
+                            (2, 4),
+                            (3, 4);
