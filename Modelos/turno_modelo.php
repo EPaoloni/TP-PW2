@@ -16,8 +16,10 @@
         return $resultado;
     }
     function eliminarTurno($idUsuario){
+        $log = new Logger();
         $query = new Query();
         $resultado = $query->eliminar("turno", "idUsuario=$idUsuario ");
+        $log->info("Se elimino el turno para el usuario $idUsuario");
         return $resultado;
     }
     function consultarTurnoPorUsuario($idUsuario){

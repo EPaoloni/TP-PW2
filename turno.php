@@ -1,13 +1,9 @@
 <?php 
-    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
-    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
     session_start();
-    $query = new Query();
-    $log = new Logger();
-    
+
     if(!isset($_SESSION['username'])){
         header("location: ./login.php");
         exit();
@@ -22,7 +18,6 @@
                 $cancelar = isset($_POST['cancelar']) ? $_POST['cancelar'] : false ;
                 if($cancelar){
                     eliminarTurno($idUsuario);
-                    $log->info("Se elimino el turno para el usuario $idUsuario");
                     header("Refresh:0");
                     exit();
                 }

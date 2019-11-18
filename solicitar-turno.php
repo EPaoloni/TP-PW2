@@ -16,7 +16,7 @@
 
                 $idCentroMedico = $_POST['centro-medico'];
                 $fechaTurno = ($_POST['fecha-turno'] != "") ? $_POST['fecha-turno'] : null;
-                $idHorario = $_POST['horario'];
+                $idHorario = isset($_POST['horario']) ? $_POST['horario'] : null;
                 
                 if(isset($idCentroMedico) && isset( $fechaTurno) && isset($idUsuario) && isset($idHorario)  ){
                     $returnCrearTurno=crearTurno($idCentroMedico,$fechaTurno,$idUsuario,$idHorario);
