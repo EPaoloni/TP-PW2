@@ -1,20 +1,17 @@
 <?php
-    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
-    $query = new Query();
-    $estaciones = $query->consulta("", "estacion", "");
-
-    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Logger.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
-    
-    $error = "";
 
+    $error = "";
     session_start();
 
     if(isset($_GET['destruirSesion'])){
         destruirSesion();
     }
+
+
+    $estaciones = consultarEstaciones();
     
     if(isset($_GET['enviar'])){
         $origen = $_GET['origen'];
@@ -23,40 +20,19 @@
         $fechaHasta = ($_GET['fechaHasta'] != "") ? $_GET['fechaHasta'] : "%";
         $cantidadPasajeros = $_GET['cantidadPasajeros'];
 
-        $logger = new Logger();
-        $logger->info("Se van a realizar consultas a vuelos con los siguientes parametros: origen = $origen, destino = $destino, fechaDesde = $fechaDesde, fechaHasta = $fechaHasta");
-
-        $circuitosRequeridos = $query->consulta("idCircuito",
-                                                "circuito",
-                                                "`estacionesCircuito` LIKE '%{$origen}%{$destino}%'");
+        $circuitosRequeridos = consultarCircuitos($origen, $destino);
 
         if($circuitosRequeridos == null){
             $error = "<p class='text-danger'>No disponemos de vuelos con la ruta que buscaste</p>";
         }else{
 
-            $listaDeVuelos = null;
-
-            foreach ($circuitosRequeridos as $circuitoRequerido) {
-                $vuelos = $query->consulta("",
-                                            "vuelo inner join circuito on vuelo.circuitoVuelo = circuito.idCircuito",
-                                            "fechaPartida LIKE '" . $fechaDesde . "' and fechaLlegada LIKE '" . $fechaHasta . "'
-                                            and circuitoVuelo = '" . $circuitoRequerido['idCircuito'] . "' ;");
-
-                if($vuelos != null){
-                    if($listaDeVuelos == null){
-                        $listaDeVuelos = $vuelos;
-                    } else {
-                        $listaDeVuelos = array_merge($listaDeVuelos, $vuelos);
-                    }
-                }
-            }
+            $listaDeVuelos = consultarVuelosPorCircuitos($circuitosRequeridos, $fechaDesde, $fechaHasta);
 
             if($listaDeVuelos == null){
                 $error = "<p class='text-danger'>No disponemos de vuelos con la ruta que buscaste</p>";
             }
         }
         
-
         $consultaRealizada = true;
 
     } else {
@@ -85,6 +61,7 @@
     <?php if(isset($_SESSION['username'])){ ?>
 
     <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
+    <a class="btn btn-primary" href="./listaReservas.php">Mis Reservas</a>
 
     <?php 
             $idUsuario=getIdByUsername($_SESSION['username']);
@@ -167,7 +144,7 @@
                                                     Numero de la nave: " . $vuelo['id_nave'] . "
                             </h5>
                             <p class='card-text'>Datos de tu vuelo</p>
-                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar(toDO)</a>
+                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar</a>
                             </div>
                             <div class='card-footer text-muted'>
                             </div>

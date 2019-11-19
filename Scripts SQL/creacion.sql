@@ -35,6 +35,12 @@ CREATE TABLE tipoVuelo(
     PRIMARY KEY(idTipoVuelo)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE pasajeros(
+    id INT AUTO_INCREMENT,
+    numeroPasajero INT UNIQUE,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE estacion(
     idEstacion INT AUTO_INCREMENT,
     nombreEstacion NVARCHAR(50) UNIQUE,
@@ -45,8 +51,10 @@ CREATE TABLE modeloNave(
     id INT AUTO_INCREMENT,
     nombreModelo NVARCHAR(50) UNIQUE,
     tipoVueloRealizado INT,
+    codigoDeViajeroRequerido INT,
     PRIMARY KEY(id),
-    FOREIGN KEY(tipoVueloRealizado) REFERENCES tipoVuelo(idTipoVuelo)
+    FOREIGN KEY(tipoVueloRealizado) REFERENCES tipoVuelo(idTipoVuelo),
+    FOREIGN KEY(codigoDeViajeroRequerido) REFERENCES pasajeros(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -65,9 +73,9 @@ CREATE TABLE naves(
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cabinas(
-    id INT AUTO_INCREMENT,
-    tipoCabina NVARCHAR(1) UNIQUE,
-    PRIMARY KEY(id)
+    idCabina INT AUTO_INCREMENT,
+    nombreCabina NVARCHAR(20) UNIQUE,
+    PRIMARY KEY(idCabina)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE modeloNave_cabinas(
@@ -78,23 +86,7 @@ CREATE TABLE modeloNave_cabinas(
     PRIMARY KEY(id),
     UNIQUE KEY (modeloNave,tipoCabina),
     FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
-    FOREIGN KEY(tipoCabina) REFERENCES cabinas(id)    
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE pasajeros(
-    id INT AUTO_INCREMENT,
-    numeroPasajero INT UNIQUE,
-    PRIMARY KEY(id)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE modeloNave_pasajeros(
-    id INT AUTO_INCREMENT,
-    modeloNave INT,
-    numeroPasajero INT,
-    PRIMARY KEY(id),
-    UNIQUE KEY (modeloNave, numeroPasajero),
-    FOREIGN KEY(modeloNave) REFERENCES modeloNave(id),
-    FOREIGN KEY(numeroPasajero) REFERENCES pasajeros(id)
+    FOREIGN KEY(tipoCabina) REFERENCES cabinas(idCabina)    
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE vuelo(
@@ -114,6 +106,11 @@ CREATE TABLE reserva(
     idVuelo INT NOT NULL,
     idOrigenReserva INT NOT NULL,
     idDestinoReserva INT NOT NULL,
+    montoReserva DECIMAL NOT NULL,
+    reservaPaga BOOLEAN NOT NULL,
+    lugaresSeleccionados NVARCHAR(50) NOT NULL,
+    idCabina INT NOT NULL,
+    reservaCaida BOOLEAN NOT NULL,
     PRIMARY KEY (idReserva),
     FOREIGN KEY (idVuelo) REFERENCES vuelo(idVuelo),
     FOREIGN KEY (idOrigenReserva) REFERENCES estacion(idEstacion),
@@ -150,4 +147,21 @@ CREATE TABLE turno(
     FOREIGN KEY(idCentroMedico) REFERENCES centroMedico(idCentroMedico),
     FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(idHorario) REFERENCES horario(idHorario)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE precioCabina(
+    idCabina INT,
+    precio DECIMAL NOT NULL,
+    PRIMARY KEY (idCabina, precio),
+    FOREIGN KEY (idCabina) REFERENCES cabinas(idCabina)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE pago(
+    idPago INT AUTO_INCREMENT NOT NULL,
+    numeroUsuario INT NOT NULL,
+    fechaPago DATE NOT NULL,
+    numeroReserva INT NOT NULL,    
+    PRIMARY KEY (idPago),
+    FOREIGN KEY(numeroUsuario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY(numeroReserva) REFERENCES Reserva(idReserva)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
