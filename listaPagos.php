@@ -3,6 +3,7 @@
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/admin_modelo.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/reserva_modelo.php");
 
 checkIsAdmin();
 
@@ -29,7 +30,7 @@ $estacionesEnArray= consultarEstaciones();
                 <th scope="col">Fecha llegada</th>
                 <th scope="col">Origen</th>
                 <th scope="col">Destino</th>
-                <th scope="col">Cant. Acompañantes</th>
+                <th scope="col">Cant. de Pasajeros</th>
                 <th scope="col">Cabina</th>
                 <th scope="col">Fecha de pago</th>
                 <th scope="col">Monto abonado</th>
@@ -42,9 +43,10 @@ $estacionesEnArray= consultarEstaciones();
                     $username = getUsernameById($pago['idTitular']);
                     $origen = $estacionesEnArray[$pago['idOrigenReserva']-1]['nombreEstacion'];
                     $destino = $estacionesEnArray[$pago['idDestinoReserva']-1]['nombreEstacion'];
-                    $fechaDesde = "asd";
-                    $fechaHasta = "asd";
-                    $cantidadAcompaniantes = "asd";
+                    $vuelo = consultarVueloPorId($pago['idVuelo']);
+                    $fechaDesde = $vuelo['fechaPartida'];
+                    $fechaHasta = $vuelo['fechaLlegada'];
+                    $cantidadAcompaniantes = consultarCantidadDeAcompaniantesReserva($pago['idReserva']) + 1;
             ?>
 
             <tr>

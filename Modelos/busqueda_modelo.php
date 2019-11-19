@@ -44,4 +44,11 @@
         }
         return $listaDeVuelos;
     }
+
+    function consultarVueloPorId($idVuelo){
+        $query = new Query();
+        $result = $query->consulta("*", "vuelo", "idVuelo = '$idVuelo'");
+
+        return $result[0];
+    }
 ?>
