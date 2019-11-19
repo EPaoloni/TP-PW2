@@ -1,6 +1,7 @@
 <?php
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/admin_modelo.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
 
 checkIsAdmin();
 
@@ -34,8 +35,9 @@ $pagosRegistrados = consultarPagosRegistrados();
         </thead>
         <tbody>
             <?php
+            if($pagosRegistrados<>null){
                 foreach ($pagosRegistrados as $pago ) {
-                    $username = "asd";
+                    $username = getUsernameById($pago['idTitular']);
                     $fechaDesde = "asd";
                     $fechaHasta = "asd";
                     $cantidadAcompaniantes = "asd";
@@ -56,6 +58,7 @@ $pagosRegistrados = consultarPagosRegistrados();
 
             <?php      
                 }
+            }
             ?>
         </tbody>
     </table>

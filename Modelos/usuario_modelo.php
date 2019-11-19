@@ -41,6 +41,14 @@
                                     "Credencial.username='$username'");
         return $idUsuario[0]['idUsuario'];
     }
+    function getUsernameById($id){
+        $query = new Query();
+        $result= $query->consulta("Credencial.username",
+                                    "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
+                                    "usuario.idUsuario='$id'");
+        return $result[0]['username'];
+    }
+
     
 
 ?>
