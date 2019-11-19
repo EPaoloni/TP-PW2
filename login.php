@@ -15,7 +15,7 @@ if(!isset($_POST['enviar'])){
 
         if(validarCredencialesUsuario($username, $password) != null){
             $username=$_SESSION['username'];
-            checkTurnos($username);
+            asignarCodigoViajeroSiFechaTurnoExpiro($username);
             header("location: ./index.php");
             exit();
         } else { 

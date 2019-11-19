@@ -3,7 +3,7 @@
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/turno_modelo.php");
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
 
-    function checkTurnos ($username){
+    function asignarCodigoViajeroSiFechaTurnoExpiro ($username){
         $query = new Query();
         $resultadoConsulta= $query->consulta("codigoViajero,idUsuario",
                                     "usuario INNER JOIN Credencial ON Usuario.numeroCredencialUsuario=Credencial.idCredencial",
