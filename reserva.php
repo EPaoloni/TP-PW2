@@ -1,5 +1,6 @@
 <?php
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/registro_modelo.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/modelos/disponibilidad_modelo.php");
 
     session_start();
     $username= $_SESSION['username'];
@@ -16,6 +17,17 @@
     $nombreOrigen = $result[0]['nombreEstacion'];
     $result = $query->consulta("nombreEstacion", "estacion", "idEstacion = '$idDestino'");
     $nombreDestino = $result[0]['nombreEstacion'];
+    $result = $query->consulta("modelo",
+                                "vuelo INNER JOIN naves ON vuelo.id_nave = naves.id",
+                                "idVuelo = '$idVuelo'");
+    $modeloNave = $result[0]['modelo'];
+    $cabinasNave = $query->consulta("idCabina, nombreCabina",
+                                "cabinas INNER JOIN modeloNave_cabinas ON idCabina = tipoCabina",
+                                "modeloNave_cabinas.modeloNave = '$modeloNave'" );
+    $preciosCabinas = $query->consulta("idCabina, precio",
+                                        "precioCabina", "");
+
+    $error = "";
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +48,26 @@
             <h3>Origen: <?php echo $nombreOrigen ;?></h3>
             <h3>Destino: <?php echo $nombreDestino ;?></h3>
             <h3>Id de la nave: <?php echo $idNave;?></h3>
+            <select name="idCabina" id="select-cabina">
+                <?php
+                    $hayLugarEnElVuelo = false;
+                    foreach ($cabinasNave as $cabina) {
+                        $cantidadLugaresDisponibles = consultarCantidadLugaresDisponiblesCabina($cabina['idCabina'], $idVuelo, $idOrigen, $idDestino);
+                        if($cantidadLugaresDisponibles >= $cantidadPasajeros + 1){
+                            echo "<option value='" . $cabina['idCabina'] . "' name='tipoCabina' class='form-control' >" . $cabina['nombreCabina'] . "</option>";
+                            $hayLugarEnElVuelo = true;
+                        } else {
+                            echo "<option value='" . $cabina['idCabina'] . "' name='tipoCabina' class='form-control' disabled>" . $cabina['nombreCabina'] . "</option>";
+                        }
+                    }
+                    if(!$hayLugarEnElVuelo){
+                        $error = "<h5 class='text-danger'>No tenemos disponibilidad para ninguna cabina en el vuelo seleccionado</h5>";
+                    }
+                ?>
+            </select>
+            <h3>Precio total: <input id="precio-total" class="" name="montoReserva"></h3>
+
+
             <?php
             for ($i=1; $i < $cantidadPasajeros; $i++) { 
                 echo '<input type="hidden" class="hidden-mail-usuario" id="hidden-mail-usuario" name="mailsUsuarios[' . $i . ']" value="">';
@@ -43,6 +75,9 @@
             echo '<input type="hidden" name="idVuelo" value="' . $idVuelo .'">';
             echo '<input type="hidden" name="idOrigen" value="' . $idOrigen .'">';
             echo '<input type="hidden" name="idDestino" value="' . $idDestino .'">';
+            foreach ($preciosCabinas as $precioCabina) {
+                echo '<input type="hidden" id="precio-cabina-' . $precioCabina['idCabina'] . '" value="' . $precioCabina['precio'] .'">';
+            }
             ?>
             <br><br>
         </form>
@@ -72,8 +107,9 @@
                 }
             ?>
         </div>
-
+    
         <button id="confirmar-reserva" class="btn btn-primary">Confirmar Reserva</button>
+        <?php echo $error; ?>
     </div>
     <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>

@@ -7,6 +7,8 @@
     $idVuelo = $_GET['idVuelo'];
     $idOrigen = $_GET['idOrigen'];
     $idDestino = $_GET['idDestino'];
+    $montoReserva = $_GET['montoReserva'];
+    $idCabina = $_GET['idCabina'];
     $mailUsuarios = [];
     $acompaniantes = [];
     if(isset($_GET['mailsUsuarios'])){
@@ -17,7 +19,7 @@
     }
     $titular = consultarIdUsuarioConMail($_SESSION['emailUsuario']);
     
-    $resultado = guardarReserva($idVuelo, $idOrigen, $idDestino, $titular, $acompaniantes);
+    $resultado = guardarReserva($idVuelo, $idOrigen, $idDestino, $titular, $acompaniantes, $montoReserva, $idCabina);
     
     if($resultado){
         header('location: /TP-PW2/listaReservas.php');
