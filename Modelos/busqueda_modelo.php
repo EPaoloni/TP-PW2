@@ -5,7 +5,7 @@
 
     function consultarEstaciones(){
         $query = new Query();
-        $estaciones = $query->consulta("", "estacion", "");
+        $estaciones = $query->consulta("", "estacion", "1=1 ORDER BY idEstacion");
         return $estaciones;
     }
 

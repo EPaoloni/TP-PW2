@@ -2,10 +2,12 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/admin_modelo.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
 
 checkIsAdmin();
 
 $pagosRegistrados = consultarPagosRegistrados();
+$estacionesEnArray= consultarEstaciones();
 
 ?>
 
@@ -38,6 +40,8 @@ $pagosRegistrados = consultarPagosRegistrados();
             if($pagosRegistrados<>null){
                 foreach ($pagosRegistrados as $pago ) {
                     $username = getUsernameById($pago['idTitular']);
+                    $origen = $estacionesEnArray[$pago['idOrigenReserva']-1]['nombreEstacion'];
+                    $destino = $estacionesEnArray[$pago['idDestinoReserva']-1]['nombreEstacion'];
                     $fechaDesde = "asd";
                     $fechaHasta = "asd";
                     $cantidadAcompaniantes = "asd";
@@ -48,16 +52,16 @@ $pagosRegistrados = consultarPagosRegistrados();
                 <td><?php echo $username ?></td>
                 <td><?php echo $fechaDesde ?></td>
                 <td><?php echo $fechaHasta ?></td>
-                <td><?php echo $pago['idOrigenReserva'] ?></td>
-                <td><?php echo $pago['idDestinoReserva'] ?></td>
+                <td><?php echo $origen ?></td>
+                <td><?php echo $destino ?></td>
                 <td><?php echo $cantidadAcompaniantes ?></td>
                 <td><?php echo $pago['idCabina'] ?></td>
                 <td><?php echo $pago['fechaPago'] ?></td>
                 <td><?php echo $pago['montoReserva'] ?></td>
             </tr>
-
+        
             <?php      
-                }
+               }
             }
             ?>
         </tbody>
