@@ -1,7 +1,7 @@
 $(function(){
     
     $("#destino").children("[value=" + $("#origen").val() + "]").prop("disabled", true);
-    $("#destino").val(1);
+    $("#destino").val(2);
     $("#origen").children("[value=1]").prop("disabled", true);
 
     $("#origen").on("change", function(){
