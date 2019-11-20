@@ -68,6 +68,15 @@ $estacionesEnArray= consultarEstaciones();
             ?>
         </tbody>
     </table>
+    <div class="row container-fluid float-right">
+        <input type="date" name="" id="fecha-desde-consulta" class="form-inline">
+        <input type="date" name="" id="fecha-hasta-consulta" class="form-inline">
+        <button class="btn btn-primary" id="btn-filtrar-por-fechas">Filtrar facturas entre fechas</button>
+    </div>
+    <div class="row container-fluid float-right">
+        <input type="text" name="" id="username-input" class="form-inline">
+        <button class="btn btn-primary" id="btn-filtrar-por-username">Filtrar por usuario</button>
+    </div>
 </div>
     
 </body>
