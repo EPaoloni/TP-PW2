@@ -2,7 +2,7 @@ $(function(){
     
     $("#destino").children("[value=" + $("#origen").val() + "]").prop("disabled", true);
     $("#destino").val(2);
-    $("#origen").children("[value=1]").prop("disabled", true);
+    $("#origen").children("[value=2]").prop("disabled", true);
 
     $("#origen").on("change", function(){
         $("#destino").children("option").prop("disabled", false);
