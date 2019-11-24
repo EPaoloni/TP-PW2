@@ -23,14 +23,14 @@ if($resultadoPago){
                                                     "( idReserva= " . $numeroReserva . " );");
 
     if($resultadoRegistrarPagoReserva){
-        header("location: ./listaReservas.php");
+        header($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/listaReservas.php");
     } else {
         $_SESSION['errorPago'] = "Ocurrio un error al registrar el pago";
-        header("location: ./vistaPago.php?idReserva=" . $numeroReserva);
+        header($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/vistaPago.php?idReserva=" . $numeroReserva);
     }
 } else {
     $_SESSION['errorPago'] = "Ocurrio un error al registrar el pago";
-    header("location: ./vistaPago.php?idReserva=" . $numeroReserva);
+    header($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/vistaPago.php?idReserva=" . $numeroReserva);
 }
 
 ?>

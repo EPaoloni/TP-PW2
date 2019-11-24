@@ -62,7 +62,7 @@ $montoReserva = $resultado[0]['montoReserva'];
 </head>
 <body>
 
-<form action="./realizarPago.php" class="container">
+<form action="./Endpoints/realizarPago.php" class="container">
 
     <label for="">Nombre:</label>
     <input type="text" name="nombre" class="form-control">
