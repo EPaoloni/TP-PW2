@@ -13,6 +13,7 @@ checkIsAdmin();
     <?php include("Vistas/head.html"); ?>
 </head>
 <body>
+<?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
 <div class="container">
     <a class="btn btn-primary" href="./listaPagos.php">Ver pagos de usuarios</a>
@@ -21,5 +22,6 @@ checkIsAdmin();
     <a class="btn btn-primary" href="./listaReservas.php">ASD</a>
 </div>
     
+<?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

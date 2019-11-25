@@ -54,6 +54,7 @@
             }
             echo "</div>";
         }
+    }else{
         echo "<h4>No tenés reservas realizadas</h1>";
     }
 ?>    
