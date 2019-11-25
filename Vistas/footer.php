@@ -9,8 +9,8 @@
             <div class="col col-lg-2">
                 <h5 class="text-uppercase font-weight-bold">Alumnos:</h5>
                 <ul class="list-unstyled">
-                    <li>Ian Tries</li>
-                    <li>Ezequiel Paolini</li>
+                    <li>Paolini Ezequiel</li>
+                    <li>Tries Ian</li>
                     <li>Zonta Alejo</li>
                 </ul>
             </div>
@@ -19,7 +19,7 @@
                 <ul class="list-unstyled">
                     <li>Facundo D´Aranno</li>
                     <li>Omar Sosa</li>
-                    <li>Alejandro Rusticeini</li>
+                    <li>Alejandro Rusticcini</li>
                 </ul>
             </div>
         </div>
