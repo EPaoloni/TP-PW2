@@ -35,7 +35,13 @@
             $logger->error("Ocurrio un error al insertar una reserva");
             return false;
         }
-        
+    }
+
+    function consultarCantidadDeAcompaniantesReserva($idReserva){
+        $query = new Query();
+        $cantidadAcompaniantes = $query->consulta("COUNT(idUsuario)", "acompaniante_reserva", "idReserva = $idReserva");
+
+        return $cantidadAcompaniantes[0]['COUNT(idUsuario)'];
     }
 
 ?>

@@ -34,24 +34,29 @@
 
     //Test OK
     function consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo, $idOrigen, $idDestino){
+        
+        $condicionesConsulta = obtenerCondicionesConsultaSegunSentido($idVuelo, $idCabina, $idDestino, $idOrigen);
+
         $query = new Query();
         $result = $query->consulta("modeloNave_cabinas.capacidad",
                                     "((modeloNave_cabinas INNER JOIN modeloNave ON modeloNave.id = modeloNave_cabinas.modeloNave)
                                     INNER JOIN naves ON modeloNave.id = naves.modelo)
                                     INNER JOIN vuelo ON naves.id = vuelo.id_nave",
-                                    "idVuelo = '$idVuelo' and tipoCabina = '$idCabina'");
+                                    "idVuelo = '$idVuelo' and tipoCabina = '$idCabina' ");
         $capacidadCabina = $result[0]['capacidad'];
 
         return $capacidadCabina;
     }
 
     //Test OK
-    function consultarLugaresOcupadosCabina($idOrigen, $idDestino, $idVuelo, $capacidadTotal){
+    function consultarLugaresOcupadosCabina($idOrigen, $idDestino, $idVuelo, $capacidadTotal, $idCabina){
+
+        $condicionesConsulta = obtenerCondicionesConsultaSegunSentido($idVuelo, $idCabina, $idDestino, $idOrigen);
 
         $query = new Query();
         $lugaresOcupados = $query->consulta("lugaresSeleccionados",
                                     "reserva INNER JOIN vuelo ON reserva.idVuelo = vuelo.idVuelo",
-                                    "idVuelo = '$idVuelo' and idCabina = '$idCabina' and idOrigenReserva >= '$idOrigen' and idDestinoReserva <= '$idDestino'");
+                                    $condicionesConsulta);
 
         $arrayLugaresOcupados = array_fill (0, $capacidadTotal, false );
         foreach ($lugaresOcupados as $lugaresEnReserva) {
@@ -62,6 +67,34 @@
         }
 
         return $arrayLugaresOcupados;
+    }
+
+    function obtenerCondicionesConsultaSegunSentido($idVuelo, $idCabina, $idDestino, $idOrigen){
+        $condicionesConsulta = "idVuelo = '$idVuelo' and idCabina = '$idCabina' ";
+
+        if(isVueloHaciaLaTierra($idVuelo)){
+            $condicionesConsulta .= " and idDestino > '$idDestino' and idOrigen < '$idOrigen'";
+        } else {
+            $condicionesConsulta .= " and idDestino < '$idDestino' and idOrigen > '$idOrigen'";
+        }
+
+        return $condicionesConsulta;
+    }
+
+    function isVueloHaciaLaTierra($idVuelo){
+        $query = new Query();
+        $resultado = $query->consulta("estacionesCircuito", 
+                                                "vuelo INNER JOIN circuito ON vuelo.circuitoVuelo = circuito.idCircuito",
+                                                "idVuelo = '$idVuelo'");
+
+        $estacionesCircuito[] = explode(",", $resultado[0]['estacionesCircuito']);
+
+        if($estacionesCircuito[0][0] > $estacionesCircuito[0][1]){
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 ?>

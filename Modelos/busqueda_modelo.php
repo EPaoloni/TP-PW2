@@ -5,7 +5,7 @@
 
     function consultarEstaciones(){
         $query = new Query();
-        $estaciones = $query->consulta("", "estacion", "");
+        $estaciones = $query->consulta("", "estacion", "1=1 ORDER BY idEstacion");
         return $estaciones;
     }
 
@@ -23,12 +23,13 @@
     function consultarVuelosPorCircuitos($circuitosRequeridos, $fechaDesde, $fechaHasta){
 
         $logger = new Logger();
-        $logger->info("Se van a realizar consultas a vuelos con los siguientes parametros: fechaDesde = $fechaDesde, fechaHasta = $fechaHasta, circuito = " . $circuitoRequerido['idCircuito']);
 
         $listaDeVuelos = null;
         $query = new Query();
 
         foreach ($circuitosRequeridos as $circuitoRequerido) {
+            $logger->info("Se van a realizar consultas a vuelos con los siguientes parametros: fechaDesde = $fechaDesde, fechaHasta = $fechaHasta, circuito = " . $circuitoRequerido['idCircuito']);
+
             $vuelos = $query->consulta("",
                                         "vuelo inner join circuito on vuelo.circuitoVuelo = circuito.idCircuito",
                                         "fechaPartida LIKE '" . $fechaDesde . "' and fechaLlegada LIKE '" . $fechaHasta . "'
@@ -43,5 +44,12 @@
             }
         }
         return $listaDeVuelos;
+    }
+
+    function consultarVueloPorId($idVuelo){
+        $query = new Query();
+        $result = $query->consulta("*", "vuelo", "idVuelo = '$idVuelo'");
+
+        return $result[0];
     }
 ?>

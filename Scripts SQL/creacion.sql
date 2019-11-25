@@ -20,8 +20,8 @@ CREATE TABLE usuario(
     idUsuario INT AUTO_INCREMENT,
     nombreUsuario VARCHAR(30),
     apellidoUsuario VARCHAR(30),
-    tipoUsuario INT, -- admin (1) / normal (2)
-    codigoViajero INT,
+    tipoUsuario INT DEFAULT 2, -- admin (1) / normal (2)
+    codigoViajero INT DEFAULT 0,
     numeroCredencialUsuario INT,
     mail varchar(100) UNIQUE,
     PRIMARY KEY(idUsuario),
@@ -160,7 +160,8 @@ CREATE TABLE pago(
     idPago INT AUTO_INCREMENT NOT NULL,
     numeroUsuario INT NOT NULL,
     fechaPago DATE NOT NULL,
-    numeroReserva INT NOT NULL,    
+    numeroReserva INT NOT NULL,
+    facturaGenerada BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (idPago),
     FOREIGN KEY(numeroUsuario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(numeroReserva) REFERENCES Reserva(idReserva)
