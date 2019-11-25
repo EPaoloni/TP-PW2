@@ -4,7 +4,9 @@
 
     function getListaTour(){
         $query=new Query();
-        $resultado= $query->consulta("","vuelo","circuitoVuelo=7");
+        $resultado= $query->consulta("",
+                                    "vuelo INNER JOIN circuito ON vuelo.circuitoVuelo=circuito.idCircuito",
+                                    "circuitoVuelo=7");
         return $resultado;
     }
 ?>

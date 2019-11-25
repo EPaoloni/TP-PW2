@@ -1,8 +1,10 @@
 <?php
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/tour_modelo.php");
-
+    session_start();
+    
     $error="";
-
+    $origen=1;
+    $destino=1;
     $listaDeTour=getListaTour();
 ?>
 <!DOCTYPE html>
@@ -20,19 +22,11 @@
             }else if($listaDeTour != null){
                     echo '<div class="card-columns mt-4">';
                     foreach ($listaDeTour as $tour) {
-
                         if(isset($_SESSION['username'])){
-                            $redirectReserva = "./reserva.php?origen="  . $origen
-                            . "&destino=" . $destino
-                            . "&fechaDesde=" . $tour['fechaPartida']
-                            . "&fechaHasta=" . $tour['fechaLlegada']
-                            . "&idVuelo="   .$tour['idVuelo']
-                            . "&cantidadPasajeros=" . $cantidadPasajeros
-                            . "&id_nave=" . $tour['id_nave'] . " ";
+                            $redirectReserva = "./reserva.php";
                         } else {
                             $redirectReserva = "./login.php";
                         }
-
                         echo "
                         <div class='card text-center'>
                             <div class='card-header'>
@@ -46,7 +40,17 @@
                                                     Numero de la nave: " . $tour['id_nave'] . "
                             </h5>
                             <p class='card-text'>Datos de tu tour</p>
-                            <a href='" . $redirectReserva . "' class='btn btn-primary'>Reservar</a>
+                            <form action='" . $redirectReserva . "'>
+                                <label>Selecciona la cantidad de pasajeros</label>
+                                <input type='number' name='cantidadPasajeros' value='1'>
+                                <input type='hidden' name='origen' value='" . $origen . "'>
+                                <input type='hidden' name='destino' value='" . $destino . "'>
+                                <input type='hidden' name='fechaDesde' value='" . $tour['fechaPartida'] . "'>
+                                <input type='hidden' name='fechaHasta' value='" . $tour['fechaLlegada'] . "'>
+                                <input type='hidden' name='idVuelo' value='" . $tour['idVuelo'] . "'>
+                                <input type='hidden' name='id_nave' value='" . $tour['id_nave'] . "'>
+                                <input type='submit' class='btn btn-primary' value='Reservar'>
+                            </form>
                             </div>
                             <div class='card-footer text-muted'>
                             </div>
