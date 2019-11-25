@@ -31,6 +31,7 @@
     <?php include("Vistas/head.html"); ?>
 </head>
 <body>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
 <div class="container">
     <p class="text-danger"><?php echo $error; ?></p>
@@ -53,11 +54,10 @@
             }
             echo "</div>";
         }
-    } else {
+    }else{
         echo "<h4>No tenés reservas realizadas</h1>";
     }
 ?>    
-
-
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

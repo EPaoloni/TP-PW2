@@ -61,6 +61,7 @@ $montoReserva = $resultado[0]['montoReserva'];
     <?php include("Vistas/head.html"); ?>
 </head>
 <body>
+<?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
 <form action="./realizarPago.php" class="container">
 
@@ -87,6 +88,7 @@ $montoReserva = $resultado[0]['montoReserva'];
     <input type="hidden" name="idReserva" value="<?php echo $numeroDeReserva ; ?>">
 
 </form>
-    
+
+<?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>
