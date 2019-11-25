@@ -21,6 +21,6 @@
     <?php } ?>				
     </ul>
     
-    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/botones-sesion.php"); ?>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/botones-header.php"); ?>
     </div>
 </nav>

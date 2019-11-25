@@ -91,7 +91,7 @@
         </form>
         
     </div>
-    <div class="container" id="container-cards-vuelos">
+    <div class="container">
         <?php
             if($error != ""){
                 echo $error;

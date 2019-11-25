@@ -62,7 +62,7 @@ if(isset($_POST['enviar'])){
             <input class="form-control col-xs-12" type="password" name="password" id="password" required>
             <label for="password">Repita su contraseña: </label>
             <input class="form-control col-xs-12" type="password" name="password-repetido" id="password-repetido" required>
-            <input id="submit-button" name="enviar" class="btn btn-success float-right mt-2" type="submit">
+            <input id="submit-button" name="enviar" class="btn btn-success float-right mt-2" type="submit" value="Registrarse">
         </form>
         <?php echo $error; ?>
     </div>

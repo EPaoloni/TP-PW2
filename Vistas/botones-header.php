@@ -7,7 +7,11 @@
                 <a class="btn btn-primary text-center align-self-center my-2 my-sm-0 botones-navbar" href="./turno.php">Mi Turno</a>
 <?php } else{ ?>
                 <a class="btn btn-warning text-center align-self-center my-2 my-sm-0 botones-navbar" href="./solicitar-turno.php">Solicitar Turno</a>
-<?php } }?>
+<?php } }
+            $isAdmin = $_SESSION['isAdmin'];
+            if($isAdmin){?>
+                <a class="btn btn-primary float-right" href="./reportes.php">Reportes</a>
+<?php       }?>
                 <a class="btn btn-danger text-center align-self-center my-2 my-sm-0 botones-navbar" href="./index.php?destruirSesion=true">Cerrar sesion</a> 
 <?php } else{ if(!(strpos($uri, 'login.php') !== false)) {
         ?>

@@ -1,5 +1,6 @@
-<div id="footer">
-    <div class="container">
+<div class='main'></div>
+<footer class="footer">
+<div class="container pt-4 pb-4">
         <div class="row justify-content-md-center">
             <div class="col col-lg-2">
                 <h5 class="text-uppercase font-weight-bold">Universidad Nacional de la Matanza.</h5>
@@ -23,5 +24,4 @@
             </div>
         </div>
     </div>
-</div>
-            
+</footer>
