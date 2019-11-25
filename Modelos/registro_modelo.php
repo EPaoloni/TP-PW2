@@ -8,6 +8,7 @@
         if(usuarioExiste($username)){
             return "Usuario Existente";
         }
+        $password=md5($password);
         $result=registrarCredencial($username, $password);
         
         if ($result){

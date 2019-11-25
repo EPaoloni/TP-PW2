@@ -12,7 +12,7 @@ CREATE TABLE tipoUsuario(
 CREATE TABLE credencial(
     idCredencial INT AUTO_INCREMENT,
     username VARCHAR(30) UNIQUE,
-    pass VARCHAR(30),
+    pass VARCHAR(100),
     PRIMARY KEY (idCredencial)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
