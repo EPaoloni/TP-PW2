@@ -112,7 +112,9 @@ INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `id_nave`, `circuitoVuelo`)
                             ('20191030', '20191101', 12, 6),
                             ('20191015', '20191017', 1, 1),
                             ('20191015', '20191019', 13, 3),
-                            ('20191215', '20200119',34,7); -- Fecha vuelo tour
+                            ('20191215', '20200119',34,7),-- tour
+                            ('20191222', '20200126',34,7),-- tour
+                            ('20191229', '20200202',37,7); -- tour
 
 INSERT INTO `cabinas` (`nombreCabina`)
                      VALUES ('General'),

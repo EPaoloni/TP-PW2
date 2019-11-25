@@ -12,8 +12,11 @@
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
             <a class="navbar-brand" href="./index.php">Gaucho Rocket</a>
-            <span class="sr-only">(current)</span>
-        </li>	
+        </li>
+        <li class="nav-item active">
+            <a class="navbar-brand" href="./tour.php">Tour</a>
+        </li>
+
     <?php   if(isset($_SESSION['username'])){ ?>
         <li class="nav-item active">
         <a class="nav-link align-self-center my-2 my-sm-0" href="./listaReservas.php">Mis Reservas</a>
