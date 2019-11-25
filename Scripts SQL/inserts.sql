@@ -39,7 +39,7 @@ INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codig
 INSERT INTO `estacion` (`nombreEstacion`)
                      VALUES ('Buenos Aires'),
                             ('Ankara'),
-                            ('Estación Especial Internacional'),
+                            ('Estacion Especial Internacional'),
                             ('OrbiterHotel'),
                             ('Luna'),
                             ('Marte'),
@@ -47,7 +47,7 @@ INSERT INTO `estacion` (`nombreEstacion`)
                             ('Europa'),
                             ('lo'),
                             ('Encedalo'),
-                            ('Titán');
+                            ('Titan');
 
 INSERT INTO `circuito` (`idCircuito`, `estacionesCircuito`)
                     VALUES  (1, "3,4,5,6"),
@@ -55,7 +55,9 @@ INSERT INTO `circuito` (`idCircuito`, `estacionesCircuito`)
                             (3, "3,5,7,8,9,10,11"),
                             (4, "11,10,9,8,7,5,3"),
                             (5, "1,2"),
-                            (6, "2,1");
+                            (6, "2,1"),
+                            (7, "1,1"); -- Circuito para el tour
+
 
 INSERT INTO `naves` (`matricula`, `modelo`)
                      VALUES ('AA1', 7),
@@ -102,14 +104,15 @@ INSERT INTO `naves` (`matricula`, `modelo`)
                             ('AA19', 9),
                             ('BA1', 3),
                             ('BA2', 3),
-                            ('BA3', 3);                          ;
+                            ('BA3', 3);                          
 
 INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `id_nave`, `circuitoVuelo`)
                      VALUES ('20191014', '20191014', 11, 5),
                             ('20191015', '20191015', 12, 6),
                             ('20191030', '20191101', 12, 6),
                             ('20191015', '20191017', 1, 1),
-                            ('20191015', '20191019', 13, 3);
+                            ('20191015', '20191019', 13, 3),
+                            ('20191215', '20200119',34,7); -- Fecha vuelo tour
 
 INSERT INTO `cabinas` (`nombreCabina`)
                      VALUES ('General'),
