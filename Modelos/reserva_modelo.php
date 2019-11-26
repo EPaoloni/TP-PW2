@@ -43,5 +43,10 @@
 
         return $cantidadAcompaniantes[0]['COUNT(idUsuario)'];
     }
+    function traerTodasLasReservasPagas(){
+        $query = new Query();
+        $result = $query->consulta("idCabina,idReserva", "reserva", "reservaPaga=true");
+        return $result;
+    }
 
 ?>
