@@ -42,7 +42,7 @@
                                     "((modeloNave_cabinas INNER JOIN modeloNave ON modeloNave.id = modeloNave_cabinas.modeloNave)
                                     INNER JOIN naves ON modeloNave.id = naves.modelo)
                                     INNER JOIN vuelo ON naves.id = vuelo.id_nave",
-                                    $condicionesConsulta);
+                                    "idVuelo = '$idVuelo' and tipoCabina = '$idCabina' ");
         $capacidadCabina = $result[0]['capacidad'];
 
         return $capacidadCabina;
@@ -79,6 +79,22 @@
         }
 
         return $condicionesConsulta;
+    }
+
+    function isVueloHaciaLaTierra($idVuelo){
+        $query = new Query();
+        $resultado = $query->consulta("estacionesCircuito", 
+                                                "vuelo INNER JOIN circuito ON vuelo.circuitoVuelo = circuito.idCircuito",
+                                                "idVuelo = '$idVuelo'");
+
+        $estacionesCircuito[] = explode(",", $resultado[0]['estacionesCircuito']);
+
+        if($estacionesCircuito[0][0] > $estacionesCircuito[0][1]){
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 ?>

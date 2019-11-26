@@ -58,31 +58,7 @@
 </head>
 <body>
 
-    <?php if(isset($_SESSION['username'])){ ?>
-
-    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
-    <a class="btn btn-primary" href="./listaReservas.php">Mis Reservas</a>
-
-    <?php 
-            $idUsuario=getIdByUsername($_SESSION['username']);
-            if(checkCodigoViajero($idUsuario)==0){
-                if(tieneTurnos($idUsuario)){    ?>
-
-    <a class="btn btn-secondary" href="./turno.php">Mi Turno</a>
-
-    <?php } else{ ?>
-    <a class="btn btn-primary" href="./solicitar-turno.php">Solicitar Turno</a>
-    <?php } } 
-        $isAdmin = $_SESSION['isAdmin'];
-        if($isAdmin){?>
-            <a class="btn btn-primary float-right" href="./reportes.php">Reportes</a>
-    <?php    }
-    } else { ?>
-        
-    <a class="btn btn-success" href="./login.php">A login</a>
-    <a class="btn btn-success" href="./registro.php">A registro</a>
-    
-    <?php } ?>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
     <h1 class="text-center">Búsqueda de vuelos</h1>
     <div class="container">
@@ -110,18 +86,18 @@
             <input class="form-control col-xs-12" type="date" name="fechaHasta" id="fechaHasta">
             <label for="pasajeros">Cantidad de pasajeros: </label>
             <input class="form-control col-xs-12" type="number" name="cantidadPasajeros" id="cantidadPasajeros" value="1">
-            <input id="submit-button" name="enviar" class="btn btn-success" type="submit">
-            <a href="./index.php" class="btn btn-danger">Limpiar</a>
+            <input id="submit-button" name="enviar" class="btn btn-success mt-2" type="submit">
+            <a href="./index.php" class="btn btn-danger mt-2">Limpiar</a>
         </form>
         
     </div>
     <div class="container">
         <?php
-
             if($error != ""){
                 echo $error;
             }else if($consultaRealizada){
                 if($listaDeVuelos != null){
+                    echo '<div class="card-columns mt-4">';
                     foreach ($listaDeVuelos as $vuelo) {
 
                         if(isset($_SESSION['username'])){
@@ -153,13 +129,15 @@
                             </div>
                             <div class='card-footer text-muted'>
                             </div>
+                        </div>
                             ";
                     }
+                    echo '</div>';
                 }
             }
         ?>
     </div>
 
-
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

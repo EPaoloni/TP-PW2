@@ -45,8 +45,7 @@
     <script src="StaticContent/js/turno.js"></script>
 </head>
 <body>
-    <a class="btn btn-danger" href="./index.php?destruirSesion=true">Cerrar sesion</a>
-    <a class="btn btn-primary" href="./index.php">Ir al Inicio</a>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
      <h1 class="text-center">Solicitar Turno</h1>
      <div class="container">
@@ -66,10 +65,11 @@
             <label for="hora">Elija la Hora </label>
             <select name="horario" id="horario" class="form-control col-xs-12"> 
             </select>
-            <input id="submit-button" name="enviar" class="btn btn-success" type="submit">
-            <a href="./solicitar-turno.php" class="btn btn-danger">Limpiar</a>
+            <input id="submit-button" name="enviar" class="btn btn-success mt-2" type="submit">
+            <a href="./solicitar-turno.php" class="btn btn-danger mt-2">Limpiar</a>
             <?php echo $error; ?> 
         </form>
     </div>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

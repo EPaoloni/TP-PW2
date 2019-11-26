@@ -19,7 +19,7 @@ $estacionesEnArray= consultarEstaciones();
     <?php include("Vistas/head.html"); ?>
 </head>
 <body>
-
+<?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 <div class="container">
     <table class="table">
         <thead class="thead-dark">
@@ -69,6 +69,7 @@ $estacionesEnArray= consultarEstaciones();
         </tbody>
     </table>
 </div>
-    
+
+<?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

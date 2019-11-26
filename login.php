@@ -17,7 +17,7 @@ if(isset($_POST['enviar'])){
             exit();
         } else {
             $error = "<p class='text-danger'>Usuario o contraseña inválidos<p>";
-        };
+        }
     } else {
         $error = "<p class='text-danger'>Complete los campos<p>";
     }
@@ -36,6 +36,8 @@ if(isset($_POST['enviar'])){
     <link rel="stylesheet" href="StaticContent/css/style-login.css">
 </head>
 <body>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+
     <h1 id="login-title" class="text-center">Ingrese sus datos</h1>
     
     <div id="login-container" class="container">
@@ -44,9 +46,16 @@ if(isset($_POST['enviar'])){
             <input class="form-control col-xs-12" type="text" name="username" id="username" required>
             <label for="password">Contraseña: </label>
             <input class="form-control col-xs-12" type="password" name="password" id="password" required>
-            <input id="submit-button" name="enviar" class="btn btn-success float-right" type="submit">
+            <input id="submit-button" name="enviar" class="btn btn-success" type="submit" value="Iniciar Sesion"> 
         </form>
-        <?php echo $error; ?>
+        <div class="container">
+            <?php echo $error; ?>
+        </div>
+        <div class="container">
+            <a href="./registro.php" class="">¿Todavia no esta registrado? Pulse aqui</a>
+        </div>
+        
     </div>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>

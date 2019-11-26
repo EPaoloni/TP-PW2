@@ -45,6 +45,8 @@ if(isset($_POST['enviar'])){
 
 </head>
 <body>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+    
     <h1 id="login-title" class="text-center">Formulario de registro</h1>
     <div id="login-container" class="container">
         <form action="registro.php" method="post">
@@ -60,9 +62,10 @@ if(isset($_POST['enviar'])){
             <input class="form-control col-xs-12" type="password" name="password" id="password" required>
             <label for="password">Repita su contraseña: </label>
             <input class="form-control col-xs-12" type="password" name="password-repetido" id="password-repetido" required>
-            <input id="submit-button" name="enviar" class="btn btn-success float-right" type="submit">
+            <input id="submit-button" name="enviar" class="btn btn-success float-right mt-2" type="submit" value="Registrarse">
         </form>
         <?php echo $error; ?>
     </div>
+    <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
 </body>
 </html>
