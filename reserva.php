@@ -65,7 +65,7 @@
                     }
                 ?>
             </select>
-            <h3>Precio total: <input id="precio-total" class="" name="montoReserva"></h3>
+            <h3>Precio total: <input id="precio-total" class="" name="montoReserva" readonly></h3>
 
 
             <?php
