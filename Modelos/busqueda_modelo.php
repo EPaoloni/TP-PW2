@@ -8,6 +8,12 @@
         $estaciones = $query->consulta("", "estacion", "1=1 ORDER BY idEstacion");
         return $estaciones;
     }
+    function consultarEstacioneById($idEstacion){
+        $query = new Query();
+        $estacion = $query->consulta("", "estacion", "idEstacion=$idEstacion");
+        return $estacion[0];
+    }
+
 
     function consultarCircuitos($origen, $destino){
         $logger = new Logger();
