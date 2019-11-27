@@ -25,10 +25,10 @@ INSERT INTO `tipoUsuario` (`idTipoUsuario`, `descripcionTipoUsuario`)
                             (2, 'normal');
 
 INSERT INTO `credencial` (`username`, `pass`)
-                     VALUES ('ezep', '1234'),
-                            ('iant', '1234'),
-                            ('alejoz', '1234'),
-                            ('juanp', '1234');
+                     VALUES ('ezep', '81dc9bdb52d04dc20036dbd8313ed055'), -- 1234
+                            ('iant', '81dc9bdb52d04dc20036dbd8313ed055'), -- 1234
+                            ('alejoz', '81dc9bdb52d04dc20036dbd8313ed055'), -- 1234
+                            ('juanp', '81dc9bdb52d04dc20036dbd8313ed055'); -- 1234
 
 INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codigoViajero`,`numeroCredencialUsuario`, `mail`)
                      VALUES ('Ezequiel', 'Paoloni', 1, 3, 1, 'ezep@hotmail.com'),
