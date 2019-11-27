@@ -23,4 +23,14 @@
         $resultado=$query->consulta("","factura","");
         return $resultado;
     }
+    function getFacturasByFechas($fechaDesde,$fechaHasta){
+        $query = new Query();
+        $resultado=$query->consulta("","factura","fechaPago BETWEEN '$fechaDesde' AND  '$fechaHasta'");
+        return $resultado;
+    }
+    function getFacturasByUsername($username){
+        $query = new Query();
+        $resultado=$query->consulta("","factura","username='$username'");
+        return $resultado;
+    }
 ?>
