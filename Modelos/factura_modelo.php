@@ -18,4 +18,9 @@
                                     "(" . $idUsuario . ",'" . $username . "','" . $vuelo['fechaPartida'] . "','" .  $vuelo['fechaLlegada'] . "','" . $origen . "','" . $destino . "'," . $cantidadDePasajeros . ",'" . $nombreCabina . "','" . $fechaPago . "');");
         return $resultado;
     }
+    function getFacturas(){
+        $query = new Query();
+        $resultado=$query->consulta("","factura","");
+        return $resultado;
+    }
 ?>
