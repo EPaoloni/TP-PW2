@@ -13,6 +13,7 @@
             //TODO: cargar en sesion todo el usuario
             $_SESSION['username'] = $username;
             $_SESSION['emailUsuario'] = $resultado[0]['mail'];
+            $_SESSION['idUsuario']= $resultado[0]['idUsuario'];
             if($resultado[0]['tipoUsuario'] == 1){
                 $isAdmin = true;
             } else {

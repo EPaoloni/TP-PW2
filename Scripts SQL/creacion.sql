@@ -166,3 +166,19 @@ CREATE TABLE pago(
     FOREIGN KEY(numeroUsuario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(numeroReserva) REFERENCES Reserva(idReserva)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE factura(
+    idFactura INT AUTO_INCREMENT,
+    idTitular INT NOT NULL,
+    username VARCHAR(30) NOT NULL,
+    fechaPartida DATE NOT NULL,
+    fechaLlegada DATE NOT NULL,
+    nombreOrigen NVARCHAR(50) NOT NULL,
+    nombreDestino NVARCHAR(50) NOT NULL,
+    cantPasajeros INT NOT NULL,
+    nombreCabina NVARCHAR(20) NOT NULL,
+    fechaPago DATE NOT NULL,
+    montoAbonado DECIMAL NOT NULL,
+    PRIMARY KEY(idFactura),
+    FOREIGN KEY(idTitular) REFERENCES usuario(idUsuario)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -36,6 +36,11 @@
             return false;
         }
     }
+    function getReservaById($idReserva){
+        $query = new Query();
+        $resultado = $query->consulta("", "reserva", "idReserva = $idReserva");
+        return $resultado[0];
+    }
 
     function consultarCantidadDeAcompaniantesReserva($idReserva){
         $query = new Query();
