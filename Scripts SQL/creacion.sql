@@ -178,7 +178,7 @@ CREATE TABLE factura(
     cantPasajeros INT NOT NULL,
     nombreCabina NVARCHAR(20) NOT NULL,
     fechaPago DATE NOT NULL,
-    montoAbonado MONEY NOT NULL,
+    montoAbonado DECIMAL NOT NULL,
     PRIMARY KEY(idFactura),
     FOREIGN KEY(idTitular) REFERENCES usuario(idUsuario)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;

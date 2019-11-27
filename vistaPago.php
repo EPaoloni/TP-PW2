@@ -63,6 +63,7 @@ $montoReserva = $resultado[0]['montoReserva'];
 <body>
 <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
+<?php echo "<p class='text-danger'>" . $_SESSION['errorPago'] . "</p>" ?>
 <form action="./Endpoints/realizarPago.php" class="container">
 
     <label for="">Nombre:</label>

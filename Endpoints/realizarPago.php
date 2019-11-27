@@ -23,9 +23,16 @@ if($resultadoPago){
                                                     "( idReserva= " . $numeroReserva . " );");
     
     if($resultadoRegistrarPagoReserva){
-        header("location: /TP-PW2/listaReservas.php");
+        $resultadoGenerarFactura = generarFactura($_SESSION['idUsuario'],$_SESSION['username'],$numeroReserva,date('Ymd'));
+        if($resultadoGenerarFactura){
+            header("location: /TP-PW2/listaReservas.php");
+        } else {
+            $_SESSION['errorPago'] = "Ocurrio un error al registrar la factura";
+            header("location: /TP-PW2/vistaPago.php?idReserva=" . $numeroReserva);
+        }
+        
     } else {
-        $_SESSION['errorPago'] = "Ocurrio un error al registrar el pago";
+        $_SESSION['errorPago'] = "Ocurrio un error al registrar el pago de la reserva";
         header("location: /TP-PW2/vistaPago.php?idReserva=" . $numeroReserva);
     }
 } else {
