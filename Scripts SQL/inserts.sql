@@ -39,7 +39,7 @@ INSERT INTO `usuario` (`nombreUsuario`, `apellidoUsuario`, `tipoUsuario`, `codig
 INSERT INTO `estacion` (`nombreEstacion`)
                      VALUES ('Buenos Aires'),
                             ('Ankara'),
-                            ('Estación Especial Internacional'),
+                            ('Estacion Especial Internacional'),
                             ('OrbiterHotel'),
                             ('Luna'),
                             ('Marte'),
@@ -47,7 +47,7 @@ INSERT INTO `estacion` (`nombreEstacion`)
                             ('Europa'),
                             ('lo'),
                             ('Encedalo'),
-                            ('Titán');
+                            ('Titan');
 
 INSERT INTO `circuito` (`idCircuito`, `estacionesCircuito`)
                     VALUES  (1, "3,4,5,6"),
@@ -55,7 +55,9 @@ INSERT INTO `circuito` (`idCircuito`, `estacionesCircuito`)
                             (3, "3,5,7,8,9,10,11"),
                             (4, "11,10,9,8,7,5,3"),
                             (5, "1,2"),
-                            (6, "2,1");
+                            (6, "2,1"),
+                            (7, "1,1"); -- Circuito para el tour
+
 
 INSERT INTO `naves` (`matricula`, `modelo`)
                      VALUES ('AA1', 7),
@@ -70,14 +72,49 @@ INSERT INTO `naves` (`matricula`, `modelo`)
                             ('BA12', 5),
                             ('O1', 1),
                             ('O2', 1),
-                            ('BA4', 4);
+                            ('O6',1),
+                            ('07',1),
+                            ('BA13',6),
+                            ('BA14',6),
+                            ('BA15',6),
+                            ('BA16',6),
+                            ('BA17',6),
+                            ('BA4', 4),
+                            ('BA5', 4),
+                            ('BA6', 4),
+                            ('BA7', 4),
+                            ('O3', 2),
+                            ('O4', 2),
+                            ('O5', 2),
+                            ('O8', 2),
+                            ('O9', 2),
+                            ('AA2', 8),
+                            ('AA6', 8),
+                            ('AA10', 8),
+                            ('AA14', 8),
+                            ('AA18', 8),
+                            ('AA4', 10),
+                            ('AA8', 10),
+                            ('AA12', 10),
+                            ('AA16', 10),
+                            ('AA3', 9),
+                            ('AA7', 9),
+                            ('AA11', 9),
+                            ('AA15', 9),
+                            ('AA19', 9),
+                            ('BA1', 3),
+                            ('BA2', 3),
+                            ('BA3', 3);                          
 
 INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `id_nave`, `circuitoVuelo`)
                      VALUES ('20191014', '20191014', 11, 5),
                             ('20191015', '20191015', 12, 6),
                             ('20191030', '20191101', 12, 6),
                             ('20191015', '20191017', 1, 1),
-                            ('20191015', '20191019', 13, 3);
+                            ('20191015', '20191019', 13, 3),
+                            ('20191215', '20200119',34,7),-- tour
+                            ('20191222', '20200126',34,7),-- tour
+                            ('20191229', '20200202',37,7); -- tour
 
 INSERT INTO `cabinas` (`nombreCabina`)
                      VALUES ('General'),
