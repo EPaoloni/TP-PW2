@@ -14,8 +14,8 @@
         $destino = consultarEstacioneById($reserva['idDestinoReserva'])['nombreEstacion'];
 
         $resultado = $query->insert("factura",
-                                    "(idTitular,username,fechaPartida,fechaLlegada,nombreOrigen,nombreDestino,cantPasajeros,nombreCabina,fechaPago)",
-                                    "(" . $idUsuario . ",'" . $username . "','" . $vuelo['fechaPartida'] . "','" .  $vuelo['fechaLlegada'] . "','" . $origen . "','" . $destino . "'," . $cantidadDePasajeros . ",'" . $nombreCabina . "','" . $fechaPago . "');");
+                                    "(idTitular,username,fechaPartida,fechaLlegada,nombreOrigen,nombreDestino,cantPasajeros,nombreCabina,fechaPago,montoAbonado)",
+                                    "(" . $idUsuario . ",'" . $username . "','" . $vuelo['fechaPartida'] . "','" .  $vuelo['fechaLlegada'] . "','" . $origen . "','" . $destino . "'," . $cantidadDePasajeros . ",'" . $nombreCabina . "','" . $fechaPago . "'," . $reserva['montoReserva'] . ");");
         return $resultado;
     }
     function getFacturas(){
