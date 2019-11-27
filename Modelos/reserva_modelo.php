@@ -23,7 +23,7 @@
                 $idReserva = $query->consulta("idReserva", "reserva", "idTitular = '" . $titular[0]['idUsuario'] . "' and idVuelo = '" . $idVuelo . "'");
 
                 foreach ($acompaniantes as $acompaniante) {
-                    $resultado = $query->insert("acompaniante_reserva", "(idReserva, idUsuario, reservaPaga)", "(" . $idReserva[0]['idReserva'] . ", " . $acompaniante[0]['idUsuario'] . " , false)");
+                    $resultado = $query->insert("acompaniante_reserva", "(idReserva, idUsuario)", "(" . $idReserva[0]['idReserva'] . ", " . $acompaniante[0]['idUsuario'] . ")");
                     if(!$resultado){
                         $logger->error("Ocurrio un error al insertar un acompañante de reserva");
                         return false;
