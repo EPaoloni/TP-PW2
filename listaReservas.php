@@ -32,28 +32,38 @@
 </head>
 <body>
     <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
+    <link rel="stylesheet" href="StaticContent/css/style-table-reserva.css">
 
 <div class="container">
     <p class="text-danger"><?php echo $error; ?></p>
 </div>
 
-
+        
 <?php
     if($reservas != null){
+       echo "<table class='table table-bordered'>
+                <thead class='thead-light'>
+                    <tr>
+                        <th>Número</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>";
         foreach ($reservas as $reserva) {
-            echo "<div class='container row>'";
-            echo "<h1>Numero de reserva: " . $reserva['idReserva'] . "</h1>";
+            // echo "<div class='container row>'";
+            echo  "<tbody><td>". $reserva['idReserva'] . "</td>";
             if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
                 if($reserva['reservaPaga']){
-                    echo "<span class='text-success'>Reserva Paga</span>";
+                    echo "<td> <span class='text-success'>Reserva Paga</span> </td>";
                 } else  if($reserva['reservaCaida']){
-                    echo "<span class='text-danger'>Reserva caida por codigo de viajero</span>";
+                    echo "<td> <span class='text-danger'>Reserva caida por codigo de viajero</span> </td>";
                 } else{
-                    echo "<a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a>";
+                    echo "<td><a class='btn btn-primary' href='vistaPago.php?idReserva=" . $reserva['idReserva'] . "'>Pagar</a></td>";
                 }
             }
-            echo "</div>";
+            
         }
+        echo "</div>";
+            echo "</tbody></table>";
     }else{
         echo "<h4>No tenés reservas realizadas</h1>";
     }
