@@ -54,6 +54,9 @@
 
     <?php include("Vistas/head.html") ?>
     <script src="StaticContent/js/busqueda.js"></script>
+    <link rel="stylesheet" href="StaticContent/css/style-index.css">
+    
+
 
 </head>
 <body>
@@ -61,7 +64,8 @@
     <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
 
     <h1 class="text-center">Búsqueda de vuelos</h1>
-    <div class="container">
+    <div class="container row">
+        <div class="col-7">
         <form action="./index.php" method="get">
             <label for="origen">Origen: </label>
                 <select name="origen" id="origen" class="form-control col-xs-12">                   
@@ -89,7 +93,10 @@
             <input id="submit-button" name="enviar" class="btn btn-success mt-2" type="submit">
             <a href="./index.php" class="btn btn-danger mt-2">Limpiar</a>
         </form>
-        
+        </div>
+        <div class="col-5 fondo">
+            <img src="StaticContent/img/fondo.jpg" class="img-fluid imagen_nave" alt="">
+        </div> 
     </div>
     <div class="container">
         <?php
