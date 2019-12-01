@@ -5,10 +5,17 @@
     $error="";
     if(isset($_GET['submit-form'])){
         $idVuelo=isset($_GET['input-vuelo'])? $_GET['input-vuelo'] : null; 
-        $listaVuelosOcupacion = getListadoVueloOcupacion($idVuelo);
-        if($listaVuelosOcupacion == null){
-            $error="<p class='text-danger'> No existe ese Modelo </p>";
+        if($idVuelo!=null){
+            $listaVuelosOcupacion = getVueloOcupacion($idVuelo);
+            if($listaVuelosOcupacion == null){
+                $listaVuelosOcupacion = getListadoVuelosOcupacion();
+                $error="<p class='text-danger'> No existe ese Modelo </p>";
+            }
+        }else{
+            $listaVuelosOcupacion = getListadoVuelosOcupacion();
+            $error="<p class='text-danger'> Complete el campo</p>";
         }
+        
     }else {
         $listaVuelosOcupacion = getListadoVuelosOcupacion();
     }

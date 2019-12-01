@@ -5,9 +5,15 @@
     $error="";
     if(isset($_GET['submit-form'])){
         $idModelo=isset($_GET['input-modelonave'])? $_GET['input-modelonave'] : null; 
-        $listaModeloOcupacion = getListadoModeloOcupacion($idModelo);
-        if($listaModeloOcupacion == null){
-            $error="<p class='text-danger'> No existe ese Modelo </p>";
+        if($idModelo!=null){
+            $listaModeloOcupacion = getModeloOcupacion($idModelo);
+            if($listaModeloOcupacion == null){
+                $listaModeloOcupacion = getListadoModelosOcupacion();
+                $error="<p class='text-danger'> No existe ese Modelo </p>";
+            }
+        }else{
+            $listaModeloOcupacion = getListadoModelosOcupacion();
+            $error="<p class='text-danger'> Complete el campo</p>";
         }
     }else {
         $listaModeloOcupacion = getListadoModelosOcupacion();
