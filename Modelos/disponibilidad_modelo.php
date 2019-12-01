@@ -11,7 +11,7 @@
         //Obtengo todas las reservas de un vuelo entre destinos
         $cantidadReservasCabinaVuelo = $query->consulta("reserva.idReserva, COUNT(idUsuario) as 'cantidadAcompaniantes'",
                                     "reserva INNER JOIN acompaniante_reserva ON reserva.idReserva = acompaniante_reserva.idReserva",
-                                    "$condicionesConsulta GROUP BY idReserva");
+                                    "reserva.idVuelo = $idVuelo GROUP BY idReserva");
         
         $capacidadTotal = consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo);
 
@@ -26,8 +26,6 @@
         foreach ($cantidadReservasCabinaVuelo as $acompaniantes) {
             $cantidadLugaresOcupados += $acompaniantes['cantidadAcompaniantes'];
         }
-
-        
 
         $cantidadLugaresDisponibles = $capacidadTotal - $cantidadLugaresOcupados;
         
