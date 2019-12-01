@@ -58,4 +58,9 @@
 
         return $result[0];
     }
+    function consultarVuelos(){
+        $query = new Query();
+        $result = $query->consulta("", "vuelo", "");
+        return $result;
+    }
 ?>

@@ -60,8 +60,6 @@
                     }?>
 
             </select>
-            <input type='hidden' name='cantidadDeMedicos' value="<?php echo $cantidadDeMedicos   ?>" id='cantidadDeMedicos' >
-            <input type='hidden' name='turnosMaximosDiarios' value="<?php echo $turnosMaximosDiarios   ?>" id='turnosMaximosDiarios' > 
             <label for="hora">Elija la Hora </label>
             <select name="horario" id="horario" class="form-control col-xs-12"> 
             </select>
