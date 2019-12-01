@@ -27,7 +27,7 @@
                 $lugaresOcupados=$lugaresOcupados+($capacidadCabina-$lugaresDisponibles);
             }
             $promedioLugaresOcupados=$lugaresOcupados/count($cabinas);
-            $tasaOcupacionVuelo=$promedioLugaresOcupados/$capacidadTotal;
+            $tasaOcupacionVuelo=($promedioLugaresOcupados/$capacidadTotal)*100;
 
             array_push($tasaOcupacionDeVuelos,array('idVuelo'=> $vuelo['idVuelo'],'tasa'=>$tasaOcupacionVuelo,'idModelo'=>$vuelo['modelo']) );
         }
@@ -114,7 +114,7 @@
             $lugaresOcupados=$lugaresOcupados+($capacidadCabina-$lugaresDisponibles);
         }
         $promedioLugaresOcupados=$lugaresOcupados/count($cabinas);
-        $tasaOcupacionVuelo=$promedioLugaresOcupados/$capacidadTotal;
+        $tasaOcupacionVuelo=($promedioLugaresOcupados/$capacidadTotal)*100;
 
         array_push($tasaOcupacionDeVuelos,array('idVuelo'=> $vuelo['idVuelo'],'tasa'=>$tasaOcupacionVuelo,'idModelo'=>$vuelo['modelo']) );
         
