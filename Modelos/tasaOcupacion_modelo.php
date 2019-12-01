@@ -10,25 +10,24 @@
         foreach ($vuelos as $vuelo) {
             $tasaOcupacionVuelo=0;
             $tasaOcupacionCabina=0;
+            $capacidadTotal=$query->consulta("SUM(capacidad) as capacidad","modelonave_cabinas","modeloNave=" . $vuelo['modelo']);
+            $capacidadTotal=$capacidadTotal[0]['capacidad'];
             $resultado = $query->consulta("estacionesCircuito", 
                                                 "vuelo INNER JOIN circuito ON vuelo.circuitoVuelo = circuito.idCircuito",
                                                 "idVuelo ='" . $vuelo['idVuelo'] . "'");
             $estacionesCircuito = explode(",", $resultado[0]['estacionesCircuito']);
             $cabinas=$query->consulta("","cabinas INNER JOIN modelonave_cabinas ON idCabina=tipoCabina","modeloNave=" . $vuelo['modelo']);
-            foreach ($estacionesCircuito as $estacion) {
-                $idOrigen=$estacion;
-                $idDestino=next($estacionesCircuito);
-                if($idDestino!=null){
-                    $lugaresOcupados=0;
-                    foreach ($cabinas as $cabina) {
-                        $capacidadCabina=consultaCapacidadCabinaPorVuelo($cabina['idCabina'],$vuelo['idVuelo']);
-                        $lugaresDisponibles=consultarCantidadLugaresDisponiblesCabina($cabina['idCabina'], $vuelo['idVuelo'], $idOrigen, $idDestino);
-                        $lugaresOcupados=$lugaresOcupados+($capacidadCabina-$lugaresDisponibles);
-                    }
-                    $tasaOcupacionCabinas=$tasaOcupacionCabina+($lugaresOcupados/count($cabinas));
-                }
+
+            $idOrigen=reset($estacionesCircuito);
+            $idDestino=end($estacionesCircuito);
+            $lugaresOcupados=0;
+            foreach ($cabinas as $cabina) {
+                $capacidadCabina=consultaCapacidadCabinaPorVuelo($cabina['idCabina'],$vuelo['idVuelo']);
+                $lugaresDisponibles=consultarCantidadLugaresDisponiblesCabina($cabina['idCabina'], $vuelo['idVuelo'], $idOrigen, $idDestino);
+                $lugaresOcupados=$lugaresOcupados+($capacidadCabina-$lugaresDisponibles);
             }
-            $tasaOcupacionVuelo=$tasaOcupacionCabinas/count($estacionesCircuito);
+            $promedioLugaresOcupados=$lugaresOcupados/count($cabinas);
+            $tasaOcupacionVuelo=$promedioLugaresOcupados/$capacidadTotal;
 
             array_push($tasaOcupacionDeVuelos,array('idVuelo'=> $vuelo['idVuelo'],'tasa'=>$tasaOcupacionVuelo,'idModelo'=>$vuelo['modelo']) );
         }
@@ -54,6 +53,25 @@
         }
         return $tasaOcupacionModelos;
     }
+    function getListadoModeloOcupacion($idModelo){
+        $query=new Query();
+        $modelo=$query->consulta("", "modelonave", "id=$idModelo");
+        $modelo=$modelo[0];
+        $tasaVuelos=getListadoVuelosOcupacion();
+        $tasaOcupacionModelos=array();
+        $tasaOcupacionModelo=0;
+        $contadorTasaVuelos=0;
+        foreach ($tasaVuelos as $tasaVuelo) {
+            if ($tasaVuelo['idModelo']==$idModelo) {
+                $contadorTasaVuelos++;
+                $tasaOcupacionModelo=$tasaOcupacionModelo+$tasaVuelo['tasa'];
+            }
+        }
+        $tasaOcupacionModelo=$tasaOcupacionModelo/$contadorTasaVuelos;
+        array_push($tasaOcupacionModelos,array('idModelo'=>$idModelo,'nombreModelo'=>$modelo['nombreModelo'] ,'tasa'=>$tasaOcupacionModelo));
+        return $tasaOcupacionModelos;
+    }
+
     
        
 ?>

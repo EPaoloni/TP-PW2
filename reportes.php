@@ -18,7 +18,7 @@ checkIsAdmin();
 <div class="container">
     <a class="btn btn-primary" href="./listaPagos.php">Ver pagos de usuarios</a>
     <a class="btn btn-primary" href="./cabinaMasVendida.php">Cabina Mas Vendida</a>
-    <a class="btn btn-primary" href="./tasaOcupacionVuelo.php">Tasa de ocupación por viaje </a>
+    <a class="btn btn-primary" href="./tasaOcupacionVuelo.php">Tasa de ocupación por vuelos </a>
     <a class="btn btn-primary" href="./tasaOcupacionModeloNave.php">Tasa de ocupación por modelo de naves</a>
 </div>
     

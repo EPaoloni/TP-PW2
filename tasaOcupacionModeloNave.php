@@ -28,7 +28,7 @@
         <div class="col col-lg-2">
         </div>
         <div class="col col-lg-4">
-            <form class="form-row align-items-center" action="./tasaOcupacionVuelo.php" >
+            <form class="form-row align-items-center" action="./tasaOcupacionModeloNave.php" >
                     <div class="form-group">
                     <h2 class="text-success"  >Buscar por modelo</h2>
                         <label for="input-vuelo">N° de modelo:</label>
@@ -70,7 +70,7 @@
             ?>
         </tbody>
     </table>
-    <a href="./tasaOcupacionVuelo.php" class="btn btn-success mb-2 mt-4">Buscar todos</a>
+    <a href="./tasaOcupacionModeloNave.php" class="btn btn-success mb-2 mt-4">Buscar todos</a>
 </div>
 
 <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/footer.php"); ?>
