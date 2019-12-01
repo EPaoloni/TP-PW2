@@ -14,5 +14,12 @@ $(function(){
         }
     });
 
+    $("#boton-guardar").on("click", function(){
+        if($(".propio").length != $("#cantidad-acompaniantes").val()){
+            event.preventDefault();
+            alert("Por favor, seleccioná los lugares para todos los pasajeros");
+        }
+    });
+
 
 });

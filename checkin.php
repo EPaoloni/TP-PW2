@@ -42,7 +42,12 @@
 
     <input id="cantidad-acompaniantes" type="hidden" value="<?php echo $cantidadAcompaniantes + 1; ?>">
 
+    <div class="container">
+        <h3>Seleccioná los lugares para <?php echo $cantidadAcompaniantes + 1; ?> pasajero/s</h3>
+    </div>
+
     <form action="/TP-PW2/Endpoints/guardarLugaresReserva.php" method="GET">
+
         <div class="container row" id="container-asientos">
 
             <input type="hidden" name="numeroReserva" value="<?php echo $numeroReserva ?>">
