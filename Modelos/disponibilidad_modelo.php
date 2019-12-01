@@ -62,7 +62,9 @@
             foreach ($lugaresOcupados as $lugaresEnReserva) {
                 $numerosDeLugares = explode(",", $lugaresEnReserva['lugaresSeleccionados']);
                 foreach ($numerosDeLugares as $numero) {
-                    $arrayLugaresOcupados[$numero - 1] = true;
+                    if($numero != ""){
+                        $arrayLugaresOcupados[$numero - 1] = true;
+                    }
                 }
             }
         }
