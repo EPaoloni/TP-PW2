@@ -42,13 +42,18 @@
         foreach ($modelos as $modelo ) {
             $tasaOcupacionModelo=0;
             $contadorTasaVuelos=0;
+            $tasaModelo=0;
             foreach ($tasaVuelos as $tasaVuelo) {
                 if ($tasaVuelo['idModelo']==$modelo['id']) {
                     $contadorTasaVuelos++;
-                    $tasaOcupacionModelo=$tasaOcupacionModelo+$tasaVuelo['tasa'];
+                    $tasaModelo=$tasaModelo+$tasaVuelo['tasa'];
                 }
             }
-            $tasaOcupacionModelo=$tasaOcupacionModelo/$contadorTasaVuelos;
+            if($tasaModelo == 0 || $contadorTasaVuelos==0){
+                $tasaOcupacionModelo=0;
+            }else{
+                $tasaOcupacionModelo=$tasaModelo/$contadorTasaVuelos;
+            }
             array_push($tasaOcupacionModelos,array('idModelo'=>$modelo['id'],'nombreModelo'=>$modelo['nombreModelo'] ,'tasa'=>$tasaOcupacionModelo));
         }
         return $tasaOcupacionModelos;
@@ -60,14 +65,20 @@
         $tasaVuelos=getListadoVuelosOcupacion();
         $tasaOcupacionModelos=array();
         $tasaOcupacionModelo=0;
+        $tasaModelo=0;
         $contadorTasaVuelos=0;
         foreach ($tasaVuelos as $tasaVuelo) {
             if ($tasaVuelo['idModelo']==$idModelo) {
                 $contadorTasaVuelos++;
-                $tasaOcupacionModelo=$tasaOcupacionModelo+$tasaVuelo['tasa'];
+                $tasaModelo=$tasaModelo+$tasaVuelo['tasa'];
             }
         }
-        $tasaOcupacionModelo=$tasaOcupacionModelo/$contadorTasaVuelos;
+        if($tasaModelo == 0 || $contadorTasaVuelos==0){
+            $tasaOcupacionModelo=0;
+        }else{
+            $tasaOcupacionModelo=$tasaModelo/$contadorTasaVuelos;
+        }
+        
         array_push($tasaOcupacionModelos,array('idModelo'=>$idModelo,'nombreModelo'=>$modelo['nombreModelo'] ,'tasa'=>$tasaOcupacionModelo));
         return $tasaOcupacionModelos;
     }
