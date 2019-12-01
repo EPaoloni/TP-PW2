@@ -11,7 +11,7 @@
                                     "idVuelo = '$idVuelo' and idCabina = '$idCabina' and idOrigenReserva >= '$idOrigen' and idDestinoReserva <= '$idDestino'
                                     GROUP BY idReserva");
         
-        $capacidadTotal = consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo, $idOrigen, $idDestino);
+        $capacidadTotal = consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo);
 
         if($cantidadReservasCabinaVuelo == null){
             return $capacidadTotal;
@@ -33,9 +33,7 @@
     }
 
     //Test OK
-    function consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo, $idOrigen, $idDestino){
-        
-        $condicionesConsulta = obtenerCondicionesConsultaSegunSentido($idVuelo, $idCabina, $idDestino, $idOrigen);
+    function consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo){
 
         $query = new Query();
         $result = $query->consulta("modeloNave_cabinas.capacidad",
@@ -59,10 +57,13 @@
                                     $condicionesConsulta);
 
         $arrayLugaresOcupados = array_fill (0, $capacidadTotal, false );
-        foreach ($lugaresOcupados as $lugaresEnReserva) {
-            $numerosDeLugares = explode(",", $lugaresEnReserva['lugaresSeleccionados']);
-            foreach ($numerosDeLugares as $numero) {
-                $arrayLugaresOcupados[$numero] = true;
+
+        if($lugaresOcupados != null){
+            foreach ($lugaresOcupados as $lugaresEnReserva) {
+                $numerosDeLugares = explode(",", $lugaresEnReserva['lugaresSeleccionados']);
+                foreach ($numerosDeLugares as $numero) {
+                    $arrayLugaresOcupados[$numero - 1] = true;
+                }
             }
         }
 
@@ -70,12 +71,12 @@
     }
 
     function obtenerCondicionesConsultaSegunSentido($idVuelo, $idCabina, $idDestino, $idOrigen){
-        $condicionesConsulta = "idVuelo = '$idVuelo' and idCabina = '$idCabina' ";
+        $condicionesConsulta = "reserva.idVuelo = '$idVuelo' and reserva.idCabina = '$idCabina' ";
 
         if(isVueloHaciaLaTierra($idVuelo)){
-            $condicionesConsulta .= " and idDestino > '$idDestino' and idOrigen < '$idOrigen'";
+            $condicionesConsulta .= " and idDestinoReserva >= '$idDestino' and idOrigenReserva <= '$idOrigen'";
         } else {
-            $condicionesConsulta .= " and idDestino < '$idDestino' and idOrigen > '$idOrigen'";
+            $condicionesConsulta .= " and idDestinoReserva <= '$idDestino' and idOrigenReserva >= '$idOrigen'";
         }
 
         return $condicionesConsulta;
