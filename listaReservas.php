@@ -22,6 +22,11 @@
 
     if(isset($_SESSION['errorCodigoDeViajero'])){
         $error = $_SESSION['errorCodigoDeViajero'];
+        unset($_SESSION['errorCodigoDeViajero']);
+    }
+    if(isset($_SESSION['errorCheckin'])){
+        $error = $_SESSION['errorCheckin'];
+        unset($_SESSION['errorCheckin']);
     }
 ?>
 
