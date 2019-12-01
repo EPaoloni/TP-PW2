@@ -4,12 +4,14 @@
 
     //Test OK
     function consultarCantidadLugaresDisponiblesCabina($idCabina, $idVuelo, $idOrigen, $idDestino){
+
+        $condicionesConsulta = obtenerCondicionesConsultaSegunSentido($idVuelo, $idCabina, $idDestino, $idOrigen);
+
         $query = new Query();
         //Obtengo todas las reservas de un vuelo entre destinos
         $cantidadReservasCabinaVuelo = $query->consulta("reserva.idReserva, COUNT(idUsuario) as 'cantidadAcompaniantes'",
                                     "reserva INNER JOIN acompaniante_reserva ON reserva.idReserva = acompaniante_reserva.idReserva",
-                                    "idVuelo = '$idVuelo' and idCabina = '$idCabina' and idOrigenReserva >= '$idOrigen' and idDestinoReserva <= '$idDestino'
-                                    GROUP BY idReserva");
+                                    "$condicionesConsulta GROUP BY idReserva");
         
         $capacidadTotal = consultaCapacidadCabinaPorVuelo($idCabina, $idVuelo);
 
