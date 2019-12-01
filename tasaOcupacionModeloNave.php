@@ -3,7 +3,16 @@
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/tasaOcupacion_modelo.php");
     checkIsAdmin();
     $error="";
-    $listaModeloOcupacion = getListadoModeloOcupacion();
+    if(isset($_GET['submit-form'])){
+        $idModelo=isset($_GET['input-modelonave'])? $_GET['input-modelonave'] : null; 
+        $listaModeloOcupacion = getListadoModeloOcupacion($idModelo);
+        if($listaModeloOcupacion == null){
+            $error="<p class='text-danger'> No existe ese Modelo </p>";
+        }
+    }else {
+        $listaModeloOcupacion = getListadoModelosOcupacion();
+    }
+    
 ?>
 
 
@@ -19,11 +28,11 @@
         <div class="col col-lg-2">
         </div>
         <div class="col col-lg-4">
-            <form class="form-row align-items-center" action="#" >
+            <form class="form-row align-items-center" action="./tasaOcupacionVuelo.php" >
                     <div class="form-group">
                     <h2 class="text-success"  >Buscar por modelo</h2>
                         <label for="input-vuelo">N° de modelo:</label>
-                        <input type="txt" class="form-control" id="input-vuelo" name="input-vuelo">
+                        <input type="number" class="form-control" id="input-modelonave" name="input-modelonave">
                         <input type="submit" name="submit-form" class="btn btn-primary mb-2 mt-4" value="Aceptar">
                         <?php echo $error;?>
                     </div>
@@ -36,8 +45,9 @@
 <div class="container">
     <table class="table">
         <thead class="thead-dark">
-            <tr>
-                <th scope="col">Modelo</th>
+            <tr>   
+                <th scope="col">N° de modelo</th>
+                <th scope="col">Modelo de Nave</th>
                 <th scope="col">Tasa de ocupacion</th>
             </tr>
         </thead>
@@ -48,7 +58,8 @@
             ?>
 
             <tr>
-                <th scope="row"><?php echo $modelo['nombreModelo'] ?></th>
+                <th scope="row"><?php echo $modelo['idModelo'] ?></th>
+                <th><?php echo $modelo['nombreModelo']   ?></th>
                 <th><?php echo $modelo['tasa']   ?>%</th>
                
             </tr>

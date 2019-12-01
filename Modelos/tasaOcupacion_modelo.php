@@ -24,7 +24,6 @@
                         $capacidadCabina=consultaCapacidadCabinaPorVuelo($cabina['idCabina'],$vuelo['idVuelo']);
                         $lugaresDisponibles=consultarCantidadLugaresDisponiblesCabina($cabina['idCabina'], $vuelo['idVuelo'], $idOrigen, $idDestino);
                         $lugaresOcupados=$lugaresOcupados+($capacidadCabina-$lugaresDisponibles);
-                        echo $lugaresDisponibles . "<br>";
                     }
                     $tasaOcupacionCabinas=$tasaOcupacionCabina+($lugaresOcupados/count($cabinas));
                 }
@@ -36,7 +35,7 @@
         return $tasaOcupacionDeVuelos;
     }
     
-    function getListadoModeloOcupacion(){
+    function getListadoModelosOcupacion(){
         $query=new Query();
         $modelos=$query->consulta("", "modelonave", "");
         $tasaVuelos=getListadoVuelosOcupacion();
@@ -45,13 +44,13 @@
             $tasaOcupacionModelo=0;
             $contadorTasaVuelos=0;
             foreach ($tasaVuelos as $tasaVuelo) {
-                if ($tasaVuelo['modelo']==$modelo['idModelo']) {
+                if ($tasaVuelo['idModelo']==$modelo['id']) {
                     $contadorTasaVuelos++;
                     $tasaOcupacionModelo=$tasaOcupacionModelo+$tasaVuelo['tasa'];
                 }
             }
             $tasaOcupacionModelo=$tasaOcupacionModelo/$contadorTasaVuelos;
-            array_push($tasaOcupacionModelos,array('idModelo'=>$modelo['idModelo'],'nombreModelo'=>$modelo['nombreModelo'] ,'tasa'=>$tasaOcupacionModelo));
+            array_push($tasaOcupacionModelos,array('idModelo'=>$modelo['id'],'nombreModelo'=>$modelo['nombreModelo'] ,'tasa'=>$tasaOcupacionModelo));
         }
         return $tasaOcupacionModelos;
     }
