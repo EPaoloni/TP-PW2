@@ -34,10 +34,10 @@
 <html lang="en">
 <head>  
     <?php include("Vistas/head.html"); ?>
+    <link rel="stylesheet" href="StaticContent/css/style-table-reserva.css">
 </head>
 <body>
     <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
-    <link rel="stylesheet" href="StaticContent/css/style-table-reserva.css">
 
 <div class="container">
     <p class="text-danger"><?php echo $error; ?></p>

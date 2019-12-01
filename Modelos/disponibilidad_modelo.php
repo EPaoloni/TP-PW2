@@ -98,4 +98,14 @@
 
     }
 
+    function consultarLugaresSeleccionadosReserva($idReserva){
+        
+        $query = new Query();
+        $resultado = $query->consulta("lugaresSeleccionados", "reserva", "reserva.idReserva = $idReserva");
+
+        $lugaresSeleccionados = explode(",", $resultado[0]['lugaresSeleccionados']);
+
+        return $lugaresSeleccionados;
+    }
+
 ?>
