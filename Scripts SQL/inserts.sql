@@ -114,7 +114,8 @@ INSERT INTO `vuelo`(`fechaPartida`, `fechaLlegada`, `id_nave`, `circuitoVuelo`)
                             ('20191015', '20191019', 13, 3),
                             ('20191215', '20200119',34,7),-- tour
                             ('20191222', '20200126',34,7),-- tour
-                            ('20191229', '20200202',37,7); -- tour
+                            ('20191229', '20200202',37,7), -- tour
+                            ('20191203', '20191203', 1, 1);
 
 INSERT INTO `cabinas` (`nombreCabina`)
                      VALUES ('General'),
@@ -174,6 +175,7 @@ INSERT INTO `reserva`(`idTitular`, `idVuelo`, `idOrigenReserva`, `idDestinoReser
                             -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
                             -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
                             -- (2, 4, 5, 9, 300, false, '4,5', 2, false),
+                            (1, 9, 1, 2, 300, true, '', 2, false),
                             (3, 4, 5, 9, 300, false, '6', 2, false);
 
 INSERT INTO `acompaniante_reserva`(`idReserva`, `idUsuario`) 
