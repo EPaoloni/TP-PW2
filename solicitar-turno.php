@@ -32,7 +32,7 @@
             }
         }
     } else {
-        header("location: ./turno.php");
+        header("location: ./login.php");
         exit();
     }
     
