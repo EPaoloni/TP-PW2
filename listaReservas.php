@@ -58,7 +58,9 @@
             // echo "<div class='container row>'";
             echo  "<tbody><td>". $reserva['idReserva'] . "</td>";
             if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
-                if($reserva['reservaPaga']){
+                if($reserva['lugaresSeleccionados'] != ""){
+                    echo "<td> <span class='text-success'>Check In realizado</span> </td>";
+                } else if($reserva['reservaPaga']){
                     $vuelo = consultarVueloPorId($reserva['idVuelo']);
                     $fechaActual = date('Y-m-d H:i:s');
                     $fechaInicioCheckin = date("Y-m-d H:i:s", strtotime('-48 hour', strtotime($vuelo['fechaPartida'])));

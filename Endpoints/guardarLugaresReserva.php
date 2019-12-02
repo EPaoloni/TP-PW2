@@ -21,6 +21,7 @@
         $_SESSION['errorGuardarLugares'] = "Ocurrio un error al guardar los lugares";
     }
 
-    header("location: /TP-PW2/checkin.php?numeroReserva=$numeroReserva");
+
+    header("location: /TP-PW2/listaReservas.php");
 
 ?>
