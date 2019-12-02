@@ -95,6 +95,7 @@ CREATE TABLE vuelo(
     fechaLlegada date NOT NULL,
     id_nave int NOT NULL,
     circuitoVuelo INT NOT NULL,
+    codigoViajeroRequerido INT DEFAULT 2,
     PRIMARY KEY(idVuelo),
     FOREIGN KEY(circuitoVuelo) REFERENCES circuito(idCircuito),
     FOREIGN KEY(id_nave) REFERENCES naves(id)

@@ -2,6 +2,8 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/usuario_modelo.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/reserva_modelo.php");
 
 session_start();
 
@@ -27,8 +29,10 @@ function verificarCodigosDeViajero($numeroDeReserva){
             $idPasajeros[] = $idAcompaniante['idUsuario'];
         }
     }
-    //TODO: Sacar
-    $codigoViajeroRequerido = 2;
+    $reserva = getReservaById($numeroDeReserva);
+    $idVuelo = $reserva['idVuelo'];
+    $vuelo = consultarVueloPorId($idVuelo);
+    $codigoViajeroRequerido = $vuelo['codigoViajeroRequerido'];
     foreach ($idPasajeros as $idPasajero) {
         $codigoViajeroPasajero = checkCodigoViajero($idPasajero);
         if($codigoViajeroPasajero == 0){
