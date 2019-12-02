@@ -1,6 +1,7 @@
 <?php
 
     include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/helpers/Query.php");
+    include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Modelos/busqueda_modelo.php");
 
     session_start();
 
@@ -34,10 +35,10 @@
 <html lang="en">
 <head>  
     <?php include("Vistas/head.html"); ?>
+    <link rel="stylesheet" href="StaticContent/css/style-table-reserva.css">
 </head>
 <body>
     <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
-    <link rel="stylesheet" href="StaticContent/css/style-table-reserva.css">
 
 <div class="container">
     <p class="text-danger"><?php echo $error; ?></p>
@@ -58,7 +59,15 @@
             echo  "<tbody><td>". $reserva['idReserva'] . "</td>";
             if($idTitular[0]['idUsuario'] == $reserva['idTitular']){
                 if($reserva['reservaPaga']){
-                    echo "<td> <span class='text-success'>Reserva Paga</span> </td>";
+                    $vuelo = consultarVueloPorId($reserva['idVuelo']);
+                    $fechaActual = date('Y-m-d H:i:s');
+                    $fechaInicioCheckin = date("Y-m-d H:i:s", strtotime('-48 hour', strtotime($vuelo['fechaPartida'])));
+                    $fechaFinCheckin = date("Y-m-d H:i:s", strtotime('-2 hour', strtotime($vuelo['fechaPartida'])));
+                    if($fechaActual > $fechaInicioCheckin && $fechaActual < $fechaFinCheckin){
+                        echo "<td><a class='btn btn-primary' href='checkin.php?numeroReserva=" . $reserva['idReserva'] . "'>Checkin</a></td>";
+                    } else {
+                        echo "<td> <span class='text-success'>Reserva Paga</span> </td>";
+                    }
                 } else  if($reserva['reservaCaida']){
                     echo "<td> <span class='text-danger'>Reserva caida por codigo de viajero</span> </td>";
                 } else{

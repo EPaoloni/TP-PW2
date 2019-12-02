@@ -1,0 +1,46 @@
+.ocupado{
+    background-color: red;
+}
+
+.libre{
+    background-color: green;
+}
+
+.propio{
+    background-color: blue;
+}
+
+#container-asientos{
+    width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    vertical-align: baseline;
+    text-align: center;
+}
+
+#container-asientos div{
+    width: 50px;
+    height: 50px;
+    margin: 4px;
+}
+
+#container-asientos div:hover{
+    cursor: pointer;
+}
+
+#container-asientos div input{
+    display:none;
+}
+
+#container-botones{
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 50px
+}
+
+h3{
+    width: 600px;
+    margin:0 auto;
+    margin-bottom: 50px;
+    padding-left:50px;
+}

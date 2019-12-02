@@ -62,7 +62,9 @@
             foreach ($lugaresOcupados as $lugaresEnReserva) {
                 $numerosDeLugares = explode(",", $lugaresEnReserva['lugaresSeleccionados']);
                 foreach ($numerosDeLugares as $numero) {
-                    $arrayLugaresOcupados[$numero - 1] = true;
+                    if($numero != ""){
+                        $arrayLugaresOcupados[$numero - 1] = true;
+                    }
                 }
             }
         }
@@ -96,6 +98,16 @@
             return false;
         }
 
+    }
+
+    function consultarLugaresSeleccionadosReserva($idReserva){
+        
+        $query = new Query();
+        $resultado = $query->consulta("lugaresSeleccionados", "reserva", "reserva.idReserva = $idReserva");
+
+        $lugaresSeleccionados = explode(",", $resultado[0]['lugaresSeleccionados']);
+
+        return $lugaresSeleccionados;
     }
 
 ?>
