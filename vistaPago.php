@@ -16,6 +16,8 @@ $montoReserva = obtenerMontoReserva($numeroDeReserva);
 <html lang="en">
 <head>
     <?php include("Vistas/head.html"); ?>
+    <link rel="stylesheet" href="StaticContent/css/style-pago.css">
+    <script src="StaticContent/js/pago.js"></script>
 </head>
 <body>
 <?php include_once($_SERVER["DOCUMENT_ROOT"] . "/TP-PW2/Vistas/header.php"); ?>
@@ -26,7 +28,7 @@ $montoReserva = obtenerMontoReserva($numeroDeReserva);
         $_SESSION['errorPago'] = ""; 
     }
 ?>
-<form action="./Endpoints/realizarPago.php" class="container">
+<form action="./Endpoints/realizarPago.php" class="container" id="form-pago">
 
     <label for="">Nombre:</label>
     <input type="text" name="nombre" class="form-control">
@@ -35,18 +37,20 @@ $montoReserva = obtenerMontoReserva($numeroDeReserva);
     <input type="text" name="apellido" class="form-control">
 
     <label for="">N° de tarjeta:</label>
-    <input type="number" name="numeroTarjeta" class="form-control">
+    <input type="text" name="numeroTarjeta" class="form-control border" id="numero-tarjeta">
 
     <label for="">Fecha de caducidad:</label>
-    <input type="number" name="fechaCaducidad" class="form-control">
+    <input type="text" name="fechaCaducidad" class="form-control" id="fecha-caducidad">
 
     <label for="">Codigo de seguridad:</label>
     <input type="number" name="codigoSeguridad" class="form-control">
 
-    <label for="">Monto total a abonar:</label>
-    <input type="text" name="montoPago" id="" value="<?php echo"$montoReserva";?>" readonly>
+    <div class="form-group row">
+        <label for="" class="col-sm-6 col-form-label">Monto total a abonar:</label>
+        <input type="text" name="montoPago" class="form-control col-sm-3" id="" value="<?php echo"$montoReserva";?>" readonly>
+        <input type="submit" id="boton-pagar" class="btn btn-primary float-right col-sm-2" value="Pagar">
+    </div>
 
-    <input type="submit" class="btn btn-primary float-right" value="Pagar">
 
     <input type="hidden" name="idReserva" value="<?php echo $numeroDeReserva ; ?>">
 
