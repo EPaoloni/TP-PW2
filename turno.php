@@ -50,16 +50,16 @@
                             Turno
                             </div>
                             <div class='card-body'>
-                            <h5 class='card-title'>Centro Medico: " .  $turno['nombreCentroMedico'].  "  <br>
-                                                    Fecha: " . $turno['fecha'] . "<br>
-                                                    Hora: " . $turno['hora'] . "<br>
-                            </h5>
-                            <form action='./turno.php' method='POST'>
-                                <input type=hidden name='cancelar' value='true'>
-                                <input id='submit-button' name='enviar' class='btn btn-danger' type='submit' value='Cancelar'>
-                            </form>
+                                <h5 class='card-title'>Centro Medico: " .  $turno['nombreCentroMedico'].  "  <br>
+                                                        Fecha: " . $turno['fecha'] . "<br>
+                                                        Hora: " . $turno['hora'] . "<br>
+                                </h5>
+                                <form action='./turno.php' method='POST'>
+                                    <input type=hidden name='cancelar' value='true'>
+                                    <input id='submit-button' name='enviar' class='btn btn-danger' type='submit' value='Cancelar'>
+                                </form>
                             </div>
-                            ";
+                        </div>";
                         }
                     } else {
                         echo " <h5> Al parecer no tiene ningun turno asigando </h5>
