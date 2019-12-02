@@ -9,4 +9,14 @@
                                     "circuitoVuelo=7");
         return $resultado;
     }
+
+    function consultarCircuitosTour(){
+        $query = new Query();
+        $resultado = $query->consulta("estacionesCircuito",
+                                        "vuelo inner join circuito on circuitoVuelo = idCircuito",
+                                        "idCircuito = 7");
+
+        $circuitoTour = explode(",", $resultado[0]['estacionesCircuito']);
+        return $circuitoTour;
+    }
 ?>

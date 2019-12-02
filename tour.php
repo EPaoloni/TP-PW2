@@ -3,8 +3,9 @@
     session_start();
     
     $error="";
-    $origen=1;
-    $destino=1;
+    $circuitoTour = consultarCircuitosTour();
+    $origen = $circuitoTour[0];
+    $destino = $circuitoTour[1];
     $listaDeTour=getListaTour();
 ?>
 <!DOCTYPE html>
