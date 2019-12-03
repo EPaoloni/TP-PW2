@@ -1,11 +1,8 @@
 #form-pago{
-    width: 400px;
+    width: 40em;
 }
-
-div{
-    margin-top: 10px;
-}
-
-#boton-pagar{
-    margin-left:15px;
+@media (max-width: 760px) {
+    #boton-pagar{
+        margin-left: 0px !important;
+    }
 }
