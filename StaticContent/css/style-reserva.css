@@ -1,0 +1,10 @@
+h3{
+    display: inline-block;
+}
+#select-cabina{
+    width: fit-content;
+}
+#precio-total{
+    display: inline-block;
+    width: fit-content;
+}
